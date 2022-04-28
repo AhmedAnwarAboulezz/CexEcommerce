@@ -1,0 +1,65 @@
+<app-store-toolbar [cartCount]="cartCount"></app-store-toolbar>
+
+<div class="survey card-model">
+    <div class="row flex-column align-items-center">
+      <!-- <div class="card-wrapper d-flex flex-column justify-content-center" id="card-data">
+        <div class="card-info" style="justify-content: center;">
+          <img src="assets/images/empty/card_toplogo.png" alt="card_toplogo"  />
+        </div>
+        <div class="d-flex justify-content-center" style="padding-inline-start: 0px;">
+          <div class="">
+            <h2 class="font-weight-bold font-20">{{'STORE.PURCASECARD' | translate}}</h2>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <p class="font-weight-bold font-14">{{'STORE.price' | translate}} : {{ cardDetails?.price }} {{'STORE.ACCURECY' | translate}}</p>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <p class="font-weight-bold font-16">{{'STORE.amount' | translate}} : {{ cardDetails?.amount }} {{'STORE.ACCURECY' | translate}}</p>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <div class="barcode d-flex justify-content-center bg-white" style="border-radius: 5px;">
+            <svg class="barcode3" id="barcode3"></svg>
+          </div>
+        </div>
+        <div class="cardfooter justify-content-center">
+          <h6 class="m-0 font-14 regular">{{'STORE.BINCODE' | translate}} {{ cardDetails?.binCode }}</h6>
+        </div>
+      </div> -->
+
+      <div class="card-wrapper d-flex flex-column justify-content-center" id="card-data"
+      [style.background-image]="getBack(cardDetails.backgroundImage)">
+        <div class="card-info" style="justify-content: center;">
+          <img src="assets/images/empty/card_toplogo.png" alt="card_toplogo"  />
+        </div>
+        <div class="d-flex justify-content-center" >
+          <div class="">
+            <p class="font-weight-bold font-20">{{'STORE.PURCASECARD' | translate}}</p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+          <p class="font-weight-bold font-14">{{'STORE.price' | translate}} : {{ cardDetails?.price }} {{'STORE.ACCURECY' | translate}}</p>
+        </div>
+
+        <div class="d-flex justify-content-center mt-0">
+          <p class="font-weight-bold font-18">{{'STORE.amount' | translate}} : {{ cardDetails?.amount }} {{'STORE.ACCURECY' | translate}}</p>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <div class="barcode d-flex justify-content-center bg-white" style="border-radius: 5px;">
+            <svg class="barcode3" id="barcode3"></svg>
+          </div>
+        </div>
+        <div class="cardfooter justify-content-center mb-2">
+          <h6 class="m-0 font-15 regular">{{'STORE.BINCODE' | translate}} {{ cardDetails?.binCode }}</h6>
+        </div>
+      </div>
+      <div style="padding: 14px 0 0 0;">
+        <button class="w-100 main-btn strock font-16 py-1 edit" (click)="downloadAsImage('card-data','card-image')"  mat-button>
+          {{ 'STORE.DOWNLOAD' | translate }}
+        </button>
+      </div> 
+    </div>
+  </div>

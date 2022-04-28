@@ -1,0 +1,65 @@
+<section class="page-wrapper">
+  <div class="wrapper h-100">
+    <div class="wrapper-transaction bg-white d-flex flex-column">
+      <div class="transaction pb-0">
+        <div class="transaction-data d-flex justify-content-between align-items-baseline">
+          <h1>{{ 'HOME.MENU.GROUP' | translate }}</h1>
+          <button  type="button"  class=" main-btn strock font-16 px-3 py-0 mat-button mat-button-base">
+              <span  class="mat-button-wrapper"  (click)="open()">{{ 'HOME.GROUP.ADDGROUP' | translate }}</span>
+          </button>
+        </div>
+      </div>
+      <app-table [columns]="columns" [rows]="rows" [withIndex]="true"  (action)="doAction($event)" *ngIf="rows.length"></app-table>
+      <div class="mt-5" *ngIf="rows.length">
+        <app-paginator [totalCount]="totalCount" [pageSize]="pageSize" (pageSelected)="pageNumber = $event; getGroup()"></app-paginator>
+      </div>
+      <div class="d-flex flex-column align-items-center justify-content-center h-100" *ngIf="!rows.length">
+        <p class="m-0 mt-5  font-14">{{ 'HOME.NODATA' | translate }}</p> 
+      </div>
+    </div>
+  </div>
+    <!-- <div class="d-flex justify-content-between align-items-baseline">
+        <h1>مجوعات العملاء</h1>
+        <button  type="button" 
+            class=" main-btn strock font-16 px-3 py-0 mat-button mat-button-base"><span
+                class="mat-button-wrapper"  (click)="open()">{{ 'HOME.GROUP.ADDGROUP' | translate }}</span></button>
+    </div> -->
+    <!-- <app-table [columns]="columns" [rows]="rows" [withIndex]="true"  (action)="doAction($event)" *ngIf="rows.length"></app-table>
+  <div class="mt-5" *ngIf="rows.length">
+    <app-paginator [totalCount]="totalCount" [pageSize]="pageSize" (pageSelected)="pageNumber = $event; getGroup()"></app-paginator>
+  </div>
+  <div class="d-flex flex-column align-items-center justify-content-center h-100" *ngIf="!rows.length">
+   <p class="m-0 mt-5  font-14">{{ 'HOME.NODATA' | translate }}</p> 
+  </div> -->
+</section>
+
+<!-- Information MODAL -->
+<ng-template #informationModal>
+    <h3>{{ 'HOME.GROUP.ADDGROUP' | translate }}</h3>
+    <form method="post" class="d-block mt-4 animate" [formGroup]="mainForm" (ngSubmit)="addGroup()">
+
+    <div class="profile-details">
+      <div class="profile-content">
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.GROUP.GROUPNAME' | translate }}</mat-label>
+              <input type="text" matInput formControlName="name">
+            </mat-form-field>
+          </div>
+    
+          <div class="col-12">
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.GROUP.GROUPDESCRIPTION' | translate }}</mat-label>
+              <input type="text" matInput formControlName="desc">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end columnGap">
+          <button class="w-100 main-btn strock  font-16 py-1" type="submit" mat-button>{{ 'ACTIONS.ADD' | translate }}</button>
+          <button class="w-100 main-btn secondary font-16 py-1 mr-1 ml-1" type="button" mat-button (click)="close()">{{ 'ACTIONS.CANCEL' | translate }}</button>
+        </div>
+  </div>
+    </div>
+    </form>
+  </ng-template>

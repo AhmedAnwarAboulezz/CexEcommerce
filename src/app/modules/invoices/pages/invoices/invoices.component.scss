@@ -1,0 +1,49 @@
+.directionModal {
+    direction: ltr !important;
+  }
+  ::ng-deep body.rtl .directionRTL {
+    direction: rtl !important;
+  
+  }
+
+  @import "style";
+
+
+  .wrapper-transaction {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: auto;
+  
+    .transaction {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+  
+      .transaction-data h1 {
+        margin: 0;
+      }
+  
+      .transaction-link a {
+        font-size: 18px;
+      }
+    }
+  }
+  
+  .wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    gap: 16px;
+  
+    // @include medium-screen {
+    //   grid-template-columns: 73% 29%;
+    //   grid-template-rows: auto;
+    // }
+  
+    // @include large-screen {
+    //   grid-template-columns: 72.3% 26.6%;
+    //   grid-template-rows: auto;
+    // }
+  }

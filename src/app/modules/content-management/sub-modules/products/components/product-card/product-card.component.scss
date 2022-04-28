@@ -1,0 +1,19 @@
+.product-card {
+    .product-photo-wrapper {
+        .product-photo {
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+        .status {
+            margin: 0 -16px;
+            top: 0;
+            right: 1rem;
+
+            &.rtl {
+                right: unset;
+                left: 1rem;
+            }
+        }
+    }
+}

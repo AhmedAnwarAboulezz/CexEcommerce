@@ -1,0 +1,113 @@
+.table-wrapper {
+  &.cursor-pointer {
+    .mat-table {
+      .mat-row {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .mat-table {
+    box-shadow: none;
+
+    @include small-screen {
+      width: 100% !important;
+    }
+
+    .mat-header-row {
+      background-color: rgba($color: #fff, $alpha: .37);
+
+      .mat-header-cell {
+        flex: 0 0 90px;
+
+        @include small-screen {
+          flex: 1;
+        }
+
+        &.mat-column-index, &.mat-column-checkbox {
+          flex: 0 0 60px;
+        }
+
+        &.default {
+          min-width: max-content;
+          max-width: 160px;
+        }
+
+        &.small {
+          min-width: max-content;
+          max-width: 80px;
+        }
+
+        &.medium {
+          min-width: max-content;
+          max-width: 250px;
+        }
+      }
+    }
+
+    .mat-row {
+      background: #fff;
+      border-bottom-color: transparent;
+
+      &.selected {
+        background-color: rgba(221, 224, 226, 0.59);
+      }
+
+      .mat-cell {
+        flex: 0 0 90px;
+
+        @include small-screen {
+          flex: 1;
+        }
+
+        &.mat-column-index, &.mat-column-checkbox {
+          flex: 0 0 60px;
+        }
+
+        &.default {
+          min-width: max-content;
+          max-width: 160px;
+        }
+
+        &.small {
+          min-width: max-content;
+          max-width: 80px;
+        }
+
+        &.medium {
+          min-width: max-content;
+          max-width: 250px;
+        }
+
+        &.max-width {
+          @include small-screen {
+            max-width: 110px;
+          }
+
+          @include normal-screen {
+            max-width: 175px;
+          }
+
+          @include xlarge-screen {
+            max-width: 190px;
+          }
+
+          @include xxlarge-screen {
+            max-width: 270px;
+          }
+
+          @include xxxlarge-screen {
+            max-width: 430px;
+          }
+        }
+      }
+    }
+  }
+}
+.table-wrapper .mat-table .mat-header-row .mat-header-cell {
+  font-weight: bold;
+}
+.table-wrapper .mat-table .mat-row:hover {
+  background-color: #f9fbfd;
+  cursor: pointer;
+}

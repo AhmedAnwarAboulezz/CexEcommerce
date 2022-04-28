@@ -1,0 +1,28 @@
+<app-store-toolbar [cartCount]="cartCount"></app-store-toolbar>
+<section class="page-wrapper d-flex flex-column h-100">  
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>{{ 'STORE.TRANSACTION' | translate }} </h1>
+    </div>
+    <div class="grid-container">
+      <div class="card-wrapper d-flex flex-column justify-content-center">
+        <div>
+          <div class="mt-0 p-0">
+            <div class="d-flex justify-content-center align-items-center mobile-cart-block">
+              <h1 style="padding: 0 28px;">{{ 'STORE.TRANSACTIONMSG' | translate }} {{counter}} {{ 'STORE.SECOND' | translate }}</h1>
+              
+            </div>
+            <div class="d-flex justify-content-center align-items-center mobile-cart-block">
+            <button  [routerLink]="['/store/my-orders']" class="main-btn strock font-16 py-1 edit" style="padding: 0.25rem;" [disabled]="!showRedirectbtn" mat-button>
+              {{ 'ACTIONS.REDIRECT' | translate }}
+            </button>
+            </div>
+          </div>
+          <div class="mt-2 p-2" style="background: #008ecb;">
+            <div class="d-flex justify-content-center align-items-center mobile-cart-block">
+              <p class="transaction-id">{{ 'STORE.TRANSACTIONID' | translate }} {{transationId}}</p> 
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </section>

@@ -1,0 +1,72 @@
+:host ::ng-deep.pagination {
+    .page-item {
+        width: 40px;
+        height: 40px;
+        background: transparent;
+        border: none;
+
+        &.active {
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+
+            .page-link {
+                color: rgba(61, 68, 101, 0.7);
+                background: #f0f0f9;
+                border-radius: 2px;
+
+                &:focus {
+                    box-shadow: 0 0 0 0.1rem #f0f0f9;
+                }
+            }
+        }
+
+        &.disabled {
+            &:first-child, &:last-child {
+                .page-link {
+                    color: #f0f0f9;
+                }
+            }
+        }
+
+        &:first-child, &:last-child {
+            border-radius: 2px;
+            margin: 0 20px;
+
+            .page-link {
+                &:focus {
+                    border: none;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        &:nth-of-type(2) {
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+
+        &:nth-last-child(2) {
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+        }
+
+        .page-link {
+            color: #A5ADBA;
+            background-color: transparent;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            border: none;
+            border-radius: 2px;
+            transition: all .3s ease-out;
+            
+            &:focus {
+                box-shadow: 0 0 0 0.1rem #f0f0f9;
+            }
+        }
+    }
+}

@@ -1,0 +1,236 @@
+@import "style";
+
+::ng-deep app-login {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+
+    * {
+        transition: all .5s ease;
+    }
+
+    .login-wrapper {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        
+        .login-content {
+            height: 30%;
+            background-color: transparent;
+            background-image: url("/assets/images/login2.png");
+            background-repeat: no-repeat; 
+            background-size: cover;
+            background-position: center;
+
+            @include normal-screen {
+                height: 50%;
+            }
+
+            @include large-screen {
+                height: 100%;
+            }
+        }
+        .logo-wrapper {
+            @include medium-screen {
+               height: 100%;
+            }
+            
+        }
+        .slider {
+            display: none !important;
+            @include medium-screen {
+                display: block !important;
+            }
+        }
+        .immSmall {
+            display: block !important;
+            width: 120px;
+            height: 70px;
+           
+            margin: 0 auto;
+            @include medium-screen {
+                display: none !important;
+            }
+
+        }
+        .langsm {
+            display: block !important;
+            @include medium-screen {
+                display: none !important;
+            }
+        }
+        .langLg {
+            display: none !important;
+            @include medium-screen {
+                display: block !important;
+            }
+        }
+        .login-form {
+            width: 100%;
+            background-color: $page-bg;
+
+            @include large-screen {
+                width: clamp(65vw, 100%, 65vw);
+            }
+
+            .image {
+                width: 75px;
+            }
+
+            .animate {
+                position: relative;
+                transition: all .5s ease-in;
+                animation: move .5s;
+            }
+        }
+
+        .pinCode-wrapper {
+          label {
+            color: rgba(0, 0, 0, 0.6);
+          }
+      
+          input {
+            border: none;
+            text-align: center;
+            width: 48px;
+            height: 48px;
+            font-size: 20px;
+            background-color: rgba($color: $primary, $alpha: 0.1);
+            margin-right: 5px;
+            @include medium-screen {
+                font-size: 36px;
+            }
+            &:focus {
+              border: 1px solid $purple;
+              outline: none;
+            }
+          }
+          .pinCode-inputs.rtl {
+              flex-flow: row-reverse;
+          }
+        }
+    }
+}
+
+@keyframes move {
+  0% {
+    top: 50px;
+  }
+  
+  100% {
+    top: 0;
+  }
+}
+
+::ng-deep .mat-form-field {
+    &.mat-form-field-invalid {
+        .mat-form-field-outline-thick {
+            color: $error !important;
+        }
+    }
+
+    .mat-form-field-wrapper {
+        .mat-form-field-flex {
+            .mat-form-field-outline {
+                color: $dark;
+
+                * {
+                    border-radius: 0;
+                }
+            }
+
+            .mat-form-field-infix {
+                .mat-form-field-label-wrapper {
+                    .mat-form-field-label {
+                        color: $dark;
+                    }
+                }
+            }
+
+            .mat-form-field-suffix {
+                top: -6px;
+            }
+        }
+    }
+}
+
+::ng-deep .mat-radio-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.4em;
+    transition: none;
+
+    * {
+        transition: none;
+    }
+
+    .mat-radio-button {
+        width: 50%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        border: 1px solid $dark;
+        transition: all .6s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+        &:first-child {
+            margin-inline-end: 1rem;
+        }
+
+        &:hover {
+            border-width: 2px;
+        }
+
+        &.mat-radio-checked {
+            color: $white;
+            background-color: $primary;
+        }
+
+        .mat-radio-label {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .mat-radio-container {
+                display: none;
+            }
+
+            .mat-radio-label-content {
+                padding: 0;
+            }
+        }
+    }
+}
+
+::ng-deep .ng-select {
+    &.ng-invalid {
+        .ng-select-container {
+          .ng-value-container {
+            .ng-placeholder {
+              background-color: #f7f9fd;
+            }
+          }
+        }
+    }
+}
+::ng-deep .carousel-indicators {
+    bottom: 0;
+}
+::ng-deep .carousel-item {
+    height: 100%;
+}
+::ng-deep .carousel-inner {
+    height: 100%;
+}
+::ng-deep .rtl .carousel-indicators {
+    left: 38%;
+    right: auto;
+}
+.termsinformation ul li {
+    margin: 5px 0;
+}

@@ -1,0 +1,80 @@
+<app-store-toolbar [cartCount]="cartCount"></app-store-toolbar>
+<section class="page-wrapper d-flex flex-column h-100">  
+    <div class="d-flex justify-content-between align-items-start">
+      <h3>{{ 'STORE.CHECKOUT' | translate }} </h3>
+    </div>
+    <div class="grid-container">
+      <div class="card-wrapper d-flex flex-column justify-content-start">
+        <div class="d-flex justify-content-between align-items-center p-2 m-2">
+          <p class="text-middle font-22 font-weight-bold p-0 m-0">
+            {{'STORE.CHOOSEPAY' | translate}}
+          </p>
+          <mat-icon style="color: #2e5dc7;">credit_card</mat-icon>
+        </div>
+        <mat-divider></mat-divider>
+        <div style="padding: 18px 0 0 0;">
+          <mat-radio-group class="w-100 text-start" aria-label="Gender" (change)="changePayMethod($event)" [value]="payMethod">
+           
+            <mat-radio-button [value]="2" >{{ 'STORE.MADA' | translate }}</mat-radio-button>
+            <mat-radio-button *ngIf="BrowserName=='safari'" [value]="3" >{{ 'STORE.APPLE' | translate }}</mat-radio-button>
+            <mat-radio-button [value]="1"  >{{ 'STORE.VISA' | translate }}</mat-radio-button>
+            
+           
+          </mat-radio-group>
+        </div>
+        <!-- {{redirectUrl}} -->
+        <span  *ngIf="showPay && payMethod ==1">
+            <form action="{{redirectUrl}}" class="paymentWidgets" data-brands="VISA MASTER"></form>
+        </span>
+        <span  *ngIf="showPay && payMethod ==2">
+          <form action="{{redirectUrl}}" class="paymentWidgets" data-brands="MADA"></form>
+          <!-- <form action="{{redirectUrl}}" class="wpwl-form wpwl-clearfix" data-brands="MADA" target="cnplframe"></form> -->
+        </span>
+
+        <span  *ngIf="showPay && payMethod ==3">
+          <form action="{{redirectUrl}}" class="paymentWidgets" data-brands="APPLEPAY"></form>
+        </span>
+
+      </div>  
+      <div class="card-wrapper spanRow d-flex flex-column justify-content-start" style="height: fit-content;">
+        <div class="d-flex justify-content-center align-items-end p-0 mt-2">
+          <p class="text-middle font-22 font-weight-bold p-0 m-0">
+            {{'STORE.ORDERREVIEW' | translate}}
+          </p>
+          <mat-divider></mat-divider>
+        </div>  
+        <div class="d-flex justify-content-center flex-column mr-4 ml-4" style="padding: 12px;">
+
+            <mat-divider></mat-divider>
+            <div class="d-flex justify-content-start mt-3 mb-3">
+                <p class="text-middle font-16 p-0 m-0">
+                    {{'STORE.NOOFPROD' | translate}}
+                </p>
+                <p class="text-dark font-16 font-weight-bold pr-2 pl-2 m-0"> 
+                    {{result.totalItems}}
+                </p>
+            </div>
+  
+            <div class="d-flex justify-content-start mt-3 mb-3">
+                <p class="text-middle font-16 p-0 m-0">
+                    {{'STORE.TOTAL' | translate}}
+                </p>
+                <p class="text-price font-16 font-weight-bold pr-2 pl-2 m-0">
+                    {{totalPrice}} {{'STORE.ACCURECY' | translate}}
+                </p>
+            </div>           
+            <div class="d-flex justify-content-start mt-3 mb-3">
+                <p class="text-middle font-16 p-0 m-0">
+                    {{'STORE.PHONENUMBER' | translate}}
+                </p>
+                <p class="text-price font-16 font-weight-bold pr-2 pl-2 m-0">
+                    {{phoneNumber}} 
+                </p>
+            </div>     
+            <mat-divider></mat-divider>
+        </div> 
+
+      </div>
+
+    </div>
+  </section>

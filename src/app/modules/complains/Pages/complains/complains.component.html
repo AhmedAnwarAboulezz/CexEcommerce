@@ -1,0 +1,181 @@
+<section class="page-wrapper">
+  <div class="d-flex justify-content-between align-items-baseline">
+    <h1>{{ 'HOME.MENU.COMPLAINS' | translate }} </h1>
+  </div>
+
+  <app-table [columns]="columns" [rows]="rows" [withIndex]="true"  (action)="doAction($event)" *ngIf="rows.length"></app-table>
+
+  <div class="mt-5" *ngIf="rows.length">
+    <app-paginator [totalCount]="totalCount" [pageSize]="pageSize" (pageSelected)="pageNumber = $event; getComplains()"></app-paginator>
+  </div>
+
+  <div class="d-flex flex-column align-items-center justify-content-center h-100" *ngIf="!rows.length">
+    <!-- <img src="../../../../../assets/images/nodata-found.png" alt="{{ 'HOME.NODATA' | translate }}"> -->
+   <p class="m-0 mt-5  font-14">{{ 'HOME.NODATA' | translate }}</p> 
+  </div>
+</section>
+
+<!-- Information MODAL -->
+<ng-template #informationModal>
+    <h3>{{ 'HOME.Complain.COMDETAILS' | translate }}</h3>
+    <div class="profile-details">
+      <div class="profile-content">
+        <div class="row">
+          <div class="col-6">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="name" class="text-main-light font-14 mb-1">{{ 'HOME.Complain.CUSTOMERNAME' | translate }}</label>
+              <span id="name" class="text-medium font-16 d-block font-weight-bold">{{ selectedUser.customerName }}</span>
+            </div>
+          </div>
+    
+          <div class="col-6">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="email" class="text-main-light font-14 mb-1">{{ 'HOME.Complain.CUSTOMERID' | translate }}</label>
+              <span id="email" class="text-medium font-16 d-flex align-items-center justify-content-between font-weight-bold">
+                {{ selectedUser.customerId }}
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-6">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="email" class="text-main-light font-14 mb-1">{{ 'HOME.Complain.COMPLAINDATE' | translate }}</label>
+              <span id="email" class="text-medium font-16 d-block font-weight-bold">{{ selectedUser.createdDate | amDateFormat: 'MM/DD/YYYY' }}</span>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="phone" class="text-main-light font-14 mb-1">{{ 'HOME.PROFILE.MOBILE' | translate }}</label>
+              <span id="phone" class="text-medium font-16 d-block font-weight-bold">{{ selectedUser.phone }}</span>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="nationalId" class="text-main-light font-14 mb-1">{{ 'HOME.Complain.STATUS' | translate }}</label>
+              <span id="nationalId" class="text-medium font-16 d-block font-weight-bold">{{  lang === 'en' ? selectedUser.status?.nameEn : selectedUser.status?.nameAr }}</span>
+            </div>
+          </div>
+          
+          <div class="col-6">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="nationalId" class="text-main-light font-14 mb-1">{{ 'HOME.Complain.STORENAME' | translate }}</label>
+              <span id="nationalId" class="text-medium font-16 d-block font-weight-bold">{{  lang === 'en' ? selectedUser?.storeNameEn : selectedUser?.storeNameAr }}</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="nationalId" class="text-main-light font-14 mb-1">{{ 'HOME.Complain.TRANSACTIONID' | translate }}</label>
+              <span id="nationalId" class="text-medium font-16 d-block font-weight-bold">{{ selectedUser?.transactionId }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="nationalId" class="text-main-light font-14 mb-2 mt-2">{{ 'HOME.Complain.QUESTION' | translate }}</label>
+              <p>{{  lang === 'en' ? selectedUser.question?.bodyEn : selectedUser.question?.bodyAr }}</p>
+              <p class="text-medium font-16 d-block font-weight-bold mt-3">{{  selectedUser.answer.answerText }}</p>
+
+              <!-- <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel> 
+              </mat-accordion>
+              -->
+            </div>
+          
+          </div>
+        </div>
+    <hr>
+    <h3 class="mr-2 ml-2">{{ 'HOME.Complain.UPDATECOMPAIN' | translate }}</h3>
+    <div class="row">
+     <div class="col-12">
+      <div class="each d-flex flex-column px-3 py-2">
+        <form method="post" class="d-block mt-1" [formGroup]="mainForm" *ngIf="mainForm">
+          <mat-form-field appearance="outline" class="w-100"> 
+            <mat-label>{{ 'HOME.Complain.NOTES' | translate }}</mat-label>
+            <textarea matInput formControlName="notes" placeholder="{{ 'HOME.Complain.WRITENOTES' | translate}}"></textarea>
+          </mat-form-field>
+          <app-dropdown  [items]="questionStatus" [formGroup]="mainForm" controlName="questionStatus" label="{{ 'HOME.Complain.STATUS' | translate }}">
+          </app-dropdown>
+          <div class="d-flex justify-content-between align-items-center">
+            <p>{{ 'HOME.Complain.NOTIFICATIONOPTION' | translate }}</p>
+            <mat-checkbox  class="amateur" color="primary" formControlName="Email">{{ 'HOME.Complain.Email' | translate }}</mat-checkbox>
+            <mat-checkbox  class="amateur" color="primary" formControlName="SMS">{{ 'HOME.Complain.SMS' | translate }}</mat-checkbox>
+          </div>
+          <div class="row mt-3">
+            <div class="col-sm-6">
+              <button class="w-100 main-btn strock font-16 py-1" type="submit" mat-button (click)="updateComplain()">{{ 'HOME.FIELDS.UPDATE' | translate }}</button>
+            </div>
+      
+            <div class="col-sm-6">
+              <button class="w-100 main-btn secondary font-16 py-1" type="submit" mat-button (click)="close()">{{ 'HOME.FIELDS.CANCEL' | translate }}</button>
+            </div>
+          </div>
+          </form>
+      </div>
+     </div>
+    </div>
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false" class="mt-3">
+        <mat-expansion-panel-header>
+          <mat-panel-title >
+            <h3 class="mr-2 ml-2">{{ 'HOME.Complain.COMPLAINSTATUSHISTORY' | translate }}</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-3 m-0 p-0">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="email" class="text-main-light font-14 mb-2">{{ 'HOME.Complain.CREATEDBY' | translate }}</label>
+             <p>
+              <span data-toggle="tooltip" data-placement="bottom" title="{{item.createdBy}}" class="text-medium font-16 d-flex align-items-center justify-content-between  mb-3"  *ngFor="let item of selectedUser?.histories">
+                <span class="histories">{{item.createdBy ? item.createdBy : '_'}}</span>
+             </span>
+             </p>     
+            </div>
+          </div>
+          <div class="col-3 m-0 p-0">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="email" class="text-main-light font-14 mb-2">{{ 'HOME.Complain.COMPLAINDATE' | translate }}</label>
+              <span data-toggle="tooltip" data-placement="bottom" title="{{item.createdDate}}" class="text-medium font-16 d-flex align-items-center justify-content-between  mb-3"  *ngFor="let item of selectedUser?.histories">
+                <span class="histories">{{item.createdDate | amDateFormat: 'MM/DD/YYYY' }}</span>
+             </span>          
+              </div>
+          </div>       
+          <div class="col-3 m-0 p-0">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="email" class="text-main-light font-14 mb-2">{{ 'HOME.Complain.CUSTOMERNOTIFIED' | translate }}</label>
+             <p>
+              <span data-toggle="tooltip" data-placement="bottom" title="{{item.customerNotified}}"  class="text-medium font-16 d-flex align-items-center justify-content-between  mb-3"  *ngFor="let item of selectedUser?.histories">
+                <span class="histories">{{item.customerNotified ? item.customerNotified : '_'}}</span>
+             </span>
+             </p>     
+            </div>
+          </div>
+          <div class="col-3 m-0 p-0">
+            <div class="each d-flex flex-column px-3 py-2">
+              <label for="email" class="text-main-light font-14 mb-2">{{ 'HOME.Complain.NOTES' | translate }}</label>
+             <p>
+              <span data-toggle="tooltip" data-placement="bottom" title="{{item.comment}}" class="text-medium font-16 d-flex align-items-center justify-content-between  mb-3"  *ngFor="let item of selectedUser?.histories">
+                <span class="histories">{{item.comment ? item.comment : '_'  }}</span>
+             </span>
+             </p>     
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  
+  
+  </div>
+    </div>
+  </ng-template>

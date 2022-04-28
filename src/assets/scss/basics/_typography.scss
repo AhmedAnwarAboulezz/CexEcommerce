@@ -1,0 +1,116 @@
+/* Source Fonts */
+@font-face {
+  font-family: "Source Light";
+  font-display: swap;
+  src: url("/assets/fonts/TitilliumWeb-Light.ttf") format("truetype");
+}
+
+
+@font-face {
+  font-family: "Source Regular";
+  font-display: swap;
+  src: url("/assets/fonts/TitilliumWeb-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Source Bold";
+  font-display: swap;
+  src: url("/assets/fonts/TitilliumWeb-Bold.ttf") format("truetype");
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
+
+/* Project Fonts */
+$font-light: "Source Light", sans-serif;
+$font-regular: "Source Regular", sans-serif;
+$font-bold: "Source Bold", sans-serif;
+$font-arabic: "Tajawal", sans-serif;
+
+body {
+  font-family: $font-regular;
+  @extend .font-16;
+  
+  &.rtl {
+    font-family: $font-arabic;
+      
+    * {
+      font-family: $font-arabic;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: $font-arabic !important;
+      }
+    }
+  }
+
+  * {
+    font-family: $font-regular;  
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    &:not(.regular) {
+      font-family: $font-bold;
+    }
+  
+    &.regular {
+      font-family: $font-regular;
+    }
+  }
+}
+
+.font-english {
+  font-family: $font-regular !important;
+}
+
+.font-arabic {
+  font-family: $font-arabic !important;
+}
+
+.font-10 {
+  font-size: .675rem !important;
+}
+
+.font-12 {
+  font-size: .75rem !important;
+}
+
+.font-14 {
+  font-size: clamp(.8rem, 1vw, .9rem) !important;
+}
+
+.font-15 {
+  font-size: 15px !important;
+}
+
+.font-16 {
+  font-size: clamp(.8rem, 1vw, 1.75rem) !important;
+}
+
+.font-18 {
+  font-size: clamp(1.15rem, 1vw, 2rem) !important;
+}
+
+.font-20 {
+  font-size: clamp(1.35rem, 1vw, 2.15rem) !important;
+}
+
+.font-22 {
+  font-size: clamp(1.5rem, 1vw, 2.3rem) !important;
+}
+
+.font-24 {
+  font-size: clamp(1.65rem, 1vw, 2.45rem) !important;
+}
+
+.font-26 {
+  font-size: clamp(1.8rem, 1vw, 2.6rem) !important;
+}

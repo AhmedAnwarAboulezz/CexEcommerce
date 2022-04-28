@@ -1,0 +1,121 @@
+<app-store-toolbar [cartCount]="cartCount"></app-store-toolbar>
+<section class="page-wrapper d-flex flex-column h-100">  
+    <div class="grid-container">
+      <div class="card-wrapper d-flex flex-column justify-content-start">
+        <div class="d-flex justify-content-between align-items-center p-1 m-1">
+          <p class="text-middle font-16 font-weight-bold p-0 m-0">
+            {{'STORE.LOGIN' | translate}}
+          </p>
+          <mat-icon>lock</mat-icon>
+        </div>
+        <mat-divider class="mt-2"></mat-divider>
+        <div class="row justify-content-center mt-2 p-2">
+            <div class="col-sm-6">
+              <!-- -----------login form----------- -->
+              <form method="post" class="d-block mt-4 animate" [formGroup]="mainForm" (ngSubmit)="login()">
+                <mat-form-field class="w-100 text-start" appearance="outline">
+                  <mat-label>{{ 'STORE.PHONENUMBER' | translate }}</mat-label>
+                  <input type="text" formControlName="phoneNumber" matInput placeholder="05xxxxxxxx" />
+                </mat-form-field>
+                <div class="d-flex justify-content-end mb-4" >
+                    <a class="edit cursor-pointer" (click)="sendOtp()" *ngIf="!isSentOtp">
+                        {{ 'STORE.SENDOTP' | translate }}
+                    </a>
+                    <p *ngIf="isSentOtp">{{'STORE.RESENDAGAIN' | translate}}  {{counter}} {{'STORE.SECOND'| translate}}</p>
+                </div>
+                <mat-form-field class="w-100 text-start" appearance="outline">
+                  <mat-label>{{ 'STORE.OTPCODE' | translate }}</mat-label>  
+                  <input type="text"  formControlName="otpCode" matInput
+                    placeholder="****" />
+                </mat-form-field>    
+                <button class="w-100 main-btn strock font-16 py-1 edit" type="submit" [disabled]="mainForm.invalid" mat-button>
+                  {{ 'LOGIN' | translate }}
+                </button>
+              </form>
+            </div> 
+        </div>
+        <!-- <mat-divider></mat-divider> -->
+        <!-- <div class="d-flex justify-content-between mt-2 p-2">
+            <p class="text-dark m-2 d-flex align-items-center align-self-end">
+                {{ 'COPYRIGHT' | translate }}
+            </p>
+            <a (click)="openDialog(termsInformation)" class="
+                text-dark
+                m-0
+                d-flex
+                align-items-center align-self-end
+                cursor-pointer
+                ">
+                {{ 'TERMS' | translate }}
+            </a>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+    <!-- Terms information -->
+<ng-template #termsInformation>
+    <section class="termsinformation">
+      <h1>{{ 'TERMS' | translate }}</h1>
+      <p>{{ 'CONDITION.INFO' | translate }}</p>
+      <ul>
+        <li>{{ 'CONDITION.WHYGAJEL' | translate }}</li>
+        <li>{{ 'CONDITION.FEES' | translate }}</li>
+        <li class="mr-4 ml-4">
+          {{ 'CONDITION.WEBSITE' | translate }}
+        </li>
+        <li class="mr-4 ml-4">
+          {{'CONDITION.CALL' | translate}}
+        </li>
+        <li class="mr-4 ml-4">
+          {{'CONDITION.ORDER' | translate}}
+        </li>
+        <li class="mr-4 ml-4">
+          {{'CONDITION.UPDATE' | translate}}
+        </li>
+        <li>{{ 'CONDITION.INSTANT' | translate }}</li>
+        <li>{{ 'CONDITION.DISCOUNT' | translate }}</li>
+        <li>{{ 'CONDITION.OFFERS' | translate }}
+          <a class="cursor-pointer font-14" href="https://jazeel.al-sadhan.com/account/login" target="_blank">www.jazeel.al-sadhan.com/account/login</a> 
+    
+        </li>
+        <li>{{ 'CONDITION.SPECIAL' | translate }}</li>
+        <li>{{ 'CONDITION.MEMBERSHIP' | translate }}</li>
+        <li>
+          {{ 'CONDITION.HOWGET' | translate }}
+        </li>
+      </ul>
+     
+      <ul>
+        <li>{{ 'CONDITION.CASHERS' | translate }}</li>
+        <li>{{ 'CONDITION.WHATMECHANISM' | translate }}</li>
+        <li>{{ 'CONDITION.PAYMENT' | translate }}</li>
+        <li class="mr-4 ml-4">{{ 'CONDITION.BENEFIT' | translate }}</li>
+        <li class="mr-4 ml-4">{{ 'CONDITION.TRANSFAREPOINTS' | translate }}</li>
+        <li>{{ 'CONDITION.ITEMS' | translate }}</li>
+        <li>
+          {{ 'CONDITION.SAHDHANWEBSITE' | translate }}
+        </li>
+        <li>{{ 'CONDITION.BALANCE' | translate }}</li>
+        <li>{{ 'CONDITION.BALANCEAPPEAR' | translate }}</li>
+      </ul>
+      <ul>
+        <li>{{ 'CONDITION.MOBILEPOLICY' | translate }}</li>
+        <li>{{ 'CONDITION.POINTSADD' | translate }}</li>
+        <li>{{ 'CONDITION.POINTSVALID' | translate }}</li>
+        <li>{{ 'CONDITION.COMPANYRESERVE' | translate }}</li>
+        <li>{{ 'CONDITION.MEMBERSHIPSIGNIFIES' | translate }}</li>
+        <li>{{ 'CONDITION.MONEYBACK' | translate }}</li>
+        <li>{{ 'CONDITION.USEPROGRAM' | translate }}</li>
+        <li>{{ 'CONDITION.COMPANYSELL' | translate }}</li>
+        <li>{{ 'CONDITION.SPARVISA' | translate }}</li>
+        <li>{{ 'CONDITION.SPARMEMBER' | translate }}</li>
+        <li>{{ 'CONDITION.SPARONEVISA' | translate }}</li>
+      </ul>
+      <div class="d-flex justify-content-end mt-3">
+        <button class="w-100 main-btn secondary font-16 py-1" type="submit" mat-button (click)="close()">
+          {{ 'CONDITION.ACCEPT' | translate }}
+        </button>
+      </div>
+    </section>
+  </ng-template>

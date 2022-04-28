@@ -1,0 +1,139 @@
+<section class="page-wrapper d-flex flex-column h-100">
+  <h1>{{ 'HOME.FAMILY.MYFAMDETAILS' | translate }}</h1>
+  <div class="card-wrapper d-flex flex-column justify-content-center  m-auto">
+    <div class="card-info">
+      <div>
+        <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.BALANCE' | translate }}</p>
+        <p class="font-weight-bold font-20">{{ cardDetails?.balance }} {{ 'HOME.PROFILE.SR' | translate }}</p>
+      </div>
+      <div>
+        <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.CARDTYPE' | translate }}</p>
+        <p class="font-weight-bold font-18">{{ lang === 'en' ? cardDetails?.cardType.nameEn : cardDetails?.cardType.nameAr }}</p>
+      </div>
+      <img src="assets/images/empty/card_toplogohome.png" alt="card_toplogo" />
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="barcode d-flex justify-content-center bg-white">
+        <svg id="barcode1"></svg>
+      </div>
+    </div>
+    <div class="cardfooter">
+      <h6 class="m-0 font-18 regular text-capitalize">{{ cardDetails?.customerName }}</h6>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row justify-content-between mt-3 flex-wrap w-100">
+    <div *ngFor="let relation of familyRelations; let i=index">
+      <div class="card-wrapper d-flex flex-column justify-content-center mt-3">
+        <div class="card-info">
+          <div>
+            <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.BALANCE' | translate }}</p>
+            <p class="font-weight-bold font-20">{{ relation?.balance }} SR</p>
+          </div>
+          <div>
+            <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.CARDTYPE' | translate }}</p>
+            <p class="font-weight-bold font-18">
+              {{ relation.card?.cardType ? (lang === 'en' ? relation.card.cardType?.nameEn : relation.card.cardType?.nameAr) : '-' }}
+            </p>
+          </div>
+          <img src="assets/images/empty/card_toplogohome.png" alt="card_toplogo" />
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="barcode d-flex justify-content-center bg-white">
+            <svg [id]="'family-' + i"></svg> <!-- family-0 OR family-1 -->
+          </div>
+        </div>
+        <div class="cardfooter">
+          <h6 class="m-0 font-18 regular">{{ relation?.name }}</h6>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="add-new d-flex flex-column justify-content-center  mt-3">
+      <div class="family">
+          <a (click)="openDialog(familyModal, 'family')" class="text-dark font-weight-bold font-14 p-0 m-0">{{ 'HOME.FAMILY.ADDNEW' | translate }}
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+      </svg>
+          </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--Add new family-->
+<ng-template #familyModal>
+  <h1>{{ 'HOME.FAMILY.INFO' | translate }}</h1>
+  <form method="post" class="d-block mt-4 animate" [formGroup]="addForm" (ngSubmit)="addFamily()">
+    <div class="row">
+     <div class="col-sm-6">
+      <mat-form-field class="w-100 text-start" appearance="outline">
+        <mat-label>{{ 'HOME.FIELDS.FULLNAME' | translate }}</mat-label>
+        <input type="text" formControlName="name" matInput>
+      </mat-form-field>
+     </div>
+    <!--
+      <mat-form-field class="w-100 text-start" appearance="outline">
+        <mat-label>National Id</mat-label>
+        <input type="number" formControlName="nationalId" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="d-flex justify-content-between columnGap">
+      <mat-form-field class="w-100 text-start" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" formControlName="email" matInput>
+      </mat-form-field>
+      <mat-form-field class="w-100 text-start" appearance="outline">
+        <mat-label>Nickname</mat-label>
+        <input type="text" formControlName="nickName" matInput>
+      </mat-form-field>
+-->
+      <div class="col-sm-6">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.MOBILE' | translate }}</mat-label>
+          <input type="number" formControlName="phone" matInput placeholder="05xxxxxxx">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+     <div class="col-sm-12">
+      <mat-form-field class="w-100 text-start" appearance="outline">
+        <mat-label>{{ 'HOME.FIELDS.PASSWORD' | translate }}</mat-label>
+        <img class="img-fluid" src="assets/images/icons/{{ showPassword ? 'eye' : 'eye-off'}}.svg" (click)="showPassword = !showPassword" alt="Key Icon" matSuffix>
+        <input [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput placeholder="**********">
+      </mat-form-field>
+     </div>
+     <div class="col-sm-12">
+
+      <mat-form-field class="w-100 text-start" appearance="outline">
+        <mat-label>{{ 'HOME.FIELDS.PASSWORDCONFIRM' | translate }}</mat-label>
+        <img class="img-fluid" src="assets/images/icons/{{ showPassword ? 'eye' : 'eye-off'}}.svg" (click)="showPassword = !showPassword" alt="Key Icon" matSuffix>
+        <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword" matInput placeholder="**********">
+      </mat-form-field>
+     </div>
+      <div class="col-sm-12">
+        <app-datepicker [formGroup]="addForm" controlName="dateOfBirth" label="{{ 'HOME.FIELDS.DOB' | translate }}" [maxDate]="today"></app-datepicker>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between columnGap">
+      <mat-radio-group class="w-100 text-start" aria-label="Gender" (change)="getGenderValue($event)">
+        <mat-radio-button [value]="1">{{ 'HOME.FIELDS.MALE' | translate }}</mat-radio-button>
+        <mat-radio-button [value]="2">{{ 'HOME.FIELDS.FEMALE' | translate }}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <app-dropdown [items]="maritalStatus" [formGroup]="addForm" controlName="maritalStatus" label="{{ 'HOME.FIELDS.MSTATUS' | translate }}"></app-dropdown>
+
+    <app-dropdown [items]="relationShipTypes" [formGroup]="addForm" controlName="relationShipId" label="{{ 'HOME.FAMILY.RELATION' | translate }}"></app-dropdown>
+
+    <div class="d-flex justify-content-end columnGap">
+      <button class="w-100 main-btn strock  font-16 py-1" type="submit" [disabled]="addForm.invalid" mat-button>{{ 'ACTIONS.ADD' | translate }}</button>
+      <button class="w-100 main-btn secondary font-16 py-1" type="button" mat-button (click)="close()">{{ 'ACTIONS.CANCEL' | translate }}</button>
+    </div>
+  </form>
+</ng-template>

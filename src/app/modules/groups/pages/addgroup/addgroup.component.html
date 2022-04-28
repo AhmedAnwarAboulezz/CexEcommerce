@@ -1,0 +1,141 @@
+<section class="page-wrapper">
+    <div class="d-flex justify-content-between align-items-baseline">
+        <h1 class="m-0 mb-2 font-24 regular">بحث مجموعة العملاء</h1>
+    </div>
+    <form method="post" class="d-block mt-2 animate search-section mb-4" [formGroup]="mainForm" (ngSubmit)="search()">
+
+        <div class="profile-details">
+            <div class="profile-content">
+                <h1 class="m-0 mb-2 font-24 regular">Customer data </h1>
+
+                <div class="row align-items-center">
+                    <div class="col-3">
+                        <mat-form-field class="w-100 text-start" appearance="outline">
+                            <mat-label>{{ 'HOME.PROFILE.CARDNUMBER' | translate }}</mat-label>
+                            <input type="text" matInput (keydown)="setcmommaNumber($event)" formControlName="cardnumber"
+                                placeholder="{{ 'HOME.PROFILE.CARDNUMBER' | translate }}">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-3">
+                        <mat-radio-group class="w-100 text-start" aria-label="Gender" (change)="getGenderValue($event)">
+                            <mat-radio-button [value]="1">{{
+                                'HOME.FIELDS.MALE' | translate
+                                }}</mat-radio-button>
+                            <mat-radio-button [value]="2">{{
+                                'HOME.FIELDS.FEMALE' | translate
+                                }}</mat-radio-button>
+                            <mat-radio-button class="mr-3 ml-3" [value]=-1>{{
+                                'HOME.FIELDS.ALL' | translate
+                                }}</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="col-3">
+                        <mat-form-field class="w-100 text-start" appearance="outline">
+                            <mat-label>{{ 'HOME.PROFILE.MOBILE' | translate }}</mat-label>
+                            <input type="text" matInput (keydown)="setcmomma($event)" formControlName="mobile"
+                                placeholder="{{ 'HOME.PROFILE.MOBILE' | translate }}">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <app-dropdown [items]="districts" [formGroup]="mainForm" controlName="districtId"
+                            [multiple]="multiple" label="{{ 'HOME.FIELDS.DISTRICT' | translate }}">
+                        </app-dropdown>
+                    </div>
+                </div>
+
+                <h1 class="m-0 mb-2 font-24 regular">Product data</h1>
+
+                <div class="row">
+                    <div class="col-12">
+                        <ng-select [items]="products" placeholder="{{ 'HOME.PRODUCT' | translate }}"
+                            formControlName="product" bindLabel="combinedDescriptionArabic" bindValue="id" [multiple]="true"
+                            [typeahead]="productInputSearch$" [searchable]="true" (scrollToEnd)="getPagedProducts()">
+                        </ng-select>
+                        <!-- <app-dropdown [items]="products" [formGroup]="mainForm" controlName="product"
+                            [multiple]="multiple" [searchable]="true" label="{{ 'HOME.PRODUCT' | translate }}">
+                        </app-dropdown> -->
+                    </div>
+                </div>
+
+                <h1 class="m-0 mb-2 font-24 regular">Store data</h1>
+
+                <div class="row">
+                    <div class="col-12">
+                        <app-dropdown [items]="stores" [formGroup]="mainForm" controlName="store" [multiple]="multiple"
+                            label="{{ 'HOME.STORE' | translate }}"></app-dropdown>
+                    </div>
+                </div>
+
+                <h1 class="m-0 mb-2 font-24 regular">Transaction data</h1>
+
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="w-100 text-start" appearance="outline">
+                            <mat-label>{{ 'HOME.PROFILE.AMOUNTFROM' | translate }}</mat-label>
+                            <input type="text" matInput formControlName="amountfrom">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="w-100 text-start" appearance="outline">
+                            <mat-label>{{ 'HOME.PROFILE.AMOUNTTO' | translate }}</mat-label>
+                            <input type="text" matInput formControlName="amountto">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <h1 class="m-0 mb-2 font-24 regular">Dates data </h1>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <app-datepicker label="{{ 'HOME.SEARCH.TRANSACTIONFORMDATE' | translate }}"
+                            [formGroup]="mainForm" controlName="transactionformdate" [maxDate]="today">
+                        </app-datepicker>
+                    </div>
+                    <div class="col-sm-6">
+                        <app-datepicker label="{{ 'HOME.SEARCH.TRANSACTIONENDDATE' | translate }}"
+                            [formGroup]="mainForm" controlName="transactionenddate" [maxDate]="today">
+                        </app-datepicker>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end columnGap">
+                    <button class="main-btn strock  font-16 py-1" type="submit" mat-button>{{
+                        'HOME.SEARCH.SEARCHBTN' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <button mat-flat-button class="m-btn strock-bg border mx-2 mb-3" type="button" *ngIf="selectedRows.length"
+        (click)="exportAsXLSX()">
+        <span>{{ "HOME.SEARCH.EXPORT" | translate }}</span>
+    </button>
+    <button mat-flat-button class="m-btn strock-bg border mx-2 mb-3" type="button" *ngIf="selectedRows.length >= 10"
+        (click)="exportAllAsXLSX()">
+        <span>{{ "HOME.SEARCH.EXPORTALL" | translate }}</span>
+    </button>
+    <button mat-flat-button class="m-btn strock-bg border mx-2 mb-3" type="button" *ngIf="selectedRows.length > 1"
+        (click)="addGroup()">
+        <span>{{ "HOME.SEARCH.ADDGROUP" | translate }}</span>
+    </button>
+
+    <button mat-flat-button class="m-btn strock-bg border mx-2 mb-3" type="button" *ngIf="selectedRows.length >= 10"
+        (click)="addGroupAll()">
+        <span>{{ "HOME.SEARCH.ADDGROUPALL" | translate }}</span>
+    </button>
+    <app-table [columns]="columns" [rows]="rows" [withIndex]="true" (selectedRows)="getSelectedRows($event)"
+        (action)="doAction($event)" *ngIf="rows.length">
+    </app-table>
+
+    <div class="mt-5" *ngIf="rows.length">
+        <app-paginator [totalCount]="totalCount" [pageSize]="pageSize" (pageSelected)="pageNumber = $event; search()">
+        </app-paginator>
+
+    </div>
+
+    <div class="d-flex flex-column align-items-center justify-content-center h-100" *ngIf="!rows.length">
+        <img src="assets/images/icons/search.svg" alt="Search Icon">
+        <p class="m-0 mt-3 text-medium font-22">{{ 'HOME.SEARCH.NODATA' | translate }}</p>
+    </div>
+</section>

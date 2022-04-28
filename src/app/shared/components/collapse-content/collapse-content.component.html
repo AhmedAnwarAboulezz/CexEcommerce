@@ -1,0 +1,22 @@
+<div class="collapse-wrapper {{ customClass }}" [ngClass]="{'default': withBoxShadow}">
+    <div class="collapse-conetnt d-flex align-items-center justify-content-between w-100" (click)="collapse()">
+        <span class="text-truncate text-capitalize  font-14" [ngClass]="{'active': showConetnt}">{{ title }}</span>
+
+        <svg [ngClass]="{'animate active': showConetnt}" xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 20 20" fill="#424447">
+            <path  fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+    </div>
+
+    <div class="collapse-separetor mt-1" [ngClass]="{'active': showConetnt}" *ngIf="showConetnt"></div>
+
+    <div class="contentCollapsed" [ngClass]="{'showContent': showConetnt}">
+        <ng-content></ng-content>
+    </div>
+</div>
+
+<!-- Ex.
+
+<app-collapse-content title="Notify for Review Form">
+    <span>ahmed</span>
+</app-collapse-content>
+-->

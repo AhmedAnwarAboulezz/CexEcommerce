@@ -1,0 +1,104 @@
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  top: unset;
+  // background-color: #eaeaea;
+  // padding: 10px 10px 10px 10px;
+  // border: 2px dotted gray;
+
+  .upload-btn {
+    font-size: 24px;
+    width: 100%;
+    height: 70px;
+    border: none;
+    color: #f05323;
+    background-color: white;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='2' ry='2' stroke='black' stroke-width='2' stroke-dasharray='6%2c 11' stroke-dashoffset='3' stroke-linecap='round'/%3e%3c/svg%3e");
+    border-radius: 2px;
+
+    .btn {
+      width: max-content;
+      line-height: 24px;
+      padding: 0 !important;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: transparent !important;
+
+      &:disabled {
+        .choose-file {
+          color: rgba(0, 0, 0, 0.54);
+        }
+      }
+
+      .mat-button-focus-overlay {
+        background: #fff;
+      }
+
+      .input-file {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
+
+      .choose-file {
+        color: #673ab7;
+      }
+    }
+
+    svg {
+      color: #673ab7;
+      // margin-inline-end: .5rem;
+    }
+
+    span {
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+
+  .wrapper {
+    .icon-wrapper {
+      width: 24px;
+      height: 24px;
+      background: #f05323;
+      color: white;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+
+  .error {
+    display: block;
+    color: red;
+  }
+
+  .selected-wrapper {
+    .file-wrapper {
+      .file-icon {
+        width: 40px;
+        height: auto;
+      }
+
+      .file-details {
+        margin-inline-start: 0.5rem;
+        width: 80%;
+
+        .hint {
+          font-size: 14px;
+          color: #848282;
+        }
+      }
+
+      .file-remove {
+        cursor: pointer;
+      }
+    }
+  }
+}

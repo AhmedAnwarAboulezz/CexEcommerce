@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; background-color: #f7f9fd !important; overflow: hidden; }
+
+.material-icons {
+    font-family: "Material Icons" !important;
+}
+
+.mat-icon {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.c-donutchart {
+    margin: 0 auto !important;
+}

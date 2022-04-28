@@ -1,0 +1,25 @@
+@import "style";
+.card-wrapper {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    .edit {
+        color: $white;
+        background-color: $background-dark;
+        padding: 8px 32px;
+        border-radius: 25px;
+        text-align: center;
+        font-weight: bold;
+      }
+  }
+  .histories {
+    width: 100px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+::ng-deep .ng-invalid .ng-select-container.ng-appearance-outline::after{
+  border-color: #dc3545;
+}

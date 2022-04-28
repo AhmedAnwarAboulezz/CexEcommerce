@@ -1,0 +1,360 @@
+@import "style";
+
+::ng-deep app-home {
+  height: 100%;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+  gap: 10px;
+
+  @include large-screen {
+    grid-template-columns: 33% 19% 19% 26.9%;
+  }
+  @include mobile-screen{
+    grid-template-columns: 49% 49%;
+  }
+
+  
+
+  .card-wrapper {
+    box-shadow: 0 8px 10px 0 rgb(183 192 206 / 50%);
+    grid-row: span 2;
+    background-image: url(/assets/images/empty/card_bg.png);
+    color: $white;
+    padding: 10px;
+    border: 0px solid;
+    border-radius: 8px;
+
+    img {
+      width: 30%;
+    }
+
+    .imgbar {
+      width: 100%;
+      height: 100px;
+    }
+
+    .card-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .barcode {
+      min-width: 200px;
+    }
+
+    .cardfooter {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      img {
+        width: 12%;
+      }
+    }
+  }
+
+  .items-details {
+    box-shadow: 0 8px 10px 0 rgb(183 192 206 / 50%);
+    border-radius: 8px;
+    padding: 16px;
+
+    .offers-details-info {
+      img {
+        width: 45px;
+        height: 45px;
+      }
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+  .recomended {
+    grid-row: span 2;
+    color: white;
+    border: 0px solid $middle;
+    background-color: #fff;
+    box-shadow: 0 8px 10px 0 rgb(183 192 206 / 20%);
+    padding-bottom: 30px !important;
+
+    h2 {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 35px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border: 0.6px solid $text-light;
+      }
+    }
+
+    .picsum-img-wrapper {
+      img {
+        height: auto;
+        width: 40%;
+      }
+    }
+
+    .carousel-item {
+      position: relative;
+    }
+    .product-info {
+      h3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.wrapper-transaction {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: auto;
+
+  .transaction {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    .transaction-data h1 {
+      margin: 0;
+    }
+
+    .transaction-link a {
+      font-size: 18px;
+    }
+  }
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+  gap: 16px;
+
+  @include medium-screen {
+    grid-template-columns: 73% 29%;
+    grid-template-rows: auto;
+  }
+
+  @include large-screen {
+    grid-template-columns: 72.3% 26.6%;
+    grid-template-rows: auto;
+  }
+
+  .wrapper-transaction {
+    .familySection {
+      background-image: url(/assets/images/empty/FLIGHT-BKK.jpg);
+      background-position: center;
+      background-size: cover;
+      min-height: 23.5vh;
+      color: $white;
+    }
+
+    .addfamily::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 0;
+      border: 0.5px solid $text-light;
+    }
+
+    .familydetails::after {
+      content: "";
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 0;
+      border: 0.5px solid $text-light;
+    }
+  }
+}
+
+.btn-circle.btn-lg {
+  width: 30px;
+  height: 30px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+
+.columnGap {
+  column-gap: 10px;
+}
+
+::ng-deep .mat-radio-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.4em;
+  transition: none;
+
+  * {
+    transition: none;
+  }
+
+  .mat-radio-button {
+    width: 50%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid $dark;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    &:first-child {
+      margin-inline-end: 2rem;
+    }
+
+    &:hover {
+      border-width: 2px;
+    }
+
+    &.mat-radio-checked {
+      color: $white;
+      background-color: $primary;
+    }
+
+    .mat-radio-label {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .mat-radio-container {
+        display: none;
+      }
+
+      .mat-radio-label-content {
+        padding: 0;
+      }
+    }
+  }
+}
+
+::ng-deep .ng-select {
+  &.ng-invalid {
+    .ng-select-container {
+      .ng-value-container {
+        .ng-placeholder {
+          background-color: #f7f9fd;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .carousel-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+::ng-deep body.rtl .carousel-item { 
+  margin-left: -100% !important;
+  margin-right: 0 !important;
+  float: left !important;
+}
+
+.text-overflow {
+  max-width: 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+::ng-deep .carousel-indicators {
+  right: 0%;
+  bottom: -29%;
+}
+
+::ng-deep .rtl .carousel-indicators {
+  left: 25%;
+  right: auto;
+}
+::ng-deep .carousel-item {
+  height: auto;
+}
+::ng-deep .carousel-inner {
+  height: inherit;
+}
+.directionModal {
+  direction: ltr !important;
+}
+::ng-deep body.rtl .directionRTL {
+  direction: rtl !important;
+
+}
+
+.show-large-screen{
+  display: block !important;
+  @include mobile-screen{
+    display: none !important;
+  }
+}
+
+
+
+.show-mobile-screen{
+  display: block !important;
+  @include not-mobile-screen{
+    display: none !important;
+  }
+}
+
+.grid-container-main {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+  gap: 10px;
+  padding-bottom: 15px;
+  .card-wrapper {
+    box-shadow: 0 8px 10px 0 rgb(183 192 206 / 50%);
+    grid-row: span 2;
+    background-image: url(/assets/images/empty/card_bg.png);
+    color: $white;
+    padding: 10px;
+    border: 0px solid;
+    border-radius: 8px;
+
+    img {
+      width: 30%;
+    }
+
+    .imgbar {
+      width: 100%;
+      height: 100px;
+    }
+
+    .card-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .barcode {
+      min-width: 200px;
+    }
+
+    .cardfooter {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      img {
+        width: 12%;
+      }
+    }
+  }
+}

@@ -1,0 +1,100 @@
+button {
+  &:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .mat-button-focus-overlay {
+    background: $white;
+  }
+}
+
+.btn-disabled {
+  background-color: transparent !important;
+}
+
+.main-btn {
+  border-radius: 0 !important;
+  min-height: 34px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  transition: none;
+
+  * {
+    transition: none;
+  }
+
+  &:disabled {
+    color: #fff !important;
+    background-color: #e3e5ee !important;
+    border: 1.5px solid #e3e5ee !important;
+  }
+
+  &.white {
+    background-color: $white;
+    color: $primary;
+  }
+
+  &.main {
+    background-color: $primary;
+    color: $white;
+  }
+
+  &.light {
+    background-color: $primary-light;
+    color: $white;
+  }
+
+  &.secondary {
+    background-color: $secondary;
+    color: $white;
+
+    &:disabled {
+      background-color: #e3e5ee;
+      color: #ccc;
+    }
+  }
+
+  &.flat {
+    border: none;
+    color: $primary;
+  }
+
+  &.strock {
+    border: 1.5px solid $dark;
+    color: $black;
+    background-color: transparent;
+
+    &.active {
+      background-color: $primary;
+      color: $white;
+    }
+  }
+
+  &.strock-bg {
+    background-color: $white;
+    border-color: $primary !important;
+    color: $primary;
+
+    &.active {
+      background-color: $primary;
+      color: $white;
+    }
+
+    &.danger {
+      background-color: $white !important;
+      border-color: $error !important;
+      color: $error !important;
+    }
+  }
+
+  &.error {
+    border-color: $error !important;
+  }
+
+  .mat-button-wrapper {
+    width: 100%;
+    line-height: 30px;
+  }
+}

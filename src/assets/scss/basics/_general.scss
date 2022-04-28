@@ -1,0 +1,375 @@
+$menu-item-height: 40px;
+
+a {
+  text-decoration: none !important;
+}
+
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.5 !important;
+}
+
+input::placeholder {
+  color: $dark !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+body {
+  text-align: start;
+
+  &.rtl {
+    direction: rtl;
+
+    .cdk-global-overlay-wrapper {
+      direction: rtl;
+    }
+  }
+
+  .cdk-global-overlay-wrapper {
+    direction: ltr;
+  }
+}
+
+// menu
+.mat-menu-panel {
+  margin-top: 0.5rem;
+  min-width: 130px !important;
+  min-height: $menu-item-height !important;
+
+  .mat-menu-content {
+    padding: 0 !important;
+
+    .mat-list {
+      .mat-list-item {
+        height: $menu-item-height !important;
+
+        .mat-list-item-content {
+          .mat-menu-item {
+            height: $menu-item-height !important;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+// mat-slider
+.mat-slider {
+  &:not(.mat-slider-disabled) {
+    &.cdk-focused {
+      .mat-slider-thumb-label {
+        border-radius: 0;
+        transform: none;
+        background-color: $white;
+        box-shadow: 0 2px 10px 0 rgba(142, 154, 160, 0.22);
+
+        .mat-slider-thumb-label-text {
+          transform: none;
+          color: $primary;
+        }
+      }
+    }
+  }
+
+  &.mat-accent {
+    .mat-slider-thumb-label {
+      background-color: $primary;
+    }
+  }
+
+  .mat-slider-wrapper {
+    height: 6px !important;
+
+    .mat-slider-track-wrapper {
+      border-radius: 2.5px;
+      height: 6px !important;
+
+      * {
+        height: 6px !important;
+      }
+
+      .mat-slider-track-background {
+        background-color: #f3f3f1 !important;
+      }
+
+      .mat-slider-track-fill {
+        background-color: $secondary !important;
+        transition: all 0.4s ease;
+      }
+    }
+
+    .mat-slider-thumb {
+      border-radius: 2px;
+      box-shadow: 0 4px 10px 0 rgba(12, 0, 51, 0.22);
+      background-color: $primary !important;
+    }
+  }
+}
+
+// input field
+.mat-form-field-appearance-outline {
+  &.mat-focused {
+    .mat-form-field-outline-thick {
+      color: $primary !important;
+    }
+  }
+}
+
+.mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: $primary !important;
+  }
+}
+
+// modal
+.cdk-overlay-pane {
+  max-height: 90vh !important;
+
+  .mat-dialog-container {
+    min-width: 90%;
+    height: 90vh;
+  }
+
+  &.small {
+    .mat-dialog-container {
+      @include small-screen {
+        width: clamp(400px, 50vw, 400px);
+        height: auto;
+      }
+    }
+  }
+
+  &.medium {
+    .mat-dialog-container {
+      @include small-screen {
+        width: clamp(600px, 50vw, 650px);
+        height: auto;
+      }
+    }
+  }
+
+  &.min-width {
+    .mat-dialog-container {
+      min-width: 90%;
+
+      @include small-screen {
+        min-width: 600px;
+      }
+    }
+  }
+
+  &.default {
+    .mat-dialog-container {
+      min-width: 90%;
+      height: 90vh;
+
+      @include small-screen {
+        min-width: clamp(600px, 50vw, 600px);
+        height: 80vh;
+      }
+    }
+  }
+}
+
+// checkbox
+.mat-checkbox {
+  .mat-checkbox-layout {
+    margin: 0;
+  }
+
+  .mat-ripple-element {
+    background-color: $error;
+  }
+
+  &.mat-checkbox-checked,
+  &.mat-checkbox-indeterminate {
+    &.mat-bg-error {
+      .mat-checkbox-background {
+        background-color: $error;
+      }
+    }
+  }
+}
+
+// tooltip
+.cdk-overlay-container {
+  .mat-tooltip-panel {
+    .mat-tooltip {
+      background-color: $white;
+      color: $black;
+      margin: 8px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.32), 0 0 2px 0 rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+// fix right in English Screen & Arabic Screen
+.end-1 {
+  right: 1rem;
+
+  &.rtl {
+    right: unset;
+    left: 1rem;
+  }
+}
+
+.ng-select {
+  &.ng-select-focused {
+    .ng-select-container {
+      &.ng-appearance-outline {
+        &::after {
+          border-color: $dark !important;
+          border-radius: 0;
+        }
+      }
+
+      .ng-value-container {
+        .ng-placeholder {
+          color: $dark;
+        }
+      }
+    }
+  }
+
+  &.ng-invalid {
+    &.ng-dirty {
+      .ng-select-container {
+        &.ng-appearance-outline {
+          &::after {
+            border-width: 2px;
+            border-color: $error !important;
+          }
+        }
+      }
+    }
+  }
+
+  .ng-select-container {
+    &.ng-appearance-outline {
+      &::after {
+        border-color: $dark;
+        border-radius: 0;
+      }
+    }
+
+    .ng-value-container {
+      min-height: 60px;
+
+      .ng-placeholder {
+        margin-top: 4px;
+        background-color: #fff;
+      }
+
+      .ng-value {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+.carousel-indicators > li {
+  box-sizing: content-box;
+  flex: 0 1 auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: $dark;
+  background-clip: padding-box;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  opacity: 0.5;
+  transition: opacity 0.6s ease;
+}
+
+.carousel-indicators {
+  right: 0%;
+  bottom: -29%;
+}
+
+.rtl .carousel-indicators {
+  left: 25%;
+  right: auto;
+}
+
+a.carousel-control-prev,
+a.carousel-control-next {
+  span {
+    display: none !important;
+  }
+}
+
+.custom-tooltip {
+  color: $white !important;
+  background-color: $black !important;
+  padding: 5px 10px;
+}
+
+.emotions {
+  &.rtl {
+    flex-direction: row-reverse !important;
+  }
+
+  .happy {
+    &:hover, &.active {
+      fill: $success;
+    }
+  }
+
+  .good {
+    &:hover, &.active {
+      fill: #ffbf00;
+    }
+  }
+
+  .okay {
+    &:hover, &.active {
+      fill: $inprogress;
+    }
+  }
+
+  .bad {
+    &:hover, &.active {
+      fill: $error;
+    }
+  }
+
+  .terrible {
+    &:hover, &.active {
+      fill: #c52747;
+    }
+  }
+
+  .like {
+    &:hover, &.active {
+      fill: $purple;
+    }
+  }
+
+  svg {
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+}

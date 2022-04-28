@@ -1,0 +1,70 @@
+/* How to use */
+/*
+.some-div{
+  @include small-screen{
+    width: 100%;
+  }
+}
+*/
+
+/* Screen Sizes */
+//mobile Screens
+@mixin mobile-screen {
+  @media only screen and (max-width: 450px) {
+    @content;
+  }
+}
+//not mobile Screens
+@mixin not-mobile-screen {
+  @media only screen and (min-width: 451px) {
+    @content;
+  }
+}
+// Small Screens
+@mixin small-screen {
+  @media only screen and (min-width: 640px) {
+    @content;
+  }
+}
+
+// Medium Screens
+@mixin medium-screen {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+// Normal Screens
+@mixin normal-screen {
+  @media only screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Large Screens
+@mixin large-screen {
+  @media only screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+// xLarge Screens
+@mixin xlarge-screen {
+  @media only screen and (min-width: 1400px) {
+    @content;
+  }
+}
+
+// xxLarge Screens
+@mixin xxlarge-screen {
+  @media only screen and (min-width: 1636px) {
+    @content;
+  }
+}
+
+// xxxLarge Screens
+@mixin xxxlarge-screen {
+  @media only screen and (min-width: 2200px) {
+    @content;
+  }
+}

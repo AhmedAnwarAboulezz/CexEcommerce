@@ -1,0 +1,112 @@
+<div class="upload-btn-wrapper">
+    <div class="row wrapper">
+        <!-- col-sm-6 col-lg-4 -->
+        <div class="col-md-12 justify-content-center">
+            <div class="upload-btn d-flex align-items-center justify-content-around m-0 py-2 px-3 py-lg-4" dragdrop (onFileDropped)="uploadFiles($event, 'drag')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="50" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+
+                <div class="d-flex flex-column">
+                    <span class="mt-1 font-14">{{ 'DRAG' | translate }}</span>
+
+                    <span>
+                        <span class="font-14">{{ 'OR' | translate }}</span>
+
+                        <button mat-button class="btn btn-sm position-relative p-0" [disabled]="isDisabled">
+                            <input class="input-file" type="file" (change)="uploadFiles($event, 'input')" name="imageUrlEn"
+                                [accept]="getAcceptTypes()" [disabled]="isDisabled">
+            
+                            <span class="mx-1 choose-file">{{ 'CHOOSE_FILE' | translate }}</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mt-2" *ngIf="formGroup.get(controlName)?.errors">
+            <div class="w-100">
+                <p class="m-0 error" *ngIf="formGroup.get(controlName)?.dirty && formGroup.get(controlName)?.errors?.required">
+                    {{ 'ERROR.REQUIRED' | translate }}
+                </p>
+
+                <p class="m-0 error" *ngIf="formGroup.get(controlName)?.errors?.maximumFiles">
+                    {{ ('ERROR.MAX_FILES' | translate) + ' ' + maxFiles + ' ' + (maxFiles > 1 ? ('ERROR.FILES' | translate) : ('ERROR.FILE' | translate)) + '.' }}
+                </p>
+
+                <p class="m-0 error" *ngIf="formGroup.get(controlName)?.errors?.minimumResolution">
+                    {{ ('ERROR.MIN_RESOLUTION' | translate) + ' ' + (minWidth + 'px') + (minHeight + 'px') }}
+                </p>
+
+                <p class="m-0 error" *ngIf="formGroup.get(controlName)?.errors?.maximumResolution">
+                    {{ ('ERROR.MAX_RESOLUTION' | translate) + ' ' + (maxWidth + 'px') + (maxHeight + 'px') }}
+                </p>
+
+                <p class="m-0 error" *ngIf="formGroup.get(controlName)?.errors?.fileSelected">
+                    {{ 'ERROR.FILE_SELECTED' | translate }}
+                </p>
+
+                <p class="m-0 error" *ngIf="formGroup.get(controlName)?.errors?.maximumSize">
+                    {{ ('ERROR.MAX_SIZE' | translate) + ' ' + fileCondition.size + 'MB.' }}
+                </p>
+
+                <p class="m-0 error" *ngIf="formGroup.get(controlName)?.errors?.allowedTypes">
+                    {{ fileConditions.length === 1 ? ('ERROR.ALLOWED_TYPE' | translate) + ' ' : ('ERROR.ALLOWED_TYPES' | translate) + ' ' }}
+                    <span *ngFor="let file of fileConditions; let i = index">{{ i < (fileConditions.length - 1) ? (file.type + ',' | uppercase) : fileConditions.length === 1 ? (file.type | uppercase) : 'and ' + (file.type | uppercase) }} </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row wrapper">
+        <div class="col-sm-6 mt-3" *ngFor="let file of selectedFiles; let fileIndex = index">
+            <div class="selected-wrapper">
+                <div class=" w-100 position-relative d-flex flex-column justify-content-between">
+                    <img [src]="file.attachmentURL" class="img-fluid" style="border-radius: 2px;" *ngIf="imagesExtentions.includes(file.attachmentExtension)"/>
+
+                    <div class="file-wrapper d-flex align-items-start justify-content-between" *ngIf="filesExtensions.includes(file.attachmentExtension)">
+                        <div class="file d-flex w-100">
+                            <img class="file-icon" src="assets/img/files/{{ file.attachmentExtension.toLowerCase() }}.svg" alt="PDF">
+    
+                            <div class="file-details d-flex flex-column justify-content-between">
+                                <p class="m-0 text-truncate">{{ file.attachmentName }}</p>
+    
+                                <p class="m-0 hint">{{ file.attachmentDisplaySize }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex">
+                            <span class="file-remove" (click)="remove(fileIndex)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#f05323">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </span>
+
+                            <span class="cursor-pointer d-flex justify-content-center align-items-center" (click)="download(file.attachmentURL)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-2 w-100 h-100 position-absolute d-flex" *ngIf="imagesExtentions.includes(file.attachmentExtension)">
+                        <div class="w-100 h-100 d-flex justify-content-end align-items-start">
+                            <div class="icon-wrapper d-flex justify-content-center align-items-center m-inline-end-1" (click)="remove(fileIndex)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="#fff">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </div>
+                            
+                            <span class="icon-wrapper d-flex justify-content-center align-items-center" (click)="download(file.attachmentURL)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,374 @@
+<section class="page-wrapper">
+  <div class="d-flex justify-content-between align-items-start">
+    <h1>{{ 'HOME.STORES' | translate }} </h1>
+    <!-- <mat-form-field class="w-75 text-start" appearance="outline">
+      <mat-label>Search</mat-label>
+      <input type="Search"  matInput>
+    </mat-form-field> -->
+    <!-- <div class="ml-1 mr-1 p-2 stores">
+      <ul class="nav nav-pills" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+            aria-controls="pills-home" aria-selected="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+            </svg>
+            List</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+            aria-controls="pills-profile" aria-selected="false">
+            <svg width="20" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13.5118 9.95898H12.2411C12.1177 10.1599 11.9982 10.3522 11.8823 10.5364H13.2355L15.5469 13.4221H3.20123L5.5132 10.5364H6.8658C6.75052 10.3522 6.6304 10.1599 6.50704 9.95898H5.23632L2 14.0001H16.7481L13.5118 9.95898Z"
+                fill="none" stroke="currentColor"></path>
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M9.3726 0C11.5774 0 13.3663 1.78784 13.3663 3.99315C13.3663 6.19846 9.3726 11.98 9.3726 11.98C9.3726 11.98 5.37891 6.19846 5.37891 3.99315C5.37891 1.78784 7.16783 0 9.3726 0ZM9.37231 1.9963C8.27019 1.9963 7.37546 2.88941 7.37546 3.99314C7.37546 5.09687 8.27019 5.98999 9.37231 5.98999C10.4744 5.98999 11.3692 5.09687 11.3692 3.99314C11.3692 2.88941 10.4744 1.9963 9.37231 1.9963Z"
+                fill="currentColor"></path>
+            </svg>
+  
+            Map
+          </a>
+        </li>
+      </ul>
+    </div> -->
+  </div>
+
+  <div class="tab-content storesList" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <div class="row col-sm-12 m-0">
+        <div class="col-sm-4">
+          <div class="storesListContainer">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="p-0 m-0">
+                <span class="pr-1 pl-1 text-middle"> {{ lang === 'en' ? 'Store name' : 'اسم الفرع' }}</span>
+                <span class="pr-1 pl-1 text-middle font-weight-bold">{{ lang === 'en' ? 'SAHAFAH' : 'الصحافة' }}</span>
+              </p> <a href="https://goo.gl/maps/pw8oMFppT6KF6R2V8" target="_blank">
+              <svg width="20" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+              </svg></a>
+            </div>
+            <div class="d-flex justify-content-start flex-column align-items-start mt-2">
+              <p class="pr-1 pl-1 m-0 text-middle">
+               {{ lang === 'en' ? 'Address' : 'عنوان الفرع' }}
+              </p>
+              <p class="pr-1 pl-1 text-middle font-weight-bold">
+               {{ lang === 'en' ? 'Anas Ibn Malik Rd, As Sahafah' : ' انس ابن مالك - الصحافة ' }}
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle ">
+               {{ lang === 'en' ? 'Working hours' : 'ساعات العمل' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+              7:00 AM to 2:00 AM
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle">
+                {{ lang === 'en' ? 'Phone' : 'الهاتف ' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+                920-000-546
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-sm-4">
+          <div class="storesListContainer">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="p-0 m-0">
+                <span class="pr-1 pl-1 text-middle"> {{ lang === 'en' ? 'Store name' : 'اسم الفرع' }}</span>
+                <span class="pr-1 pl-1 text-middle font-weight-bold">{{ lang === 'en' ? 'WUROOD' : 'الورود' }}</span>
+              </p> <a href="https://goo.gl/maps/Rqj86R5seb6Z9aKPA" target="_blank">
+              <svg width="20" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+              </svg></a>
+            </div>
+            <div class="d-flex justify-content-start flex-column align-items-start mt-2">
+              <p class="pr-1 pl-1 m-0 text-middle">
+               {{ lang === 'en' ? 'Address' : 'عنوان الفرع' }}
+              </p>
+              <p class="pr-1 pl-1 text-middle font-weight-bold">
+               {{ lang === 'en' ? 'WUROOD' : ' الورود ' }}
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle ">
+               {{ lang === 'en' ? 'Working hours' : 'ساعات العمل' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+              7:00 AM to 2:00 AM
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle">
+                {{ lang === 'en' ? 'Phone' : 'الهاتف ' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+                920-000-546
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+         <div class="storesListContainer">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="p-0 m-0">
+              <span class="pr-1 pl-1 text-middle"> {{ lang === 'en' ? 'Store name' : 'اسم الفرع' }}</span>
+              <span class="pr-1 pl-1 text-middle font-weight-bold">{{ lang === 'en' ? 'RABWA' : 'الربوة' }}</span>
+            </p> <a href="https://goo.gl/maps/pw8oMFppT6KF6R2V8" target="_blank">
+            <svg width="20" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+            </svg></a>
+          </div>
+          <div class="d-flex justify-content-start flex-column align-items-start mt-2">
+            <p class="pr-1 pl-1 m-0 text-middle">
+             {{ lang === 'en' ? 'Address' : 'عنوان الفرع' }}
+            </p>
+            <p class="pr-1 pl-1 text-middle font-weight-bold">
+             {{ lang === 'en' ? 'RABWA' : ' الربوة ' }}
+            </p>
+          </div>
+          <div class="d-flex justify-content-start align-items-start">
+            <p class="pr-1 pl-1 text-middle ">
+             {{ lang === 'en' ? 'Working hours' : 'ساعات العمل' }}
+            </p>
+            <p class="text-middle font-weight-bold">
+            7:00 AM to 2:00 AM
+            </p>
+          </div>
+          <div class="d-flex justify-content-start align-items-start">
+            <p class="pr-1 pl-1 text-middle">
+              {{ lang === 'en' ? 'Phone' : 'الهاتف ' }}
+            </p>
+            <p class="text-middle font-weight-bold">
+              920-000-546
+            </p>
+          </div>
+         </div>
+        </div>
+        
+      </div>
+      <div class="row col-sm-12 m-0 mt-2">
+        <div class="col-sm-4">
+          <div class="storesListContainer">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="p-0 m-0">
+                <span class="pr-1 pl-1 text-middle"> {{ lang === 'en' ? 'Store name' : 'اسم الفرع' }}</span>
+                <span class="pr-1 pl-1 text-middle font-weight-bold">{{ lang === 'en' ? 'RAWABI' : 'الروابي' }}</span>
+              </p> <a href="https://goo.gl/maps/cZBf8APhaZgRvvp49" target="_blank">
+              <svg width="20" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+              </svg></a>
+            </div>
+            <div class="d-flex justify-content-start flex-column align-items-start mt-2">
+              <p class="pr-1 pl-1 m-0 text-middle">
+               {{ lang === 'en' ? 'Address' : 'عنوان الفرع' }}
+              </p>
+              <p class="pr-1 pl-1 text-middle font-weight-bold">
+               {{ lang === 'en' ? 'RAWABIh' : 'الروابي ' }}
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle ">
+               {{ lang === 'en' ? 'Working hours' : 'ساعات العمل' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+              7:00 AM to 2:00 AM
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle">
+                {{ lang === 'en' ? 'Phone' : 'الهاتف ' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+                920-000-546
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class= "col-sm-4">
+          <div class="storesListContainer">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="p-0 m-0">
+                <span class="pr-1 pl-1 text-middle"> {{ lang === 'en' ? 'Store name' : 'اسم الفرع' }}</span>
+                <span class="pr-1 pl-1 text-middle font-weight-bold">{{ lang === 'en' ? 'MANAR' : 'المنار' }}</span>
+              </p> <a href="https://goo.gl/maps/SuqnSvmZigYLtqMTA" target="_blank">
+              <svg width="20" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+              </svg></a>
+            </div>
+            <div class="d-flex justify-content-start flex-column align-items-start mt-2">
+              <p class="pr-1 pl-1 m-0 text-middle">
+               {{ lang === 'en' ? 'Address' : 'عنوان الفرع' }}
+              </p>
+              <p class="pr-1 pl-1 text-middle font-weight-bold">
+               {{ lang === 'en' ? 'MANAR' : 'المنار ' }}
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle ">
+               {{ lang === 'en' ? 'Working hours' : 'ساعات العمل' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+              7:00 AM to 2:00 AM
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle">
+                {{ lang === 'en' ? 'Phone' : 'الهاتف ' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+                920-000-546
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="storesListContainer">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="p-0 m-0">
+                <span class="pr-1 pl-1 text-middle"> {{ lang === 'en' ? 'Store name' : 'اسم الفرع' }}</span>
+                <span class="pr-1 pl-1 text-middle font-weight-bold">{{ lang === 'en' ? 'SULIEMANIYA' : 'السليمانية' }}</span>
+              </p> <a href="https://goo.gl/maps/cEVNGC2yFZ2V142j6" target="_blank">
+              <svg width="20" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+              </svg></a>
+            </div>
+            <div class="d-flex justify-content-start flex-column align-items-start mt-2">
+              <p class="pr-1 pl-1 m-0 text-middle">
+               {{ lang === 'en' ? 'Address' : 'عنوان الفرع' }}
+              </p>
+              <p class="pr-1 pl-1 text-middle font-weight-bold">
+               {{ lang === 'en' ? 'SULIEMANIYA' : 'السليمانية ' }}
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle ">
+               {{ lang === 'en' ? 'Working hours' : 'ساعات العمل' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+              7:00 AM to 2:00 AM
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle">
+                {{ lang === 'en' ? 'Phone' : 'الهاتف ' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+                920-000-546
+              </p>
+            </div>
+          </div>
+         
+        </div>
+       
+        
+      </div>
+      <div class="row col-sm-12 m-0 mt-2">
+        <div class="col-sm-4">
+          <div class="storesListContainer">
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="p-0 m-0">
+                <span class="pr-1 pl-1 text-middle"> {{ lang === 'en' ? 'Store name' : 'اسم الفرع' }}</span>
+                <span class="pr-1 pl-1 text-middle font-weight-bold">{{ lang === 'en' ? 'MUROOJ' : 'المروج' }}</span>
+              </p> <a href="https://goo.gl/maps/rWVzcPWp8xc615fYA" target="_blank">
+              <svg width="20" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+              </svg></a>
+            </div>
+            <div class="d-flex justify-content-start flex-column align-items-start mt-2">
+              <p class="pr-1 pl-1 m-0 text-middle">
+               {{ lang === 'en' ? 'Address' : 'عنوان الفرع' }}
+              </p>
+              <p class="pr-1 pl-1 text-middle font-weight-bold">
+               {{ lang === 'en' ? 'MUROOJ' : 'المروج ' }}
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle ">
+               {{ lang === 'en' ? 'Working hours' : 'ساعات العمل' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+              7:00 AM to 2:00 AM
+              </p>
+            </div>
+            <div class="d-flex justify-content-start align-items-start">
+              <p class="pr-1 pl-1 text-middle">
+                {{ lang === 'en' ? 'Phone' : 'الهاتف ' }}
+              </p>
+              <p class="text-middle font-weight-bold">
+                920-000-546
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+         <div class="storesListContainer">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="p-0 m-0">
+              <span class="pr-1 pl-1 text-middle"> {{ lang === 'en' ? 'Store name' : 'اسم الفرع' }}</span>
+              <span class="pr-1 pl-1 text-middle font-weight-bold">{{ lang === 'en' ? 'NASEEM' : 'النسيم' }}</span>
+            </p> <a href="https://g.page/r/CZIpfZ5n-GBgEBA" target="_blank">
+            <svg width="20" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+            </svg></a>
+          </div>
+          <div class="d-flex justify-content-start flex-column align-items-start mt-2">
+            <p class="pr-1 pl-1 m-0 text-middle">
+             {{ lang === 'en' ? 'Address' : 'عنوان الفرع' }}
+            </p>
+            <p class="pr-1 pl-1 text-middle font-weight-bold">
+             {{ lang === 'en' ? 'NASEEM' : 'النسيم ' }}
+            </p>
+          </div>
+          <div class="d-flex justify-content-start align-items-start">
+            <p class="pr-1 pl-1 text-middle ">
+             {{ lang === 'en' ? 'Working hours' : 'ساعات العمل' }}
+            </p>
+            <p class="text-middle font-weight-bold">
+            7:00 AM to 2:00 AM
+            </p>
+          </div>
+          <div class="d-flex justify-content-start align-items-start">
+            <p class="pr-1 pl-1 text-middle">
+              {{ lang === 'en' ? 'Phone' : 'الهاتف ' }}
+            </p>
+            <p class="text-middle font-weight-bold">
+              920-000-546
+            </p>
+          </div>
+         </div>
+        </div>
+      
+       
+        
+      </div>
+    
+
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <div class="mapouter">
+        <div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas"
+            src="https://maps.google.com/maps?q=sudia&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+            scrolling="no" marginheight="0" marginwidth="0"></iframe>
+          <style>
+            .mapouter {
+              position: relative;
+              text-align: right;
+              height: 500px;
+              width: auto;
+            }
+          </style>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>

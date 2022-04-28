@@ -1,0 +1,20 @@
+<div clss="form-group m-0" [formGroup]="formGroup">
+    <!-- {{ formGroup.dirty ? 'mat-form-field-invalid' : '' }} -->
+    <mat-form-field class="d-block" appearance="outline">
+        <mat-label [attr.for]="controlName" class="text-middle font-16">{{ label }}</mat-label>
+        <input matInput [matDatepicker]="datepicker" [id]="controlName" [formControlName]="controlName"
+            [min]="minDate" [max]="maxDate" (keydown)="preventDefault($event)" (dateChange)="setDateValue($event)">
+
+        <mat-datepicker-toggle matSuffix [for]="datepicker">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" matDatepickerToggleIcon viewBox="0 0 18 18" 
+                class="position-relative">
+                <g fill="#868894" fill-rule="nonzero" stroke="#868894">
+                  <path d="M7.5 2.25h3v1h-3z"/>
+                  <path d="M16.5 2.25h-2.09v.804h1.233v3.375H2.335V3.054h1.233V2.25H1.5v13.5h15V2.25zM2.335 14.946V7.232h13.329v7.714H2.335z"/>
+                </g>
+            </svg>
+        </mat-datepicker-toggle>
+
+        <mat-datepicker #datepicker></mat-datepicker>
+    </mat-form-field>
+</div>

@@ -1,0 +1,6 @@
+<div [formGroup]="formGroup">
+    <!-- class="{{ formGroup.dirty ? 'ng-dirty' : '' }}" -->
+    <ng-select [items]="items" [formControlName]="controlName" [placeholder]="label" appearance="outline"
+        [bindLabel]="lang === 'en' ? 'nameEn' : 'nameAr'" [bindValue]="bindValue" [clearable]="clearable" [selectOnTab]="true" [searchable]="searchable"  [multiple]="multiple">
+    </ng-select>
+</div>

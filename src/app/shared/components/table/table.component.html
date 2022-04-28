@@ -1,0 +1,109 @@
+<div class="table-wrapper">
+    <mat-table [dataSource]="rows" class="mat-elevation-z8" [ngStyle]="{'width': (columns.length * 90) + 'px'}">
+
+        <ng-container [matColumnDef]="column.rowPropertyName" *ngFor="let column of columns">
+            <mat-header-cell *matHeaderCellDef class="d-flex justify-content-start text-dark font-14 {{column.className}}">
+                <span *ngIf="column.type !== 'checkbox'">{{ column.title | translate }}</span>
+
+                <mat-checkbox   (change)="$event ? masterToggle() : null" *ngIf="column.type === 'checkbox'"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()" color="bg-error">
+                </mat-checkbox>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row" class="d-flex justify-content-start text-dark font-14 {{column.className}}" [style.background]="getBackground(row)"
+                [ngClass]="{'max-width': isCustomClass, 'selected': selection.isSelected(row)}">
+                <!-- Checkbox -->
+                <mat-checkbox   (click)="$event.stopPropagation()"  *ngIf="column.type === 'checkbox'"
+                                (change)="$event ? selection.toggle(row) : null; selectedRows.emit(selection.selected)"
+                                [checked]="selection.isSelected(row)" [disabled]="isCheckedDisabled(row)" color="bg-error">
+                </mat-checkbox>
+
+                <!-- data -->
+                <span *ngIf="column.type === 'data'" class="text-truncate {{ column.rowPropertyName === 'status' ? row.statusCode : '' }}"
+                  [ngClass]="{'px-2 py-1': column.rowPropertyName === 'status'}">
+                    {{ row[column.rowPropertyName] ? slice(row[column.rowPropertyName]) : '-' }}
+                </span>
+
+                <!-- date -->
+                <span *ngIf="column.type === 'date'" dir="ltr">{{ row[column.rowPropertyName] ? (row[column.rowPropertyName] | amFromUtc | amLocal | amDateFormat: 'YYYY/MM/DD hh:mm A') : '-' }}</span>
+                <!-- action icon -->
+                <span *ngIf="column.type === 'action' && column.actionType === 'icon'" class="img_icon" >
+                  <img mat-raised-button
+                  matTooltip= "{{iconName}}"
+                  aria-label="Button that displays a tooltip when focused or hovered over"
+                  matTooltipClass="custom-tooltip"
+                  matTooltipPosition="above"
+                   src="assets/images/icons/{{iconName}}.svg" *ngFor="let iconName of column.actionIconName" (click)="doAction(row, iconName)" class="cursor-pointer m-inline-end-1"  />
+                </span>
+
+                <span *ngIf="column.type === 'action' && column.actionType === 'button'" class="img_icon">
+                  <span class="m-inline-end-1" *ngFor="let iconName of column.actionIconName; let i = index">
+                    <div class="space-between-large"></div>
+                    <span  class="cursor-pointer " mat-raised-button [ngClass]="column.classNames !== undefined ? column.classNames[i] : ''" (click)="doAction(row, iconName)">
+                      {{iconName | translate}}
+                    </span>
+                  </span>
+                </span> 
+
+              </mat-cell>
+
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"  [ngClass]="{'selected': selection.isSelected(row)}"  ></mat-row>
+    </mat-table>
+</div>
+
+<!-- usage -->
+<!-- TS ->
+
+  this.rows = [
+      {
+        employeeId: 'Ahmed Khairy',
+        department: 'Web Development',
+        score: '1000',
+        status: 'completed'
+      },
+      {
+        employeeId: 'Ahmed Khairy',
+        department: 'Web Development',
+        score: '1000',
+        status: 'completed'
+      }
+    ]
+
+  generateColumns() {
+    this.columns = [
+      {
+        title: 'Employee',
+        rowPropertyName: 'employeeId',
+        className: 'medium',
+        type: 'data'
+      },
+      {
+        title: 'Department',
+        rowPropertyName: 'department',
+        className: 'default',
+        type: 'data'
+      },
+      {
+        title: 'Score',
+        rowPropertyName: 'score',
+        className: 'small',
+        type: 'data'
+      },
+      {
+        title: 'Status',
+        rowPropertyName: 'status',
+        className: 'default',
+        type: 'data'
+      }
+    ];
+  }
+
+-->
+
+<!-- HTML ->
+    <app-table [columns]="columns" [rows]="rows" [withCheckbox]="false"></app-table>
+-->

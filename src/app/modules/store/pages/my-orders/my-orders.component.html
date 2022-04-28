@@ -1,0 +1,75 @@
+<app-store-toolbar [cartCount]="cartCount"></app-store-toolbar>
+<section class="page-wrapper d-flex flex-column h-100">  
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="d-flex justify-content-between align-items-center p-2 m-2">
+        <p class="text-middle font-22 font-weight-bold p-0 m-0">
+          {{'STORE.PREVIOUSORDER' | translate}}
+        </p>
+      </div>
+      
+      <!-- <button  mat-button class="main-btn btn-header font-18" (click)="logOut()">
+        <div class="d-flex align-items-center">
+          {{'STORE.GoToCard' | translate}}
+         
+        </div>
+      </button>  -->
+
+      <button  mat-button class="main-btn btn-header font-14" (click)="logOut()" style="background-color: #FFA836;">
+        <div class="d-flex align-items-center">
+          {{'STORE.LOGOUT' | translate}}
+         
+        </div>
+      </button> 
+
+    </div>
+   
+    <div class="grid-container">
+      <div class="card-wrapper d-flex flex-column justify-content-start">
+        <!-- <div class="d-flex justify-content-between align-items-center p-2 m-2">
+          <p class="text-middle font-22 font-weight-bold p-0 m-0">
+            {{'STORE.PREVIOUSORDER' | translate}}
+          </p>
+        </div> -->
+       
+        <div  *ngFor="let item of orders">
+          <div class="mt-2 p-1">
+            <div class="d-flex justify-content-between align-items-center mobile-cart-block">
+
+              <div class="mt-6 order-item" style="text-align: start;">
+                <p class=" font-16 p-0 mb-2">
+                  <span>{{'STORE.OrderCode' | translate}} </span>
+                    {{ item.code }}
+                </p>
+                <p class=" font-16 p-0 mb-2">
+                  <span>{{'STORE.Status' | translate}}</span>
+                    {{ lang === 'en' ? item.statusEn : item.statusAr }}
+                </p>
+                <p class=" font-16 p-0 mb-2 text-price">
+                  <span>{{'STORE.PayedMoney' | translate}} </span>
+                    {{ item.totalPayment }} {{'STORE.ACCURECY' | translate}}
+                </p>
+                <p class=" font-16 p-0 mb-2">
+                  <span> {{'STORE.Datetime' | translate}}</span>
+                    {{ item.dayDate | amDateFormat: 'YYYY/MM/DD hh:mm A'}}
+                </p>
+              </div>
+
+              <div class="mt-6">
+                <div class="d-flex justify-content-end align-items-start">
+                  <button  mat-button class="main-btn btn-body font-16" (click)="getOrderDtails(item.id)">
+                    <div class="d-flex align-items-center">
+                      {{'STORE.OrderDetails' | translate}}
+                       
+                    </div>
+                  </button> 
+
+                  </div>
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>  
+
+    </div>
+  </section>

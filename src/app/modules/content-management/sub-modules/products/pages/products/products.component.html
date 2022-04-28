@@ -1,0 +1,16 @@
+<div class="page-wrapper">
+    <div class="d-flex align-items-center justify-content-between">
+        <h3 class="m-0 regular font-24">{{ 'HOME.RECPRODUCTS' | translate }}</h3>
+
+        <a [routerLink]="[ 'product/add' ]">
+            <button class="w-100 main-btn strock font-16 px-3 py-0" type="button" mat-button>{{ 'ACTIONS.ADD' | translate }}</button>
+        </a>
+    </div>
+
+    <div class="mt-4 row">
+        <div class="col-sm-6 col-xl-3" [ngClass]="{'mt-3': productIndex > 0, 'mt-sm-0': productIndex === 1, 'mt-xl-0': productIndex === 2}"
+            *ngFor="let product of products; let productIndex=index">
+            <app-product-card [product]="product"></app-product-card>
+        </div>
+    </div>
+</div>

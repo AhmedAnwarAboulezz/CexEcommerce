@@ -1,0 +1,66 @@
+<div class="page-wrapper">
+    <h1 class="m-0 mb-4 font-24 regular">{{ type === 'mobile' ? ('HOME.MENU.UPDATEMOB' | translate) : ('HOME.MENU.UPDATEPASS' | translate) }}</h1>
+
+    <div class="row justify-content-center justify-content-lg-start">
+        <div class="col-md-6" *ngIf="type === 'mobile'">
+            <form method="post" [formGroup]="resetForm" *ngIf="resetForm" (ngSubmit)="reset()">
+                <div class="newPhone w-100" *ngIf="resetForm.get('newPhone')">
+                    <mat-form-field class="w-100 text-start" appearance="outline">
+                        <mat-label>New Mobile Number</mat-label>
+                        <input type="number" formControlName="newPhone" matInput placeholder="05xxxxxxxx">
+                    </mat-form-field>
+                </div>
+
+                <div class="pinCode-wrapper w-100" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)" *ngIf="showOTP">
+                    <label for="pin" class="font-18">Pin Code</label>
+
+                    <div class="pinCode-inputs d-flex justify-content-center">
+                        <input type="number" maxlength="1" min="0" max="9" autofocus id="pin">
+                        <input type="number" maxlength="1" min="0" max="9">
+                        <input type="number" maxlength="1" min="0" max="9">
+                        <input type="number" maxlength="1" min="0" max="9">
+                        <!-- <input type="number" maxlength="1" min="0" max="9">
+                        <input type="number" maxlength="1" min="0" max="9"> -->
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <button id="submitBtn" class="main-btn strock font-14 py-1" type="submit" [disabled]="resetForm.invalid" mat-button>
+                        {{ showOTP ? ('ACTIONS.SEND' | translate) : ('ACTIONS.CONTINUE' | translate) }}
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="col-md-6" *ngIf="type === 'password'">
+            <form method="post" [formGroup]="resetForm" *ngIf="resetForm" (ngSubmit)="changePassword()">
+                <div class="oldPassword w-100">
+                    <mat-form-field class="w-100 text-start" appearance="outline">
+                        <mat-label>Old Password</mat-label>
+                        <input type="password" formControlName="oldPassword" matInput placeholder="**********">
+                    </mat-form-field>
+                </div>
+                
+                <div class="newPassword w-100">
+                    <mat-form-field class="w-100 text-start" appearance="outline">
+                        <mat-label>New Password</mat-label>
+                        <input type="password" formControlName="newPassword" matInput placeholder="**********">
+                    </mat-form-field>
+                </div>
+                
+                <div class="confirmNewPassword w-100">
+                    <mat-form-field class="w-100 text-start" appearance="outline">
+                        <mat-label>Confirm New Password</mat-label>
+                        <input type="password" formControlName="confirmNewPassword" matInput placeholder="**********">
+                    </mat-form-field>
+                </div>
+                
+                <div class="d-flex justify-content-end mt-4">
+                    <button id="submitBtn" class="main-btn strock font-14 py-1" type="submit" [disabled]="resetForm.invalid" mat-button>
+                        {{ 'ACTIONS.SEND' | translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+@import "style";
+
+.page-wrapper {
+  .pinCode-wrapper {
+    label {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    input {
+      border: none;
+      text-align: center;
+      width: 48px;
+      height: 48px;
+      font-size: 36px;
+      background-color: rgba($color: $primary, $alpha: 0.1);
+      margin-right: 5px;
+
+      &:focus {
+        border: 1px solid $purple;
+        outline: none;
+      }
+    }
+  }
+}

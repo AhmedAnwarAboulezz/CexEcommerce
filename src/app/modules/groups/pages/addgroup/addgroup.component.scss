@@ -1,0 +1,107 @@
+@import "style";
+.search-section {
+    padding: 16px;
+    background-color: white;
+    border-radius: 7px;
+}
+::ng-deep .mat-form-field {
+    &.mat-form-field-invalid {
+        .mat-form-field-outline-thick {
+            color: $error !important;
+        }
+    }
+
+    .mat-form-field-wrapper {
+        .mat-form-field-flex {
+            .mat-form-field-outline {
+                color: $dark;
+
+                * {
+                    border-radius: 0;
+                }
+            }
+
+            .mat-form-field-infix {
+                .mat-form-field-label-wrapper {
+                    .mat-form-field-label {
+                        color: $dark;
+                    }
+                }
+            }
+
+            .mat-form-field-suffix {
+                top: -6px;
+            }
+        }
+    }
+}
+
+::ng-deep .mat-radio-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.4em;
+    transition: none;
+
+    * {
+        transition: none;
+    }
+
+    .mat-radio-button {
+        width: 50%;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        border: 1px solid $dark;
+        transition: all .6s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+        &:first-child {
+            margin-inline-end: 1rem;
+        }
+
+        &:hover {
+            border-width: 2px;
+        }
+
+        &.mat-radio-checked {
+            color: $white;
+            background-color: $primary;
+        }
+
+        .mat-radio-label {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .mat-radio-container {
+                display: none;
+            }
+
+            .mat-radio-label-content {
+                padding: 0;
+            }
+        }
+    }
+}
+
+::ng-deep .ng-select {
+    &.ng-invalid {
+        .ng-select-container {
+          .ng-value-container {
+            .ng-placeholder {
+              background-color: #f7f9fd;
+            }
+          }
+        }
+    }
+}
+::ng-deep {
+  .ng-select {
+    padding-bottom: 1.93em;
+  }
+  .ng-select .ng-select-container.ng-appearance-outline {
+    min-height: 63px;
+  }
+}

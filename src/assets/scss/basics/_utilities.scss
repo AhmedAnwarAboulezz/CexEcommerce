@@ -1,0 +1,278 @@
+.text-dark {
+  color: $dark !important;
+}
+
+.text-main {
+  color: $primary !important;
+}
+
+.text-main-light {
+  color: $primary-light;
+}
+
+.text-secondary {
+  color: $secondary !important;
+}
+
+.text-middle {
+  color: $middle !important;
+}
+
+.text-light {
+  color: $light !important;
+}
+
+.text-white {
+  color: $white !important;
+}
+
+.text-black {
+  color: $black;
+}
+
+.text-success {
+  color: $success !important;
+}
+
+.text-error {
+  color: $error !important;
+}
+
+.text-pending {
+  color: $inprogress !important;
+}
+
+.text-start {
+  text-align: start !important;
+}
+
+.text-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.word-break {
+  word-break: break-all
+}
+
+// bg
+.bg-main {
+  background-color: $primary !important;
+}
+
+.bg-main-light {
+  background-color: $primary-light;
+}
+
+.bg-main-light-2 {
+  background-color: rgba($color: $primary, $alpha: .05);
+}
+
+.bg-secondary {
+  background-color: $secondary !important;
+}
+
+.bg-middle {
+  background-color: $middle !important;
+}
+
+.bg-bluelight {
+  background-color: $blue-light !important;
+}
+
+.bg-light {
+  background-color: $light !important;
+}
+
+.bg-succes {
+  background-color: $success-light !important;
+}
+
+.bg-error {
+  background-color: $error-light !important;
+}
+
+.bg-purple {
+  background-color: $purple !important;
+}
+
+.border-purple {
+  border: 1px solid $purple;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.h-40 {
+  height: 40px;
+}
+
+.w-80 {
+  width: 100%;
+
+  @include small-screen {
+    width: 80%;
+  }
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.title-border-bottom {
+  border-bottom: 2px solid #dde0e2;
+}
+
+.border-main {
+  border-color: $primary !important;
+}
+
+.border-error {
+  border-color: $error !important;
+}
+
+.border-radius-0 {
+  border-radius: 0;
+}
+
+.border-radius-2 {
+  border-radius: 2px !important;
+}
+
+.border-radius-50 {
+  border-radius: 50%;
+}
+
+// margin
+.m-inline-start-1 {
+  margin-inline-start: 0.25rem !important;
+}
+
+.m-inline-start-2 {
+  margin-inline-start: 0.5rem !important;
+}
+
+.m-inline-start-3 {
+  margin-inline-start: 1rem !important;
+}
+
+.m-inline-end-1 {
+  margin-inline-end: .25rem !important;
+}
+
+.m-inline-end-2 {
+  margin-inline-end: .5rem !important;
+}
+
+.m-inline-end-3 {
+  margin-inline-end: 1rem !important;
+}
+
+// padding
+.p-inline-start-1 {
+  padding-inline-start: 0.25rem !important;
+}
+
+.p-inline-start-2 {
+  padding-inline-start: 0.5rem !important;
+}
+
+.p-inline-start-3 {
+  padding-inline-start: 1rem !important;
+}
+
+.p-inline-start-4 {
+  padding-inline-start: 2rem !important;
+}
+
+.p-inline-start-5 {
+  padding-inline-start: 4rem !important;
+}
+
+.p-inline-end-1 {
+  padding-inline-end: .25rem !important;
+}
+
+.p-inline-end-2 {
+  padding-inline-end: .5rem !important;
+}
+
+.p-inline-end-3 {
+  padding-inline-end: 1rem !important;
+}
+
+.p-inline-end-4 {
+  padding-inline-end: 2rem !important;
+}
+
+.p-inline-end-5 {
+  padding-inline-end: 4rem !important;
+}
+
+.xl-p-inline-end-5 {
+  @include normal-screen {
+    padding-inline-end: 4rem !important;
+  }
+}
+
+// badge
+.badge-circle {
+  width: 35px;
+  min-width: 35px !important;
+  height: 35px;
+  max-height: 35px !important;
+  border-radius: 50% !important;
+}
+
+.badge-square {
+  width: 30px;
+  min-width: 30px !important;
+  height: 25px;
+  max-height: 25px !important;
+  border-radius: 2px !important;
+}
+
+.w-max {
+  width: max-content;
+}
+
+.page-wrapper {
+  padding: 1.5rem clamp(1rem, 5vw, 2.5rem) !important;
+}
+
+.page-title {
+  font-size: clamp(1.2rem, 1.9vw, 2.5rem) !important;
+}
+
+.rtl {
+  .rotate {
+    display: block;
+    transform: rotate(180deg);
+  }
+}
+
+/* Scrollbar Styles Start Here*/
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d2d2d2;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $primary;
+}

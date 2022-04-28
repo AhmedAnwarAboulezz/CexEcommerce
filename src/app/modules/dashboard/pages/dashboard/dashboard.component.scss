@@ -1,0 +1,25 @@
+@import 'style';
+.card-wrapper {
+    background-color: $white;
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+    .personalImg img{
+        width: 20%;
+        height: 20%;
+        margin-bottom: 2%;
+    }
+    .person-info {
+        margin: 0 10px;
+    }
+ 
+}
+.chartDisplay {
+    display: grid;
+}
+.chartDisplay .rtl {
+    direction: ltr
+}
+::ng-deep .c-donutchart__title {
+    margin-bottom: 15px;
+}

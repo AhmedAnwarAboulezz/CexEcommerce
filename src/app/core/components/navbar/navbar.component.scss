@@ -1,0 +1,19 @@
+@import "style";
+
+::ng-deep .mat-toolbar {
+    height: 60px;
+    position: relative;
+    z-index: 5;
+    background-color: $white;
+    color: $black;
+    box-shadow: 3px 0 10px 0 rgba(183, 192, 206, .2);
+    
+
+    .mat-list {
+        .mat-list-item {
+            .mat-list-item-content {
+                padding: 0 !important;
+            }
+        }
+    }
+}

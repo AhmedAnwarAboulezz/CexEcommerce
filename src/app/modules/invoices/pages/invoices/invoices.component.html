@@ -1,0 +1,246 @@
+<section class="page-wrapper">
+  <div class="wrapper h-100">
+    <div class="wrapper-transaction bg-white d-flex flex-column">
+      <div class="transaction pb-0">
+        <div class="transaction-data">
+          <h1>{{ 'HOME.MYINVOICES' | translate }} </h1>
+        </div>
+      </div>
+
+        <app-table [columns]="columns" [rows]="rows" [withCheckbox]="false" [withIndex]="true" (action)="doAction($event)" *ngIf="rows.length"></app-table>
+        <div class="mt-5" *ngIf="rows.length">
+          <app-paginator [totalCount]="totalCount" [pageSize]="pageSize" (pageSelected)="pageNumber = $event; getTransactions()"></app-paginator>
+        </div>
+
+      <div class="d-flex justify-content-center align-items-center h-100" *ngIf="!rows.length">
+        <p class="m-0 font-16">{{ 'HOME.NODATA' | translate }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- survey modal -->
+<ng-template #surveyModal>
+  <div class="survey" *ngIf="survey">
+    <h1 class="m-0 mb-4 font-22 regular">{{ lang === 'en' ? survey.nameEn : survey.nameAr }}</h1>
+    <form method="post" class="d-block mt-4" [formGroup]="mainForm" (ngSubmit)="rate()" *ngIf="mainForm">
+      <div class="form-array row flex-column align-items-center" formArrayName="answers">
+        <div class="form-group mb-2 col-sm-10" [formGroup]="mainForm.get('answers')?.get(questionIndex.toString())" *ngFor="let question of survey.questions; let questionIndex = index">
+          <div class="form-control d-flex flex-column border-0 h-100">
+            <label [for]="'question-' + question.id" class="font-16">{{ lang === 'en' ? question.bodyEn : question.bodyAr }}</label>
+
+            <!-- rating type -->
+            <div [id]="'question-' + question.id" setRtl class="emotions mt-2 w-100 d-flex align-items-center justify-content-between"
+              *ngIf="question.questionTypeId === QuestionTypes.rating">
+
+              <!-- happy -->
+              <svg class="happy" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0" viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.happy}"
+                (click)="setRate(questionIndex, 5)">
+                <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z" />
+                <path d="M393.385 299.115c-5.781-1.385-11.49 2.177-12.844 7.906-13.75 57.885-64.958 98.313-124.542 98.313-59.656 0-110.885-40.49-124.573-98.448-1.365-5.75-7.146-9.24-12.833-7.938-5.74 1.354-9.292 7.104-7.938 12.833 15.979 67.646 75.75 114.885 145.344 114.885 69.51 0 129.26-47.167 145.292-114.708 1.365-5.739-2.176-11.489-7.906-12.843z" />
+                <circle cx="170.667" cy="192" r="21.333" />
+                <circle cx="341.333" cy="192" r="21.333" />
+              </svg>
+              
+              <!-- good -->
+              <svg class="good" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0" viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.good}"
+                (click)="setRate(questionIndex, 4)">
+                <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z" />
+                <path d="M393.385 299.115c-5.781-1.385-11.49 2.177-12.844 7.906-13.75 57.885-64.958 98.313-124.542 98.313-59.656 0-110.885-40.49-124.573-98.448-1.365-5.75-7.146-9.24-12.833-7.938-5.74 1.354-9.292 7.104-7.938 12.833 15.979 67.646 75.75 114.885 145.344 114.885 69.51 0 129.26-47.167 145.292-114.708 1.365-5.739-2.176-11.489-7.906-12.843z" />
+                <circle cx="170.667" cy="192" r="21.333" />
+                <circle cx="341.333" cy="192" r="21.333" />
+              </svg>
+
+              <!-- okay -->
+              <svg class="okay" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0" viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.okay}"
+                (click)="setRate(questionIndex, 3)">
+                <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z"/>
+                <circle cx="170.667" cy="192" r="21.333"/>
+                <circle cx="341.333" cy="192" r="21.333"/>
+                <path d="M373.333 341.333H138.667c-5.896 0-10.667 4.771-10.667 10.667s4.771 10.667 10.667 10.667h234.667c5.896 0 10.667-4.771 10.667-10.667-.001-5.896-4.772-10.667-10.668-10.667z"/>
+              </svg>
+
+              <!-- bad -->
+              <svg class="bad" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0" viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.bad}"
+                (click)="setRate(questionIndex, 2)">
+                <path d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z"/>
+                <circle cx="170.667" cy="192" r="21.333"/>
+                <circle cx="341.333" cy="192" r="21.333"/>
+                <path d="M256 320h-.031c-89.615 0-124.396 45.021-125.833 46.938-3.521 4.688-2.573 11.302 2.094 14.854 4.667 3.542 11.354 2.635 14.927-2 1.208-1.573 30.604-38.458 108.813-38.458h.03c78.229.01 107.635 36.896 108.802 38.406 2.094 2.792 5.292 4.26 8.542 4.26 2.229 0 4.469-.698 6.396-2.135 4.708-3.531 5.667-10.219 2.125-14.938C380.427 365.021 345.635 320.01 256 320z"/>
+              </svg>
+
+              <!-- terrible -->
+              <svg class="terrible" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0" viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.terrible}"
+                (click)="setRate(questionIndex, 1)">
+                <path d="M256 0C114.833 0 0 114.844 0 256s114.833 256 256 256 256-114.844 256-256S397.167 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z"/>
+                <path d="M255.958 298.635c-60.479 0-114.604 36.073-137.896 91.906-2.25 5.438.313 11.677 5.75 13.948 5.354 2.281 11.688-.302 13.958-5.74 19.938-47.854 66.333-78.781 118.188-78.781 51.854 0 98.271 30.927 118.208 78.802 1.708 4.094 5.688 6.563 9.854 6.563 1.375 0 2.771-.26 4.104-.823 5.438-2.26 8-8.51 5.75-13.948-23.291-55.843-77.416-91.927-137.916-91.927z"/>
+                <circle cx="170.667" cy="192" r="21.333"/>
+                <circle cx="341.333" cy="192" r="21.333"/>
+              </svg>
+            </div>
+
+            <!-- boolean type -->
+            <div [id]="'question' + question.id" class="emotions mt-2 w-100 d-flex align-items-center justify-content-end"
+              *ngIf="question.questionTypeId === QuestionTypes.boolean">
+              
+              <!-- like -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0" viewBox="0 0 512 512" class="m-inline-end-2 like"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Boolean.like}"
+                (click)="setRate(questionIndex, 1)">
+                <path d="M469.51 317c7.14-7.97 11.49-18.49 11.49-30 0-24.81-20.19-45-45-45h-87.34c8.65-26.25 12.34-61.08 12.34-76.01V151c0-33.08-26.92-60-60-60h-15c-6.88 0-12.88 4.68-14.55 11.36l-8.17 32.69c-11.45 45.78-47.8 96.29-85.42 105.47C171.27 223.84 155 212 136 212H46c-8.28 0-15 6.72-15 15v270c0 8.28 6.72 15 15 15h90c17.89 0 33.37-10.49 40.62-25.65l51.54 17.18c16.85 5.62 34.41 8.47 52.18 8.47H406c24.81 0 45-20.19 45-45 0-5.85-1.12-11.45-3.16-16.58C466.92 445.21 481 427.72 481 407c0-11.51-4.35-22.03-11.49-30 7.14-7.97 11.49-18.49 11.49-30s-4.35-22.03-11.49-30zM151 467c0 8.27-6.73 15-15 15H61V242h75c8.27 0 15 6.73 15 15v210zm255-135h30c8.27 0 15 6.73 15 15s-6.73 15-15 15h-30c-8.28 0-15 6.72-15 15 0 8.28 6.72 15 15 15h30c8.27 0 15 6.73 15 15s-6.73 15-15 15h-30c-8.28 0-15 6.72-15 15 0 8.28 6.72 15 15 15 8.27 0 15 6.73 15 15s-6.73 15-15 15H280.34c-14.54 0-28.91-2.33-42.7-6.93L181 456.19V270.58c23.53-4.47 46.56-19.37 67.35-43.76 20.3-23.82 36.76-55.4 44.03-84.49l5.33-21.33H301c16.54 0 30 13.46 30 30v14.99c0 20.14-6.3 58.77-14.36 76.01H286c-8.28 0-15 6.72-15 15 0 8.28 6.72 15 15 15h150c8.27 0 15 6.73 15 15s-6.73 15-15 15h-30c-8.28 0-15 6.72-15 15 0 8.28 6.72 15 15 15z" />
+                <circle cx="106" cy="437" r="15" />
+                <path d="M316 0c-8.284 0-15 6.716-15 15v31c0 8.284 6.716 15 15 15s15-6.716 15-15V15c0-8.284-6.716-15-15-15zM252.36 66.148l-21.213-21.213c-5.857-5.858-15.355-5.858-21.213 0-5.858 5.858-5.858 15.355 0 21.213l21.213 21.213c5.857 5.857 15.356 5.858 21.213 0 5.858-5.858 5.858-15.355 0-21.213zM422.066 44.935c-5.857-5.858-15.355-5.858-21.213 0L379.64 66.147c-5.858 5.858-5.858 15.355 0 21.213 5.857 5.858 15.355 5.859 21.213.001l21.213-21.213c5.858-5.858 5.858-15.355 0-21.213z" />
+              </svg>
+              
+              <!-- dislike -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0" viewBox="0 0 512 512" class="m-inline-start-3 terrible"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Boolean.dislike}"
+                (click)="setRate(questionIndex, 2)">
+                <path d="M46.32 273.32h29.673v29.673H46.32z" />
+                <path d="M488.639 242.484c7.225-9.158 11.553-20.702 11.553-33.245 0-18.371-9.264-34.613-23.36-44.319 7.225-9.158 11.553-20.702 11.553-33.245 0-18.364-9.254-34.609-23.342-44.317 7.222-9.156 11.534-20.706 11.534-33.246C476.577 24.457 452.45.33 422.795.33H289.309c-28.379 0-56.24 5.053-82.811 15.017l-55.83 20.937V12.088H0v353.639h150.668v-56.803c51.144 54.842 99.367 108.775 107.744 122.182v59c0 11.891 9.674 21.564 21.564 21.564 49.039 0 88.936-39.896 88.936-88.935v-26.613l-16.079-55.542 105.385.005c29.655 0 53.782-24.127 53.782-53.782 0-18.371-9.264-34.613-23.361-44.319zm-367.971 93.243H30V42.088h90.668v293.639zm337.551-25.142l-145.304-.007 25.997 89.799v22.358c0 29.633-21.985 54.228-50.5 58.334v-53.003c0-7.265 0-13.003-73.773-93.979-26.079-28.626-52.408-56.716-63.971-69.002V68.321l66.363-24.886c23.19-8.697 47.509-13.106 72.277-13.106h133.487c13.113 0 23.782 10.669 23.782 23.782s-10.669 23.782-23.782 23.782H384.43v30h50.173c13.113 0 23.782 10.668 23.782 23.781s-10.669 23.782-23.782 23.782H398.14v30h48.27c13.113 0 23.782 10.669 23.782 23.782s-10.669 23.782-23.782 23.782h-36.428v30h48.235c13.113 0 23.782 10.668 23.782 23.781.001 13.115-10.668 23.784-23.78 23.784z" />
+              </svg>
+            </div>
+
+
+            <!-- question type -->
+            <div [id]="'question' + question.id" class="emotions mt-2 w-100 d-flex align-items-center justify-content-end"
+              *ngIf="question.questionTypeId === QuestionTypes.question">
+              <mat-form-field class="w-100 text-start" appearance="outline">
+                <mat-label>Your Answer</mat-label>
+                <textarea name="answer" id="answer" cols="30" rows="2" formControlName="answerText" matInput></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row flex-column align-items-center">
+        <div class="form-group mb-2 col-sm-10">
+          <div class="form-control d-flex flex-column border-0 h-100">
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>Your Notes</mat-label>
+              <textarea name="notes" id="notes" cols="30" rows="2" formControlName="notes" matInput></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button class="w-75 main-btn strock font-16 py-1" type="submit" [disabled]="mainForm.invalid" mat-button>{{ 'ACTIONS.SEND' | translate }}</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<!---View-->
+<!-- Information MODAL -->
+<ng-template #viewModal>
+  <div class="text-center m-auto">
+    <img src="../assets/images/logo/logo.png" alt="logo" />
+    <h5 class="m-0 text-medium font-18 mt-2">{{ lang === 'en' ?  "Alsadhan - " +  selectedUser.storeNameEn : "السدحان - " + selectedUser.storeNameAr }}
+    </h5>
+  </div>
+  <section class="directionModal">
+    <div class="directionRTL">
+      <div class="d-flex justify-content-start">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">{{ 'HOME.PROFILE.CARDNUMBER' | translate }}</p>
+        <p class="text-middle font-16 d-block mt-2 mr-2 ml-2">{{selectedUser.cardNumber}}</p>
+      </div>
+      <div class="d-flex justify-content-start">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">{{ 'HOME.Complain.CUSTOMERNAME' | translate }}</p>
+        <p class="text-middle font-16 d-block mt-2 mr-2 ml-2">{{selectedUser.customerName}}</p>
+      </div>
+      <div class="d-flex justify-content-between">
+        <!-- <div class="d-flex justify-content-start">
+          <p class="text-medium font-16 d-block font-weight-bold mt-2">{{ 'HOME.POINTS' | translate }}</p>
+          <p class="text-middle font-16 d-block mt-2 mr-2 ml-2"></p>
+        </div> -->
+        <div class="d-flex justify-content-start">
+          <p class="text-medium font-16 d-block font-weight-bold mt-2">{{ 'HOME.PROFILE.DATE' | translate }}</p>
+          <p class="text-middle font-16 d-block mt-2 mr-2 ml-2">{{selectedUser.transactionDate}} </p>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div *ngFor="let details of selectedUser.details">
+      <div class="d-flex justify-content-start">
+        <p class="text-medium font-14 d-block  mt-2">{{details?.descriptionEn}}</p>
+        <p class="text-medium font-14 d-block  mt-2 mr-2 ml-2">{{details?.descriptionAr}}</p>
+      </div>
+      <div class="d-flex justify-content-end">
+        <p class="text-middle font-16 d-block  mt-2 mr-3 ml-3">{{details.price}}</p>
+      </div>
+      <hr>
+    </div>
+    <!-- <mat-divider></mat-divider> -->
+    <div class="d-flex justify-content-end flex-column mt-2">
+      <div class="d-flex justify-content-end">
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">Total الأجمالي</p>
+        <p class="text-medium font-weight-bold font-16 d-block mt-2 mr-3 ml-3">{{selectedUser.total}}</p>
+      </div>
+      <div class="d-flex justify-content-end">
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">VAT</p>
+        <p class="text-medium font-weight-bold font-16 d-block mt-2 mr-3 ml-3">{{selectedUser.vat}}</p>
+      </div>
+    </div>
+    <!-- <span class="mt-2 ml-3 mr-3 text-medium font-16 font-weight-bold">(15%)</span> -->
+    <mat-divider></mat-divider>
+    <div class="d-flex justify-content-between mt-2">
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">Date and Time</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{selectedUser.transactionDate}}</p>
+      </div>
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">Branch</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{selectedUser.storeId}}</p>
+      </div>
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">POS</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{selectedUser.terminalNumber}}</p>
+      </div>
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">EMPID</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{selectedUser.cashirId}}</p>
+      </div>
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">TransID</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{rowID}}</p>
+      </div>
+    </div>
+    <hr>
+    
+    <div class="text-right mt-2">
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">سياسة الإسترجاع والإستبدال </p>
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">يجب احضار الفاتورة الأصلية</p>
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">يجب ان يكون المنتج بحالة جيده وبنفس حالتة عند الشراء</p>
+
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">تطبق الشروط والأحكام</p>
+    </div>
+    <div class=" mt-2">
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">RETURN & REFUND POLICY</p>
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">You Must bring the original invoice</p>
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">The Product must be in good condition & in the same condition when parchasing</p>
+
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">Terms and condition apply</p>
+    </div>
+    <!-- <div class="text-center mt-4">
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">VAT# 30054265678547854</p>
+    </div> -->
+    <div class="text-center mt-5">
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">VAT# 30054265678547854</p>
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">شركة السدحان التجارية: 9200000546</p>
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">الادارة العامة - الرباحي حي الورود  </p>
+    </div>
+   <div class="m-auto text-center">
+    <ngx-qrcode 
+    [elementType]="elementType" 
+    [value] = "value"
+    cssClass = "aclass"
+    >
+</ngx-qrcode>
+   </div>
+  </section>
+</ng-template>

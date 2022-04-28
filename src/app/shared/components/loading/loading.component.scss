@@ -1,0 +1,83 @@
+@import "style";
+
+// Colors
+$border--color: #fff;
+$bg--color: #fff;
+
+ul {
+  list-style: none;
+}
+
+.main-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2000;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  .spinner__container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+  }
+
+  .spinner__square {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* ---- Spinner Effect 8 ---- */
+  @mixin effect-8__keyframes($child: 1, $transform: translate(-325%, -325%)) {
+    @keyframes spinner__effect--8-child-#{$child} {
+      50% {
+        transform: $transform;
+      }
+    }
+  }
+
+  @mixin effect-8__square($child: 1, $delay: calc(0.1s * #{$child})) {
+    &:nth-child(#{$child}) {
+      animation-name: spinner__effect--8-child-#{$child};
+      animation-delay: $delay;
+    }
+  }
+
+  @include effect-8__keyframes();
+  @include effect-8__keyframes(2, translate(0, -325%));
+  @include effect-8__keyframes(3, translate(325%, -325%));
+  @include effect-8__keyframes(4, translate(325%, 0));
+  @include effect-8__keyframes(5, translate(325%, 325%));
+  @include effect-8__keyframes(6, translate(0, 325%));
+  @include effect-8__keyframes(7, translate(-325%, 325%));
+  @include effect-8__keyframes(8, translate(-325%, 0));
+  @include effect-8__keyframes(9, scale(2));
+
+  .spinner__effect--8 {
+    .spinner {
+      position: relative;
+      transform: rotate(45deg);
+
+      .spinner__square {
+        position: absolute;
+        background: $primary;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+
+        @include effect-8__square();
+        @include effect-8__square(2);
+        @include effect-8__square(3);
+        @include effect-8__square(4);
+        @include effect-8__square(5);
+        @include effect-8__square(6);
+        @include effect-8__square(7);
+        @include effect-8__square(8);
+        @include effect-8__square(9, 1.25s);
+      }
+    }
+  }
+}

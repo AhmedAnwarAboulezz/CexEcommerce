@@ -1,0 +1,191 @@
+<aside class="sidebar-wrapper d-flex flex-column h-100" [ngClass]="{'opened': isSidebarOpened}">
+  <div class="sidebar-logo d-none d-sm-flex justify-content-center " style="background-color: #171f69;" [ngClass]="{'justify-content-center': !isSidebarOpened, 'justify-content-end': isSidebarOpened}">
+    <span class="m-auto font-weight-bold"><img src="assets/images/empty/card_toplogohome.png" style="height: 55px;" /></span>
+    <button mat-button class="font-18" aria-label="icon-button with menu icon" style="color: white;" (click)="sidebarToggle()">
+      <mat-icon class="font-26">menu</mat-icon>
+    </button>
+  </div>
+
+  <div class="sidebar-content h-100">
+    <ul class="menu-items">
+      <!-- home -->
+      <li *ngIf="userType === userTypes.Customer">
+        <a class="list-item d-flex align-items-center" setRtl routerLink="/home" routerLinkActive="active">
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#1950E2" width="20" height="20" stroke="#1950E2" class="bi bi-house" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+              <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+            </svg>
+          </span>
+
+          <span class="mx-3">{{ 'HOME.MENU.HOME' | translate }}</span>
+        </a>
+      </li>
+
+      <mat-divider *ngIf="userType === userTypes.Customer"></mat-divider>
+
+      <!-- profile -->
+      <li *ngIf="userType === userTypes.Customer">
+        <a class="list-item d-flex align-items-center" setRtl routerLinkActive="active" [routerLink]="[ '/profile' ]">
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg class="svg-icon" fill="#1950E2" width="20" height="20" stroke="#1950E2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
+            </svg>
+          </span>
+
+          <span class="mx-3">{{ 'HOME.MENU.PROFILE' | translate }}</span>
+        </a>
+      </li>
+
+      <mat-divider *ngIf="userType === userTypes.Customer"></mat-divider>
+
+      <!-- invoices -->
+      <li *ngIf="userType === userTypes.Customer">
+        <a class="list-item d-flex align-items-center" setRtl routerLink="/invoices" routerLinkActive="active">
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg class="svg-icon" fill="#1950E2" xmlns="http://www.w3.org/2000/svg" stroke="#1950E2" width="20" height="20" viewBox="0 0 20 20">
+              <path fill="none" d="M17.671,13.945l0.003,0.002l1.708-7.687l-0.008-0.002c0.008-0.033,0.021-0.065,0.021-0.102c0-0.236-0.191-0.428-0.427-0.428H5.276L4.67,3.472L4.665,3.473c-0.053-0.175-0.21-0.306-0.403-0.306H1.032c-0.236,0-0.427,0.191-0.427,0.427c0,0.236,0.191,0.428,0.427,0.428h2.902l2.667,9.945l0,0c0.037,0.119,0.125,0.217,0.239,0.268c-0.16,0.26-0.257,0.562-0.257,0.891c0,0.943,0.765,1.707,1.708,1.707S10,16.068,10,15.125c0-0.312-0.09-0.602-0.237-0.855h4.744c-0.146,0.254-0.237,0.543-0.237,0.855c0,0.943,0.766,1.707,1.708,1.707c0.944,0,1.709-0.764,1.709-1.707c0-0.328-0.097-0.631-0.257-0.891C17.55,14.182,17.639,14.074,17.671,13.945 M15.934,6.583h2.502l-0.38,1.709h-2.312L15.934,6.583zM5.505,6.583h2.832l0.189,1.709H5.963L5.505,6.583z M6.65,10.854L6.192,9.146h2.429l0.19,1.708H6.65z M6.879,11.707h2.027l0.189,1.709H7.338L6.879,11.707z M8.292,15.979c-0.472,0-0.854-0.383-0.854-0.854c0-0.473,0.382-0.855,0.854-0.855s0.854,0.383,0.854,0.855C9.146,15.596,8.763,15.979,8.292,15.979 M11.708,13.416H9.955l-0.189-1.709h1.943V13.416z M11.708,10.854H9.67L9.48,9.146h2.228V10.854z M11.708,8.292H9.386l-0.19-1.709h2.512V8.292z M14.315,13.416h-1.753v-1.709h1.942L14.315,13.416zM14.6,10.854h-2.037V9.146h2.227L14.6,10.854z M14.884,8.292h-2.321V6.583h2.512L14.884,8.292z M15.978,15.979c-0.471,0-0.854-0.383-0.854-0.854c0-0.473,0.383-0.855,0.854-0.855c0.473,0,0.854,0.383,0.854,0.855C16.832,15.596,16.45,15.979,15.978,15.979 M16.917,13.416h-1.743l0.189-1.709h1.934L16.917,13.416z M15.458,10.854l0.19-1.708h2.218l-0.38,1.708H15.458z"></path>
+            </svg>
+          </span>
+
+          <span class="mx-3">{{ 'HOME.MENU.MYINVOICES' | translate }}</span>
+        </a>
+      </li>
+
+      <mat-divider *ngIf="userType === userTypes.Customer"></mat-divider>
+
+      <!-- family -->
+      <li *ngIf="userType === userTypes.Customer">
+        <a class="list-item d-flex align-items-center" setRtl routerLink="/family" routerLinkActive="active">
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg class="svg-icon" viewBox="0 0 20 20" fill="#1950E2" xmlns="http://www.w3.org/2000/svg" stroke="#1950E2" width="20" height="20">
+              <path d="M15.573,11.624c0.568-0.478,0.947-1.219,0.947-2.019c0-1.37-1.108-2.569-2.371-2.569s-2.371,1.2-2.371,2.569c0,0.8,0.379,1.542,0.946,2.019c-0.253,0.089-0.496,0.2-0.728,0.332c-0.743-0.898-1.745-1.573-2.891-1.911c0.877-0.61,1.486-1.666,1.486-2.812c0-1.79-1.479-3.359-3.162-3.359S4.269,5.443,4.269,7.233c0,1.146,0.608,2.202,1.486,2.812c-2.454,0.725-4.252,2.998-4.252,5.685c0,0.218,0.178,0.396,0.395,0.396h16.203c0.218,0,0.396-0.178,0.396-0.396C18.497,13.831,17.273,12.216,15.573,11.624 M12.568,9.605c0-0.822,0.689-1.779,1.581-1.779s1.58,0.957,1.58,1.779s-0.688,1.779-1.58,1.779S12.568,10.427,12.568,9.605 M5.06,7.233c0-1.213,1.014-2.569,2.371-2.569c1.358,0,2.371,1.355,2.371,2.569S8.789,9.802,7.431,9.802C6.073,9.802,5.06,8.447,5.06,7.233 M2.309,15.335c0.202-2.649,2.423-4.742,5.122-4.742s4.921,2.093,5.122,4.742H2.309z M13.346,15.335c-0.067-0.997-0.382-1.928-0.882-2.732c0.502-0.271,1.075-0.429,1.686-0.429c1.828,0,3.338,1.385,3.535,3.161H13.346z"></path>
+            </svg>
+          </span>
+
+          <span class="mx-3">{{ 'HOME.MENU.MYFAMILY' | translate }}</span>
+        </a>
+      </li>
+
+      <mat-divider *ngIf="userType === userTypes.Customer"></mat-divider>
+
+      <!-- digital cards store -->
+
+      <li *ngIf="userType === userTypes.Customer">
+        <a class="list-item d-flex align-items-center" setRtl [routerLink]="['/store']" routerLinkActive="active">
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg class="svg-icon" fill="#1950E2" xmlns="http://www.w3.org/2000/svg" stroke="#1950E2" width="20" height="20" viewBox="0 0 20 20">
+              <path fill="none" d="M17.671,13.945l0.003,0.002l1.708-7.687l-0.008-0.002c0.008-0.033,0.021-0.065,0.021-0.102c0-0.236-0.191-0.428-0.427-0.428H5.276L4.67,3.472L4.665,3.473c-0.053-0.175-0.21-0.306-0.403-0.306H1.032c-0.236,0-0.427,0.191-0.427,0.427c0,0.236,0.191,0.428,0.427,0.428h2.902l2.667,9.945l0,0c0.037,0.119,0.125,0.217,0.239,0.268c-0.16,0.26-0.257,0.562-0.257,0.891c0,0.943,0.765,1.707,1.708,1.707S10,16.068,10,15.125c0-0.312-0.09-0.602-0.237-0.855h4.744c-0.146,0.254-0.237,0.543-0.237,0.855c0,0.943,0.766,1.707,1.708,1.707c0.944,0,1.709-0.764,1.709-1.707c0-0.328-0.097-0.631-0.257-0.891C17.55,14.182,17.639,14.074,17.671,13.945 M15.934,6.583h2.502l-0.38,1.709h-2.312L15.934,6.583zM5.505,6.583h2.832l0.189,1.709H5.963L5.505,6.583z M6.65,10.854L6.192,9.146h2.429l0.19,1.708H6.65z M6.879,11.707h2.027l0.189,1.709H7.338L6.879,11.707z M8.292,15.979c-0.472,0-0.854-0.383-0.854-0.854c0-0.473,0.382-0.855,0.854-0.855s0.854,0.383,0.854,0.855C9.146,15.596,8.763,15.979,8.292,15.979 M11.708,13.416H9.955l-0.189-1.709h1.943V13.416z M11.708,10.854H9.67L9.48,9.146h2.228V10.854z M11.708,8.292H9.386l-0.19-1.709h2.512V8.292z M14.315,13.416h-1.753v-1.709h1.942L14.315,13.416zM14.6,10.854h-2.037V9.146h2.227L14.6,10.854z M14.884,8.292h-2.321V6.583h2.512L14.884,8.292z M15.978,15.979c-0.471,0-0.854-0.383-0.854-0.854c0-0.473,0.383-0.855,0.854-0.855c0.473,0,0.854,0.383,0.854,0.855C16.832,15.596,16.45,15.979,15.978,15.979 M16.917,13.416h-1.743l0.189-1.709h1.934L16.917,13.416z M15.458,10.854l0.19-1.708h2.218l-0.38,1.708H15.458z"></path>
+            </svg>
+          </span>
+
+          <span class="mx-3">{{ 'HOME.GBOXMENU' | translate }}</span>
+        </a>
+      </li>
+
+
+      <!-- search -->
+      <li *ngIf="userType === userTypes.Store || userType === userTypes.Admin">
+        <a class="list-item d-flex align-items-center" setRtl routerLink="/search" routerLinkActive="active">
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#1950E2" width="20" height="20" stroke="#1950E2">
+              <path fill="none" d="M19.129,18.164l-4.518-4.52c1.152-1.373,1.852-3.143,1.852-5.077c0-4.361-3.535-7.896-7.896-7.896
+								c-4.361,0-7.896,3.535-7.896,7.896s3.535,7.896,7.896,7.896c1.934,0,3.705-0.698,5.078-1.853l4.52,4.519
+								c0.266,0.268,0.699,0.268,0.965,0C19.396,18.863,19.396,18.431,19.129,18.164z M8.567,15.028c-3.568,0-6.461-2.893-6.461-6.461
+								s2.893-6.461,6.461-6.461c3.568,0,6.46,2.893,6.46,6.461S12.135,15.028,8.567,15.028z"></path>
+            </svg>
+          </span>
+
+          <span class="mx-3">{{ 'HOME.MENU.CSEARCH' | translate }}</span>
+        </a>
+      </li>
+      <mat-divider *ngIf="userType === userTypes.Store || userType === userTypes.Admin"></mat-divider>
+
+      <!-- dashboard -->
+      <li *ngIf="userType === userTypes.Admin || userType === userTypes.TopManagement || userType === userTypes.Mareking">
+        <a class="list-item d-flex align-items-center" setRtl routerLink="/dashboard" routerLinkActive="active">
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#1950E2" stroke="#1950E2" width="20" height="20">
+              <path d="M11.709,7.438H8.292c-0.234,0-0.427,0.192-0.427,0.427v8.542c0,0.234,0.192,0.427,0.427,0.427h3.417c0.233,0,0.426-0.192,0.426-0.427V7.865C12.135,7.63,11.942,7.438,11.709,7.438 M11.282,15.979H8.719V8.292h2.563V15.979zM6.156,11.709H2.74c-0.235,0-0.427,0.191-0.427,0.426v4.271c0,0.234,0.192,0.427,0.427,0.427h3.417c0.235,0,0.427-0.192,0.427-0.427v-4.271C6.583,11.9,6.391,11.709,6.156,11.709 M5.729,15.979H3.167v-3.416h2.562V15.979zM17.261,3.167h-3.417c-0.235,0-0.427,0.192-0.427,0.427v12.812c0,0.234,0.191,0.427,0.427,0.427h3.417c0.234,0,0.427-0.192,0.427-0.427V3.594C17.688,3.359,17.495,3.167,17.261,3.167 M16.833,15.979h-2.562V4.021h2.562V15.979z"></path>
+            </svg>
+          </span>
+
+          <span class="mx-3"> {{ 'HOME.MENU.DASHBOARD' | translate }}</span>
+        </a>
+      </li>
+
+      <mat-divider *ngIf="userType === userTypes.Admin || userType === userTypes.TopManagement || userType === userTypes.Mareking"></mat-divider>
+
+      <!-- configration -->
+      <!-- <li *ngIf="userType === userTypes.Admin">
+        <a class="list-item d-flex align-items-center" routerLinkActive="active" setRtl>
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#1950E2" width="20" height="20" stroke="#1950E2">
+              <path fill="none" d="M10.032,8.367c-1.112,0-2.016,0.905-2.016,2.018c0,1.111,0.904,2.014,2.016,2.014c1.111,0,2.014-0.902,2.014-2.014C12.046,9.271,11.143,8.367,10.032,8.367z M10.032,11.336c-0.525,0-0.953-0.427-0.953-0.951c0-0.526,0.427-0.955,0.953-0.955c0.524,0,0.951,0.429,0.951,0.955C10.982,10.909,10.556,11.336,10.032,11.336z"></path>
+              <path fill="none" d="M17.279,8.257h-0.785c-0.107-0.322-0.237-0.635-0.391-0.938l0.555-0.556c0.208-0.208,0.208-0.544,0-0.751l-2.254-2.257c-0.199-0.2-0.552-0.2-0.752,0l-0.556,0.557c-0.304-0.153-0.617-0.284-0.939-0.392V3.135c0-0.294-0.236-0.532-0.531-0.532H8.435c-0.293,0-0.531,0.237-0.531,0.532v0.784C7.582,4.027,7.269,4.158,6.966,4.311L6.409,3.754c-0.1-0.1-0.234-0.155-0.376-0.155c-0.141,0-0.275,0.055-0.375,0.155L3.403,6.011c-0.208,0.207-0.208,0.543,0,0.751l0.556,0.556C3.804,7.622,3.673,7.935,3.567,8.257H2.782c-0.294,0-0.531,0.238-0.531,0.531v3.19c0,0.295,0.237,0.531,0.531,0.531h0.787c0.105,0.318,0.236,0.631,0.391,0.938l-0.556,0.559c-0.208,0.207-0.208,0.545,0,0.752l2.254,2.254c0.208,0.207,0.544,0.207,0.751,0l0.558-0.559c0.303,0.154,0.616,0.285,0.938,0.391v0.787c0,0.293,0.238,0.531,0.531,0.531h3.191c0.295,0,0.531-0.238,0.531-0.531v-0.787c0.322-0.105,0.636-0.236,0.938-0.391l0.56,0.559c0.208,0.205,0.546,0.207,0.752,0l2.252-2.254c0.208-0.207,0.208-0.545,0.002-0.752l-0.559-0.559c0.153-0.303,0.285-0.615,0.389-0.938h0.789c0.295,0,0.532-0.236,0.532-0.531v-3.19C17.812,8.495,17.574,8.257,17.279,8.257z M16.747,11.447h-0.653c-0.241,0-0.453,0.164-0.514,0.398c-0.129,0.496-0.329,0.977-0.594,1.426c-0.121,0.209-0.089,0.473,0.083,0.645l0.463,0.465l-1.502,1.504l-0.465-0.463c-0.174-0.174-0.438-0.207-0.646-0.082c-0.447,0.262-0.927,0.463-1.427,0.594c-0.234,0.061-0.397,0.271-0.397,0.514V17.1H8.967v-0.652c0-0.242-0.164-0.453-0.397-0.514c-0.5-0.131-0.98-0.332-1.428-0.594c-0.207-0.123-0.472-0.09-0.646,0.082l-0.463,0.463L4.53,14.381l0.461-0.463c0.169-0.172,0.204-0.434,0.083-0.643c-0.266-0.461-0.467-0.939-0.596-1.43c-0.06-0.234-0.272-0.398-0.514-0.398H3.313V9.319h0.652c0.241,0,0.454-0.162,0.514-0.397c0.131-0.498,0.33-0.979,0.595-1.43c0.122-0.208,0.088-0.473-0.083-0.645L4.53,6.386l1.503-1.504l0.46,0.462c0.173,0.172,0.437,0.204,0.646,0.083c0.45-0.265,0.931-0.464,1.433-0.597c0.233-0.062,0.396-0.274,0.396-0.514V3.667h2.128v0.649c0,0.24,0.161,0.452,0.396,0.514c0.502,0.133,0.982,0.333,1.433,0.597c0.211,0.12,0.475,0.089,0.646-0.083l0.459-0.462l1.504,1.504l-0.463,0.463c-0.17,0.171-0.202,0.438-0.081,0.646c0.263,0.448,0.463,0.928,0.594,1.427c0.061,0.235,0.272,0.397,0.514,0.397h0.651V11.447z"></path>
+            </svg>
+          </span>
+
+          <span class="w-100 m-inline-start-3">
+            <app-collapse-content title="{{ 'HOME.MENU.CONFIG' | translate }}" class="collapse-content" customClass="p-0">
+              <span class="content-child" setRtl>{{ 'HOME.MENU.REG' | translate }}</span>
+
+              <span class="content-child" setRtl>{{ 'HOME.MENU.MEMBERSHIP' | translate }}</span>
+              <span class="content-child" setRtl>{{ 'HOME.MENU.PARTNERS' | translate }}</span>
+            </app-collapse-content>
+          </span>
+        </a>
+      </li> -->
+
+      <!-- <mat-divider *ngIf="userType === userTypes.Admin"></mat-divider> -->
+
+      <!-- Recommended Products -->
+      <li *ngIf="userType === userTypes.Admin">
+        <a class="list-item d-flex align-items-center" routerLinkActive="active" setRtl>
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="#1950E2">
+              <path d="M22.5 6h-21C.673 6 0 5.327 0 4.5v-3C0 .673.673 0 1.5 0h21c.827 0 1.5.673 1.5 1.5v3c0 .827-.673 1.5-1.5 1.5zm-21-5a.5.5 0 00-.5.5v3a.5.5 0 00.5.5h21a.5.5 0 00.5-.5v-3a.5.5 0 00-.5-.5zM23.5 9h-10a.5.5 0 010-1h10a.5.5 0 010 1zM23.5 12h-10a.5.5 0 010-1h10a.5.5 0 010 1zM23.5 15h-10a.5.5 0 010-1h10a.5.5 0 010 1zM23.5 18h-10a.5.5 0 010-1h10a.5.5 0 010 1zM23.5 21h-10a.5.5 0 010-1h10a.5.5 0 010 1zM9.5 15h-8C.673 15 0 14.327 0 13.5v-4C0 8.673.673 8 1.5 8h8c.827 0 1.5.673 1.5 1.5v4c0 .827-.673 1.5-1.5 1.5zm-8-6a.5.5 0 00-.5.5v4a.5.5 0 00.5.5h8a.5.5 0 00.5-.5v-4a.5.5 0 00-.5-.5zM9.5 24h-8C.673 24 0 23.327 0 22.5v-4c0-.827.673-1.5 1.5-1.5h8c.827 0 1.5.673 1.5 1.5v4c0 .827-.673 1.5-1.5 1.5zm-8-6a.5.5 0 00-.5.5v4a.5.5 0 00.5.5h8a.5.5 0 00.5-.5v-4a.5.5 0 00-.5-.5zM23.5 24h-10a.5.5 0 010-1h10a.5.5 0 010 1z" />
+            </svg>
+          </span>
+
+          <span class="w-100 m-inline-start-3">
+            <app-collapse-content [title]="'HOME.CONTENT' | translate" class="collapse-content" customClass="p-0">
+              <a [routerLink]="[ '/content/recommended-products' ]">
+                <span class="content-child" setRtl>{{ 'HOME.RECPRODUCTS' | translate }}</span>
+              </a>
+            </app-collapse-content>
+          </span>
+        </a>
+      </li>
+      <mat-divider *ngIf="userType === userTypes.Store || userType === userTypes.Admin || userType === userTypes.Support"></mat-divider>
+      <!-- complains -->
+      <li *ngIf="userType === userTypes.Support || userType === userTypes.Admin">
+        <a class="list-item d-flex align-items-center" setRtl routerLink="/complains" routerLinkActive="active">
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#1950E2" stroke="#1950E2" width="20" height="20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+          </span>
+
+          <span class="mx-3"> {{ 'HOME.MENU.COMPLAINS' | translate }}</span>
+        </a>
+      </li>
+
+      <mat-divider *ngIf="userType === userTypes.Store || userType === userTypes.Admin || userType === userTypes.Support"></mat-divider>
+       <!-- group -->
+       <li *ngIf="userType === userTypes.Support || userType === userTypes.Admin">
+        <a class="list-item d-flex align-items-center" setRtl routerLink="/group" routerLinkActive="active">
+          <span class="menuitems-icon d-flex justify-content-center">
+            <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#1950E2" stroke="#1950E2" width="20" height="20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+          </span>
+
+          <span class="mx-3"> {{ 'HOME.MENU.GROUP' | translate }}</span>
+        </a>
+      </li>
+
+      <mat-divider *ngIf="userType === userTypes.Store || userType === userTypes.Admin || userType === userTypes.Support"></mat-divider>
+    </ul>
+  </div>
+</aside>

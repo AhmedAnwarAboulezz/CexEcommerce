@@ -1,0 +1,28 @@
+<div class="product-details">
+    <a class="details-header" [routerLink]="[ 'product/' + product.id ]">
+        <h3 class="m-0 font-18 regular text-dark text-truncate">{{ lang === 'en' ? product.titleEn : product.titleAr }}</h3>
+    </a>
+
+    <h6 class="m-0 font-16 regular text-dark font-weight-bold">{{ lang === 'en' ? product.vendorNameEn : product.vendorNameAr }}</h6>
+
+    <div class="details-content mt-2">
+        <p class="m-0 overflow-hidden font-14 text-dark text-truncate-3">
+            {{ lang === 'en' ? product.descriptionEn ? product.descriptionEn : '-' : product.descriptionAr ? product.descriptionAr : '-' }}
+        </p>
+    </div>
+
+    <div class="details-tags mt-2">
+        <div class="d-flex align-items-center justify-content-between">
+            <span class="each d-flex align-items-center text-main bg-error py-1 mt-3 mt-sm-0 font-12">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 18 18">
+                    <g fill="#4F008C" fill-rule="nonzero" stroke="#0a084e">
+                        <path d="M7.5 2.25h3v1h-3z" />
+                        <path d="M16.5 2.25h-2.09v.804h1.233v3.375H2.335V3.054h1.233V2.25H1.5v13.5h15V2.25zM2.335 14.946V7.232h13.329v7.714H2.335z" />
+                    </g>
+                </svg>
+
+                <span class="m-inline-start-1 font-14 text-error">{{ product.expireDate | amDateFormat: 'DD/MM/YYYY' }}</span>
+            </span>
+        </div>
+    </div>
+</div>

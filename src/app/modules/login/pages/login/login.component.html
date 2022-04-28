@@ -1,0 +1,584 @@
+<div class="login-wrapper d-flex flex-column flex-xl-row h-100">
+  <div class="d-flex flex-column w-100">
+    <div class="logo-wrapper" setRtl>
+      <!-- <img src="assets/images/logo/logo.png" alt="Logo">-->
+      <ngb-carousel class="h-100 slider">
+        <ng-template ngbSlide class="h-100">
+          <div class="picsum-img-wrapper h-100">
+            <img src="assets/images/login2.png" class="w-100 h-100" alt="First Slide Image" />
+          </div>
+        </ng-template>
+        <!-- <ng-template ngbSlide class="h-100">
+          <div class="picsum-img-wrapper h-100">
+            <img src="assets/images/login1.jpeg" class="w-100 h-100" alt="First Slide Image" />
+          </div>
+        </ng-template>
+        <ng-template ngbSlide class="h-100">
+          <div class="picsum-img-wrapper h-100">
+            <img src="assets/images/login1.jpeg" class="w-100 h-100" alt="First Slide Image" />
+          </div>
+        </ng-template> -->
+      </ngb-carousel>
+      <div class="langsm h-100">
+        <div class="d-flex align-items-center justify-content-between">
+          <button mat-button class="main-btn text-black font-18" (click)="changeLanguage()">
+            <div class="d-flex align-items-center">
+              <svg class="m-inline-end-2" xmlns="http://www.w3.org/2000/svg" fill="none" width="18" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+
+              <span class="font-english" [ngClass]="{ 'font-arabic': lang === 'en' }">{{ lang === 'en' ? 'العربية' :
+                'English' }}</span>
+            </div>
+          </button>
+          <p class="text-middle align-self-end mt-3" *ngIf="
+              pageType !== 'FORGET_PASSWORD' && pageType !== 'COMPLETE_PROFILE'
+            ">
+            {{ pageType + '_HINT' | translate }}
+            <a [routerLink]="
+                pageType === 'SIGNIN'
+                  ? ['/account/register_single']
+                  : ['/account/login']
+              ">
+              <span class="text-main font-weight-bold">{{
+                pageType === 'SIGNIN'
+                ? ('CREATE_ACCOUNT' | translate)
+                : ('LOGIN' | translate)
+                }}</span>
+            </a>
+          </p>
+        </div>
+
+        <img src="../../../../../assets/images/login3.jpeg" class="immSmall my-5" alt="First Slide Image" />
+      </div>
+    </div>
+  </div>
+
+  <div class="login-form page-wrapper d-flex flex-column" [ngClass]="{ 'overflow-auto': pageType === 'SIGNUP' }">
+    <div class="langLg">
+      <div class="d-flex align-items-center justify-content-between">
+        <button mat-button class="main-btn text-black font-18" (click)="changeLanguage()">
+          <div class="d-flex align-items-center">
+            <svg class="m-inline-end-2" xmlns="http://www.w3.org/2000/svg" fill="none" width="18" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+            <span class="font-english" [ngClass]="{ 'font-arabic': lang === 'en' }">{{ lang === 'en' ? 'العربية' :
+              'English' }}</span>
+          </div>
+        </button>
+        <p class="text-middle align-self-end mt-3" *ngIf="
+            pageType !== 'FORGET_PASSWORD' && pageType !== 'COMPLETE_PROFILE'
+          ">
+          {{ pageType + '_HINT' | translate }}
+          <a [routerLink]="
+              pageType === 'SIGNIN'
+                ? ['/account/register_single']
+                : ['/account/login']
+            ">
+            <span class="text-main font-weight-bold">{{
+              pageType === 'SIGNIN'
+              ? ('CREATE_ACCOUNT' | translate)
+              : ('LOGIN' | translate)
+              }}</span>
+          </a>
+        </p>
+      </div>
+    </div>
+
+
+    <div class="d-flex flex-column justify-content-center" [ngClass]="{
+        'mt-5': pageType === 'SIGNUP',
+        'h-100': pageType !== 'SIGNUP'
+      }">
+      <div class="d-flex justify-content-center animate">
+        <h6 class="m-0 mb-2 font-24 regular">{{ pageType | translate }}</h6>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-8">
+          <!-- -----------login form----------- -->
+          <form method="post" class="d-block mt-4 animate" [formGroup]="mainForm" (ngSubmit)="login()"
+            *ngIf="pageType === 'SIGNIN'">
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.USERNAME' | translate }}</mat-label>
+              <input type="number" formControlName="username" matInput placeholder="05xxxxxxxx" />
+            </mat-form-field>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.PASSWORD' | translate }}</mat-label>
+              <img class="img-fluid" src="assets/images/icons/{{
+                  showPassword ? 'eye' : 'eye-off'
+                }}.svg" (click)="showPassword = !showPassword" alt="Key Icon" matSuffix />
+
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput
+                placeholder="**********" />
+            </mat-form-field>
+
+            <div class="d-flex justify-content-end mb-4">
+              <a [routerLink]="['/account/forget-password']">
+                <span class="cursor-pointer text-middle font-14">{{
+                  'FORGET_PASSWORD_HINT' | translate
+                  }}</span>
+              </a>
+            </div>
+
+            <button class="w-100 main-btn strock font-16 py-1" type="submit" [disabled]="mainForm.invalid" mat-button>
+              {{ 'LOGIN' | translate }}
+            </button>
+            <a [routerLink]="['/store']" class="text-middle align-self-end mt-3">
+              <button class="w-100 main-btn secondary font-16 py-1 mt-3" type="button" mat-flat-button>
+                {{ 'STORE.GOTOSTORE' | translate }}
+              </button>
+            </a>
+          </form>
+          <!-- -----------register form----------- -->
+          <form method="post" class="d-block mt-4 animate col-sm-8" [ngClass]="{ 'mb-3': pageType === 'SIGNUP' }"
+            [formGroup]="mainForm" (ngSubmit)="pageType === 'SIGNUP' ? register() : complete()"
+            *ngIf="pageType === 'SIGNUP'">
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.FULLNAME' | translate }}</mat-label>
+              <input type="text" formControlName="name" matInput />
+            </mat-form-field>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.MOBILE' | translate }}</mat-label>
+              <input type="number" formControlName="phone" matInput placeholder="05xxxxxxxx" />
+            </mat-form-field>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.EMAIL' | translate }}</mat-label>
+              <input type="email" formControlName="email" matInput placeholder="Email" />
+            </mat-form-field>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.PASSWORD' | translate }}</mat-label>
+              <img class="img-fluid" src="assets/images/icons/{{
+                  showPassword ? 'eye' : 'eye-off'
+                }}.svg" (click)="showPassword = !showPassword" alt="Key Icon" matSuffix />
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput
+                placeholder="**********" />
+
+              <mat-error *ngIf="
+                  mainForm.get('password')?.errors &&
+                  mainForm.get('password')?.touched
+                ">
+                <span class="font-12">{{
+                  mainForm.get('password')?.errors | validationHandler
+                  }}</span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{
+                'HOME.FIELDS.PASSWORDCONFIRM' | translate
+                }}</mat-label>
+              <img class="img-fluid" src="assets/images/icons/{{
+                  showPassword ? 'eye' : 'eye-off'
+                }}.svg" (click)="showPassword = !showPassword" alt="Key Icon" matSuffix />
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword" matInput
+                placeholder="**********" />
+
+              <mat-error *ngIf="
+                  mainForm.get('confirmPassword')?.errors &&
+                  mainForm.get('confirmPassword')?.touched
+                ">
+                <span class="font-12">{{
+                  mainForm.get('confirmPassword')?.errors | validationHandler
+                  }}</span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-radio-group class="w-100 text-start" aria-label="Gender" (change)="getGenderValue($event)">
+              <mat-radio-button [value]="1">{{
+                'HOME.FIELDS.MALE' | translate
+                }}</mat-radio-button>
+              <mat-radio-button [value]="2">{{
+                'HOME.FIELDS.FEMALE' | translate
+                }}</mat-radio-button>
+            </mat-radio-group>
+
+            <app-datepicker [formGroup]="mainForm" controlName="dateOfBirth" [label]="'HOME.FIELDS.DOB' | translate"
+              [maxDate]="maxDate"></app-datepicker>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.JOB_NUMBER' | translate }}</mat-label>
+              <input type="text" formControlName="employeeCode" matInput placeholder="Employee Code" />
+            </mat-form-field>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.PARTNER' | translate }}</mat-label>
+              <input type="text" formControlName="partnerName" matInput placeholder="Partner Name" />
+            </mat-form-field>
+
+            <!-- <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.PARTNER' | translate }}</mat-label>
+              <mat-select formControlName="parentId">
+                <mat-option *ngFor="let item of partners" [value]="item.id">{{
+                  item.name
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field> -->
+
+            <div class="pinCode-wrapper w-100 mb-4" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)">
+              <label for="pin" class="font-18">{{ 'HOME.FIELDS.PINCODE' | translate }}
+              </label>
+
+              <div class="pinCode-inputs d-flex justify-content-center" setRtl>
+                <input type="number" maxlength="1" min="0" max="9" id="pin" />
+                <input type="number" maxlength="1" min="0" max="9" />
+                <input type="number" maxlength="1" min="0" max="9" />
+                <input type="number" maxlength="1" min="0" max="9" />
+                <input type="number" maxlength="1" min="0" max="9" />
+                <input type="number" maxlength="1" min="0" max="9" />
+              </div>
+            </div>
+
+            <button class="w-100 main-btn strock font-16 py-1" type="submit" [disabled]="mainForm.invalid" mat-button>
+              {{
+              pageType === 'SIGNUP'
+              ? ('ACTIONS.SIGNUP' | translate)
+              : ('ACTIONS.COMPLETE' | translate)
+              }}
+            </button>
+          </form>
+        </div>
+
+        <div class="col-sm-8">
+          <!-- -----------forget password form----------- -->
+          <form method="post" class="d-block mt-4 animate" [formGroup]="mainForm" (ngSubmit)="forget()"
+            *ngIf="pageType === 'FORGET_PASSWORD'">
+            <mat-tab-group (selectedIndexChange)="
+     isForgetPasswordSent ? '' : getActiveTab($event)
+   ">
+              <mat-tab *ngIf="!isForgetPasswordSent">
+                <ng-template mat-tab-label>
+                  <h6 class="text-dark regular m-0 font-16">
+                    {{ 'HOME.FIELDS.BYEMAIL' | translate }}
+                  </h6>
+                </ng-template>
+
+                <mat-form-field class="w-100 text-start mt-4" appearance="outline">
+                  <mat-label>{{ 'HOME.FIELDS.EMAIL' | translate }}</mat-label>
+                  <input type="email" matInput formControlName="email" placeholder="example@gmail.com" />
+                </mat-form-field>
+              </mat-tab>
+
+              <mat-tab *ngIf="!isForgetPasswordSent">
+                <ng-template mat-tab-label>
+                  <h6 class="text-dark regular m-0 font-16">
+                    {{ 'HOME.FIELDS.BYMOBILE' | translate }}
+                  </h6>
+                </ng-template>
+
+                <mat-form-field class="w-100 text-start mt-4" appearance="outline">
+                  <mat-label>{{ 'HOME.FIELDS.MOBILE' | translate }}</mat-label>
+                  <input type="number" matInput formControlName="phone" placeholder="05xxxxxxxx" />
+                </mat-form-field>
+              </mat-tab>
+
+              <mat-tab *ngIf="isForgetPasswordSent">
+                <ng-template mat-tab-label>
+                  <h6 class="text-dark regular m-0 font-16">{{ '' }}</h6>
+                </ng-template>
+
+                <mat-form-field class="w-100 text-start mt-4" appearance="outline">
+                  <mat-label>{{ 'HOME.FIELDS.PASSWORD' | translate }}</mat-label>
+                  <img class="img-fluid" src="assets/images/icons/{{
+           showPassword ? 'eye' : 'eye-off'
+         }}.svg" (click)="showPassword = !showPassword" alt="Key Icon" matSuffix />
+                  <input [type]="showPassword ? 'text' : 'password'" formControlName="password" autofocus matInput
+                    placeholder="**********" />
+                </mat-form-field>
+
+                <mat-form-field class="w-100 text-start" appearance="outline">
+                  <mat-label>{{
+                    'HOME.FIELDS.PASSWORDCONFIRM' | translate
+                    }}</mat-label>
+                  <img class="img-fluid" src="assets/images/icons/{{
+           showPassword ? 'eye' : 'eye-off'
+         }}.svg" (click)="showPassword = !showPassword" alt="Key Icon" matSuffix />
+                  <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword"
+                    id="confirmPassword" matInput placeholder="**********" />
+                </mat-form-field>
+
+                <div class="pinCode-wrapper w-100 mb-4" *ngIf="forgetPasswordType === 'otp'" (keyup)="onKeyUp($event)"
+                  (keydown)="onKeyDown($event)">
+                  <label for="pin" class="font-18">{{ 'HOME.FIELDS.PINCODE' | translate }}
+                  </label>
+
+                  <div class="pinCode-inputs d-flex justify-content-center" setRtl>
+                    <input type="number" maxlength="1" min="0" max="9" id="pin" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+
+            <button class="w-100 main-btn strock font-16 py-1" type="submit" id="submitBtn"
+              [disabled]="mainForm.invalid" mat-button>
+              {{
+              isForgetPasswordSent
+              ? ('ACTIONS.SUBMIT' | translate)
+              : ('ACTIONS.CONTINUE' | translate)
+              }}
+            </button>
+
+            <a [routerLink]="['/account/login']">
+              <button class="w-100 main-btn secondary font-16 py-1 mt-3" type="button" mat-flat-button>
+                {{ 'ACTIONS.CANCEL' | translate }}
+              </button>
+            </a>
+          </form>
+
+          <!-- ----------- send verification form----------- -->
+          <form method="post" class="d-block mt-4 animate" [formGroup]="mainForm" (ngSubmit)="sendVerification()"
+            *ngIf="pageType === 'SEND_VERIFICATION'">
+            <mat-tab-group (selectedIndexChange)="
+     isVerificationSent ? '' : getActiveTab($event)
+   ">
+              <mat-tab *ngIf="!isVerificationSent">
+                <ng-template mat-tab-label>
+                  <h6 class="text-dark regular m-0 font-16">
+                    {{ 'HOME.FIELDS.BYEMAIL' | translate }}
+                  </h6>
+                </ng-template>
+
+                <mat-form-field class="w-100 text-start mt-4" appearance="outline">
+                  <mat-label>{{ 'HOME.FIELDS.EMAIL' | translate }}</mat-label>
+                  <input type="email" matInput formControlName="email" placeholder="example@gmail.com" />
+                </mat-form-field>
+              </mat-tab>
+
+              <mat-tab *ngIf="!isVerificationSent">
+                <ng-template mat-tab-label>
+                  <h6 class="text-dark regular m-0 font-16">
+                    {{ 'HOME.FIELDS.BYMOBILE' | translate }}
+                  </h6>
+                </ng-template>
+
+                <mat-form-field class="w-100 text-start mt-4" appearance="outline">
+                  <mat-label>{{ 'HOME.FIELDS.MOBILE' | translate }}</mat-label>
+                  <input type="number" matInput formControlName="phone" placeholder="05xxxxxxxx" />
+                </mat-form-field>
+              </mat-tab>
+
+              <mat-tab *ngIf="isVerificationSent">
+                <ng-template mat-tab-label>
+                  <h6 class="text-dark regular m-0 font-16">{{ '' }}</h6>
+                </ng-template>
+
+                <div class="pinCode-wrapper w-100 mb-4" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)">
+                  <label for="pin" class="font-18">{{ 'HOME.FIELDS.PINCODE' | translate }}
+                  </label>
+
+                  <div class="pinCode-inputs d-flex justify-content-center" setRtl>
+                    <input type="number" maxlength="1" min="0" max="9" id="pin" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                    <input type="number" maxlength="1" min="0" max="9" />
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+
+            <button class="w-100 main-btn strock font-16 py-1" type="submit" id="submitBtn"
+              [disabled]="mainForm.invalid" mat-button>
+              {{
+              isForgetPasswordSent
+              ? ('ACTIONS.SUBMIT' | translate)
+              : ('ACTIONS.CONTINUE' | translate)
+              }}
+            </button>
+
+            <a [routerLink]="['/account/login']">
+              <button class="w-100 main-btn secondary font-16 py-1 mt-3" type="button" mat-flat-button>
+                {{ 'ACTIONS.CANCEL' | translate }}
+              </button>
+            </a>
+          </form>
+        </div>
+
+        <div class="col-sm-8">
+          <!-- -----------register single form----------- -->
+          <form method="post" class="d-block mt-4 animate" [ngClass]="{ 'mb-3': pageType === 'SIGNUP_SINGLE' }"
+            [formGroup]="mainForm" (ngSubmit)="pageType === 'SIGNUP_SINGLE' ? register() : complete()" *ngIf="
+  pageType === 'SIGNUP_SINGLE' || pageType === 'COMPLETE_PROFILE'
+">
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.FULLNAME' | translate }}</mat-label>
+              <input type="text" formControlName="name" matInput />
+            </mat-form-field>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.MOBILE' | translate }}</mat-label>
+              <input type="number" formControlName="phone" matInput placeholder="05xxxxxxxx" />
+            </mat-form-field>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'HOME.FIELDS.PASSWORD' | translate }}</mat-label>
+              <img class="img-fluid" src="assets/images/icons/{{
+      showPassword ? 'eye' : 'eye-off'
+    }}.svg" (click)="showPassword = !showPassword" alt="Key Icon" matSuffix />
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput
+                placeholder="**********" />
+
+              <mat-error *ngIf="
+      mainForm.get('password')?.errors &&
+      mainForm.get('password')?.touched
+    ">
+                <span class="font-12">{{
+                  mainForm.get('password')?.errors | validationHandler
+                  }}</span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{
+                'HOME.FIELDS.PASSWORDCONFIRM' | translate
+                }}</mat-label>
+              <img class="img-fluid" src="assets/images/icons/{{
+      showPassword ? 'eye' : 'eye-off'
+    }}.svg" (click)="showPassword = !showPassword" alt="Key Icon" matSuffix />
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword" matInput
+                placeholder="**********" />
+
+              <mat-error *ngIf="
+      mainForm.get('confirmPassword')?.errors &&
+      mainForm.get('confirmPassword')?.touched
+    ">
+                <span class="font-12">{{
+                  mainForm.get('confirmPassword')?.errors | validationHandler
+                  }}</span>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-radio-group class="w-100 text-start" aria-label="Gender" (change)="getGenderValue($event)">
+              <mat-radio-button [value]="1">{{
+                'HOME.FIELDS.MALE' | translate
+                }}</mat-radio-button>
+              <mat-radio-button [value]="2">{{
+                'HOME.FIELDS.FEMALE' | translate
+                }}</mat-radio-button>
+            </mat-radio-group>
+
+            <app-datepicker [formGroup]="mainForm" controlName="dateOfBirth" [label]="'HOME.FIELDS.DOB' | translate"
+              [maxDate]="maxDate"></app-datepicker>
+
+            <button class="w-100 main-btn strock font-16 py-1" type="submit" [disabled]="mainForm.invalid" mat-button>
+              {{
+              pageType === 'SIGNUP_SINGLE'
+              ? ('ACTIONS.SIGNUP' | translate)
+              : ('ACTIONS.COMPLETE' | translate)
+              }}
+            </button>
+          </form>
+        </div>
+
+        <div *ngIf="pageType === 'SELECTION'" class="selection w-100">
+          <a [routerLink]="['/account/register_verify']">
+            <button class="w-100 main-btn secondary font-16 py-1 mt-3" type="button" mat-flat-button>
+              {{ 'ACTIONS.COMP' | translate }}
+            </button>
+          </a>
+          <a [routerLink]="['/account/register_single']">
+            <button class="w-100 main-btn secondary font-16 py-1 mt-3" type="button" mat-flat-button>
+              {{ 'ACTIONS.SINGLE' | translate }}
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5">
+      <div class="d-flex justify-content-between">
+        <p class="text-dark m-0 d-flex align-items-center align-self-end">
+          {{ 'COPYRIGHT' | translate }}
+        </p>
+        <a (click)="openDialog(termsInformation)" class="
+            text-dark
+            m-0
+            d-flex
+            align-items-center align-self-end
+            cursor-pointer
+          ">
+          {{ 'TERMS' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Terms information -->
+<ng-template #termsInformation>
+  <section class="termsinformation">
+    <h1>{{ 'TERMS' | translate }}</h1>
+    <p>{{ 'CONDITION.INFO' | translate }}</p>
+    <ul>
+      <li>{{ 'CONDITION.WHYGAJEL' | translate }}</li>
+      <li>{{ 'CONDITION.FEES' | translate }}</li>
+      <li class="mr-4 ml-4">
+        {{ 'CONDITION.WEBSITE' | translate }}
+      </li>
+      <li class="mr-4 ml-4">
+        {{'CONDITION.CALL' | translate}}
+      </li>
+      <li class="mr-4 ml-4">
+        {{'CONDITION.ORDER' | translate}}
+      </li>
+      <li class="mr-4 ml-4">
+        {{'CONDITION.UPDATE' | translate}}
+      </li>
+      <li>{{ 'CONDITION.INSTANT' | translate }}</li>
+      <li>{{ 'CONDITION.DISCOUNT' | translate }}</li>
+      <li>{{ 'CONDITION.OFFERS' | translate }}
+        <a class="cursor-pointer font-14" href="https://jazeel.al-sadhan.com/account/login" target="_blank">www.jazeel.al-sadhan.com/account/login</a> 
+  
+      </li>
+      <li>{{ 'CONDITION.SPECIAL' | translate }}</li>
+      <li>{{ 'CONDITION.MEMBERSHIP' | translate }}</li>
+      <li>
+        {{ 'CONDITION.HOWGET' | translate }}
+      </li>
+    </ul>
+   
+    <ul>
+      <li>{{ 'CONDITION.CASHERS' | translate }}</li>
+      <li>{{ 'CONDITION.WHATMECHANISM' | translate }}</li>
+      <li>{{ 'CONDITION.PAYMENT' | translate }}</li>
+      <li class="mr-4 ml-4">{{ 'CONDITION.BENEFIT' | translate }}</li>
+      <li class="mr-4 ml-4">{{ 'CONDITION.TRANSFAREPOINTS' | translate }}</li>
+      <li>{{ 'CONDITION.ITEMS' | translate }}</li>
+      <li>
+        {{ 'CONDITION.SAHDHANWEBSITE' | translate }}
+      </li>
+      <li>{{ 'CONDITION.BALANCE' | translate }}</li>
+      <li>{{ 'CONDITION.BALANCEAPPEAR' | translate }}</li>
+    </ul>
+    <ul>
+      <li>{{ 'CONDITION.MOBILEPOLICY' | translate }}</li>
+      <li>{{ 'CONDITION.POINTSADD' | translate }}</li>
+      <li>{{ 'CONDITION.POINTSVALID' | translate }}</li>
+      <li>{{ 'CONDITION.COMPANYRESERVE' | translate }}</li>
+      <li>{{ 'CONDITION.MEMBERSHIPSIGNIFIES' | translate }}</li>
+      <li>{{ 'CONDITION.MONEYBACK' | translate }}</li>
+      <li>{{ 'CONDITION.USEPROGRAM' | translate }}</li>
+      <li>{{ 'CONDITION.COMPANYSELL' | translate }}</li>
+      <li>{{ 'CONDITION.SPARVISA' | translate }}</li>
+      <li>{{ 'CONDITION.SPARMEMBER' | translate }}</li>
+      <li>{{ 'CONDITION.SPARONEVISA' | translate }}</li>
+    </ul>
+    <div class="d-flex justify-content-end mt-3">
+      <button class="w-100 main-btn secondary font-16 py-1" type="submit" mat-button (click)="close()">
+        {{ 'CONDITION.ACCEPT' | translate }}
+      </button>
+    </div>
+  </section>
+</ng-template>

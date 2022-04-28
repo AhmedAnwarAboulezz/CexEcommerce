@@ -1,0 +1,88 @@
+<div class="page-wrapper">
+    <h1 class="m-0 font-24 regular font-weight-bold">{{ (isEdit ? ('ACTIONS.EDIT' | translate) : ('ACTIONS.ADD')) + ' ' + ('HOME.PRODUCT' | translate) }}</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+            <form class="form-group mt-4" [formGroup]="productFormGroup" (ngSubmit)="doAction()" *ngIf="productFormGroup">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="w-100 text-start">
+                            <mat-label>{{ 'HOME.FIELDS.PRODUCT_TITLE_EN' | translate }}</mat-label>
+                            <input type="text" formControlName="titleEn" matInput placeholder="Product Title">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <mat-form-field class="w-100 text-start">
+                            <mat-label>{{ 'HOME.FIELDS.PRODUCT_TITLE_AR' | translate }}</mat-label>
+                            <input type="text" formControlName="titleAr" matInput placeholder="Product Title">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <mat-form-field class="w-100 text-start">
+                            <mat-label>{{ 'HOME.FIELDS.PRODUCT_DESCRIPTION_EN' | translate }}</mat-label>
+                            <textarea formControlName="descriptionEn" matInput placeholder="Product Description" rows="3"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <mat-form-field class="w-100 text-start">
+                            <mat-label>{{ 'HOME.FIELDS.PRODUCT_DESCRIPTION_AR' | translate }}</mat-label>
+                            <textarea formControlName="descriptionAr" matInput placeholder="Product Description" rows="3"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <mat-form-field class="w-100 text-start">
+                            <mat-label>{{ 'HOME.FIELDS.PRODUCT_VENDOR_NAME_EN' | translate }}</mat-label>
+                            <input type="text" formControlName="vendorNameEn" matInput placeholder="Product Vendor">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <mat-form-field class="w-100 text-start">
+                            <mat-label>{{ 'HOME.FIELDS.PRODUCT_VENDOR_NAME_AR' | translate }}</mat-label>
+                            <input type="text" formControlName="vendorNameAr" matInput placeholder="Product Vendor">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <mat-form-field class="w-100 text-start">
+                            <mat-label>{{ 'HOME.FIELDS.PRODUCT_PRICE_BEFORE' | translate }}</mat-label>
+                            <input type="number" formControlName="priceBefore" matInput placeholder="Product Price">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <mat-form-field class="w-100 text-start">
+                            <mat-label>{{ 'HOME.FIELDS.PRODUCT_PRICE_AFTER' | translate }}</mat-label>
+                            <input type="number" formControlName="priceAfter" matInput placeholder="Product Price">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <app-datepicker [formGroup]="productFormGroup" controlName="expireDate" [label]="'HOME.FIELDS.EXPIRE_DATE' | translate"
+                            [minDate]="today">
+                        </app-datepicker>
+                    </div>
+
+                    <div class="col-md-6 mt-3 mt-md-0">
+                        <app-attachment [formGroup]="productFormGroup" [editMode]="isEdit" type="image" controlName="photo" [maxFiles]="1"
+                            [fileConditions]="[{ type: 'png', size: 2 }, { type: 'jpg', size: 2 }, { type: 'jpeg', size: 2 }]">
+                        </app-attachment>
+                    </div>                    
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <div class="w-max d-flex align-items-center">
+                        <button class="w-100 main-btn strock font-16 px-4 m-inline-end-2" type="submit" mat-flat-button [disabled]="productFormGroup.invalid">
+                            {{ isEdit ? ('HOME.FIELDS.UPDATE' | translate) : ('ACTIONS.ADD' | translate) }}
+                        </button>
+                        <button class="w-100 main-btn text-error font-16 px-4 py-1" type="button" mat-button routerLink="/content/recommended-products">{{ 'HOME.FIELDS.CANCEL' | translate }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

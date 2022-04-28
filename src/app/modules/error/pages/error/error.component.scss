@@ -1,0 +1,47 @@
+@import "style";
+
+::ng-deep app-error {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100vh;
+  
+  .error-wrapper {
+    padding: 2.5rem;
+
+    @include small-screen {
+      padding: 7.5rem;
+    }
+
+    h1 {
+      line-height: 1.2 !important;
+    }
+  }
+
+  .bgi-size-cover {
+    background-size: cover;
+  }
+
+  .bgi-position-center {
+    background-position: center;
+  }
+  
+  .bgi-no-repeat {
+    background-repeat: no-repeat;
+  }
+}
+
+a {
+  width: max-content;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid;
+  background: transparent;
+  padding: 10px 40px;
+  transition: 0.25s all;
+
+  &:hover {
+    background-color: #000;
+    color: #fff !important;
+  }
+}

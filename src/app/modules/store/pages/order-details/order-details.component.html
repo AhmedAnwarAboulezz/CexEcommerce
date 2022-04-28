@@ -1,0 +1,252 @@
+<app-store-toolbar [cartCount]="cartCount"></app-store-toolbar>
+<section class="page-wrapper show-large-screen">
+    <div class="d-flex justify-content-between align-items-baseline">
+      <h1>{{ 'STORE.ORDERDETAILS' | translate }} </h1>
+      <!-- <button class="main-btn strock font-16 py-1 edit" (click)="bulksend = ! bulksend; bulkszSerialNmbr = []">
+        <div class="d-flex align-items-center">
+          {{'STORE.BulkSend' | translate}}
+        </div>
+      </button> -->
+    </div>
+    <app-table  [columns]="columns" [rows]="rows"  [withCheckbox]="true" (selectedRows)="setChecked($event)" (action)="doAction($event)" *ngIf="rows.length && bulksend"></app-table>
+    <!-- <app-table  [columns]="columns" [rows]="rows"  [withIndex]="true" (action)="doAction($event)" *ngIf="rows.length && !bulksend"></app-table> -->
+    <div class="d-flex flex-column align-items-center justify-content-center h-100" *ngIf="!rows.length">
+     <p class="m-0 mt-5  font-14">{{ 'HOME.NODATA' | translate }}</p> 
+    </div>
+</section>
+
+
+<div class="show-mobile-screen">
+  <section class="page-wrapper d-flex flex-column h-100">   
+    <div class="grid-container">
+      <div class="card-wrapper d-flex flex-column justify-content-start">
+        <div class="d-flex justify-content-between align-items-center p-2 m-2">
+          <p class="text-middle font-22 font-weight-bold p-0 m-0">
+            {{'STORE.ORDERDETAILS' | translate}}
+          </p>
+          <!-- <button class="main-btn strock font-16 py-1 edit" (click)="bulksend = ! bulksend">
+            <div class="d-flex align-items-center">
+              {{'STORE.BulkSend' | translate}}
+            </div>
+          </button> -->
+        </div>
+        
+        <mat-divider></mat-divider>
+        <div  *ngFor="let item of rows" [style.background]="getBackground(item)">
+          <div class="mt-2 p-1">
+            <div class="d-flex justify-content-end align-items-end" *ngIf="bulksend && item.benficairyMobile == null">
+              <mat-checkbox type="checkbox" [checked]="isChecked(item.szSerialNmbr)" (change)="setBulkSend($event, item.szSerialNmbr)" color="bg-error"></mat-checkbox>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mobile-cart-block">
+              <div class="mt-12 order-item" style="text-align: start;">
+                <p class="font-weight-bold font-16 p-0 mb-1">
+                  <span>{{'STORE.orderNumber' | translate}} </span>
+                    {{ item.orderNumber }}
+                </p>
+                <p class="font-weight-bold font-16 p-0 mb-1">
+                  <span>{{'STORE.barcode' | translate}} </span>
+                    {{ item.barCode }}
+                </p>
+                <p class="font-weight-bold font-16 p-0 mb-1">
+                  <span>{{'STORE.szScratchCode' | translate}}</span>
+                    {{ item.szScratchCode }}
+                </p>
+                <p class="font-weight-bold font-16 p-0 m-0">
+                  <span>{{'STORE.binCode' | translate}} </span>
+                    {{ item.binCode }}
+                </p>
+                <p class="font-weight-bold font-16 p-0 m-0 text-price">
+                  <span>{{'STORE.price' | translate}} </span>
+                    {{ item.price }} {{'STORE.ACCURECY' | translate}}
+                </p>
+
+                <p class="font-weight-bold font-16 p-0 m-0 text-price">
+                  <span>{{'STORE.amount' | translate}} </span>
+                    {{ item.amount }} {{'STORE.ACCURECY' | translate}}
+                </p>
+                <p class="font-weight-bold font-16 p-0 mb-1">
+                  <span> {{'STORE.benficairyMobile' | translate}}</span>
+                    {{ item.benficairyMobile}}
+                </p>
+              </div>
+
+              <div class="mt-12">
+                <div class="d-flex justify-content-center align-items-center">
+                  <button class="solid-btn-primary" (click)="getCard(item)">
+                    <div class="d-flex align-items-center">
+                      {{'STORE.previewCard' | translate}}
+                    </div>
+                  </button> 
+                  <button class="solid-btn-secondry mx-2" (click)="sendMain(item)">
+                    <div class="d-flex align-items-center">
+                      {{'STORE.sendToAnother' | translate}}
+                    </div>
+                  </button>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>  
+
+    </div>
+  </section>
+</div>
+
+<div style="position: fixed;bottom: 0px;z-index: 5; width: 100%;" *ngIf="bulksend">
+  <div class="d-flex justify-content-end align-items-end p-2 m-2" >
+    <button class="main-btn strock font-16 py-1 edit" (click)="showsendAllModal()" [disabled]="bulkszSerialNmbr.length <= 0" mat-button>
+      <div class="d-flex align-items-center">
+        {{'STORE.sendToAnotherAll' | translate}}
+      </div>
+    </button>
+  </div>
+</div>
+
+
+
+
+
+
+  <!-- survey modal -->
+<ng-template #shareModal>
+  <div class="survey" *ngIf="sendAnother">
+    <h1 class="m-0 mb-4 font-22 regular">{{'STORE.SendToAnother' | translate}}</h1>
+    <form method="post" class="d-block mt-4" [formGroup]="mainForm" (ngSubmit)="sendToAnother()" *ngIf="mainForm">
+      <div class="row flex-column align-items-center">
+        <div class="form-group mb-2 col-sm-10 w-100 text-start">
+          <mat-label>{{'STORE.szScratchCode' | translate}}</mat-label>
+          <p>{{mainForm.value.szSerialNmbr}}</p>
+        </div>
+        <div class="form-group mb-2 col-sm-10">
+          <div class="form-control d-flex flex-column border-0 h-100">
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'STORE.PHONENUMBERTO' | translate }}</mat-label>
+              <input type="text" formControlName="benficiaryMobile"  matInput placeholder="05xxxxxxxx" />
+            </mat-form-field>
+          </div>
+        </div>
+        <button class="w-75 main-btn strock font-16 py-1 edit" type="submit" [disabled]="mainForm.invalid" mat-button>
+          {{ 'ACTIONS.SEND' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #sendAllModal>
+  <div class="survey">
+    <h1 class="m-0 mb-4 font-22 regular">
+      {{'STORE.SendToAnotherAll1' | translate}}
+      <span class="font-weight-bold text-price">
+         {{bulkszSerialNmbr.length}}
+      </span>
+      {{'STORE.SendToAnotherAll2' | translate}}
+    </h1>
+    <form method="post" class="d-block mt-4" [formGroup]="sendAllForm" (ngSubmit)="sendToAnotherAll()">
+      <div class="row flex-column align-items-center">
+        <div class="form-group mb-2 col-sm-10 w-100 text-start">
+          <mat-label>{{'STORE.szScratchCodes' | translate}}</mat-label>
+          <p>{{getBulkszSerialNmbrs()}}</p>
+        </div>
+        
+        <div class="form-group mb-2 col-sm-10">
+          <div class="form-control d-flex flex-column border-0 h-100">
+            <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>{{ 'STORE.PHONENUMBERTO' | translate }}</mat-label>
+              <input type="text" formControlName="benficiaryMobileAll"  matInput placeholder="05xxxxxxxx" />
+            </mat-form-field>
+          </div>
+        </div>
+        <button class="w-75 main-btn strock font-16 py-1 edit" type="submit" [disabled]="sendAllForm.invalid" mat-button>
+          {{ 'ACTIONS.SEND' | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #cardModal>
+  <div class="survey card-model">
+    <div class="row flex-column align-items-center">
+      <!-- <div class="card-wrapper d-flex flex-column justify-content-between" id="card-data">
+        <div class="card-info">
+          <div>
+            <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.BALANCE' | translate }}</p>
+            <p class="font-weight-bold font-20">{{ cardDetails?.price }} ريال</p>
+          </div>
+          <div>
+            <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.CARDTYPE' | translate }}</p>
+            <p class="font-weight-bold font-18">{{ cardDetails?.barCode }}</p>
+          </div>
+          <img src="assets/images/empty/card_toplogo.png" alt="card_toplogo" />
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="barcode d-flex justify-content-center bg-white" style="border-radius: 21px;">
+            <svg class="barcode3" id="barcode3"></svg>
+          </div>
+        </div>
+        <div class="cardfooter">
+          <h6 class="m-0 font-18 regular">الرقم السري {{ cardDetails?.binCode }}</h6>
+        </div>
+      </div> -->
+      <div class="card-wrapper d-flex flex-column justify-content-center" id="card-data"
+      [style.background-image]="getBack(cardDetails.backgroundImage)">
+        <div class="card-info" style="justify-content: center;">
+          <img src="assets/images/empty/card_toplogo.png" alt="card_toplogo"  />
+        </div>
+        <div class="d-flex justify-content-center" >
+          <div class="">
+            <p class="font-weight-bold font-20">{{'STORE.PURCASECARD' | translate}}</p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+          <p class="font-weight-bold font-14">{{'STORE.price' | translate}} : {{ cardDetails?.price }} {{'STORE.ACCURECY' | translate}}</p>
+        </div>
+
+        <div class="d-flex justify-content-center mt-0">
+          <p class="font-weight-bold font-16">{{'STORE.amount' | translate}} : {{ cardDetails?.amount }} {{'STORE.ACCURECY' | translate}}</p>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <div class="barcode d-flex justify-content-center bg-white" style="border-radius: 5px;">
+            <svg class="barcode3" id="barcode3"></svg>
+          </div>
+        </div>
+        <div class="cardfooter justify-content-center mb-2">
+          <h6 class="m-0 font-15 regular">{{'STORE.BINCODE' | translate}} {{ cardDetails?.binCode }}</h6>
+        </div>
+      </div>
+
+
+      <div style="padding: 14px 0 0 0;">
+        <button class="py-1 edit" (click)="downloadAsImage('card-data','card-image')" >
+          {{ 'STORE.DOWNLOAD' | translate }}
+        </button>
+            
+        <!-- <a (click)="showWhatsForm = !showWhatsForm">
+          <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="40px" height="40px" fill-rule="evenodd" clip-rule="evenodd"><path fill="#fff" d="M4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98c-0.001,0,0,0,0,0h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303z"/><path fill="#fff" d="M4.868,43.803c-0.132,0-0.26-0.052-0.355-0.148c-0.125-0.127-0.174-0.312-0.127-0.483l2.639-9.636c-1.636-2.906-2.499-6.206-2.497-9.556C4.532,13.238,13.273,4.5,24.014,4.5c5.21,0.002,10.105,2.031,13.784,5.713c3.679,3.683,5.704,8.577,5.702,13.781c-0.004,10.741-8.746,19.48-19.486,19.48c-3.189-0.001-6.344-0.788-9.144-2.277l-9.875,2.589C4.953,43.798,4.911,43.803,4.868,43.803z"/><path fill="#cfd8dc" d="M24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,4C24.014,4,24.014,4,24.014,4C12.998,4,4.032,12.962,4.027,23.979c-0.001,3.367,0.849,6.685,2.461,9.622l-2.585,9.439c-0.094,0.345,0.002,0.713,0.254,0.967c0.19,0.192,0.447,0.297,0.711,0.297c0.085,0,0.17-0.011,0.254-0.033l9.687-2.54c2.828,1.468,5.998,2.243,9.197,2.244c11.024,0,19.99-8.963,19.995-19.98c0.002-5.339-2.075-10.359-5.848-14.135C34.378,6.083,29.357,4.002,24.014,4L24.014,4z"/><path fill="#40c351" d="M35.176,12.832c-2.98-2.982-6.941-4.625-11.157-4.626c-8.704,0-15.783,7.076-15.787,15.774c-0.001,2.981,0.833,5.883,2.413,8.396l0.376,0.597l-1.595,5.821l5.973-1.566l0.577,0.342c2.422,1.438,5.2,2.198,8.032,2.199h0.006c8.698,0,15.777-7.077,15.78-15.776C39.795,19.778,38.156,15.814,35.176,12.832z"/><path fill="#fff" fill-rule="evenodd" d="M19.268,16.045c-0.355-0.79-0.729-0.806-1.068-0.82c-0.277-0.012-0.593-0.011-0.909-0.011c-0.316,0-0.83,0.119-1.265,0.594c-0.435,0.475-1.661,1.622-1.661,3.956c0,2.334,1.7,4.59,1.937,4.906c0.237,0.316,3.282,5.259,8.104,7.161c4.007,1.58,4.823,1.266,5.693,1.187c0.87-0.079,2.807-1.147,3.202-2.255c0.395-1.108,0.395-2.057,0.277-2.255c-0.119-0.198-0.435-0.316-0.909-0.554s-2.807-1.385-3.242-1.543c-0.435-0.158-0.751-0.237-1.068,0.238c-0.316,0.474-1.225,1.543-1.502,1.859c-0.277,0.317-0.554,0.357-1.028,0.119c-0.474-0.238-2.002-0.738-3.815-2.354c-1.41-1.257-2.362-2.81-2.639-3.285c-0.277-0.474-0.03-0.731,0.208-0.968c0.213-0.213,0.474-0.554,0.712-0.831c0.237-0.277,0.316-0.475,0.474-0.791c0.158-0.317,0.079-0.594-0.04-0.831C20.612,19.329,19.69,16.983,19.268,16.045z" clip-rule="evenodd"/></svg>
+        </a> -->
+
+        <button (click)="showWhatsForm = !showWhatsForm" class="py-1 edit mx-1" >
+          {{ 'STORE.SENDWHATSAPP' | translate }}
+        </button>
+
+      </div> 
+      <form  method="post" class="d-block mt-4" [formGroup]="whatsForm" (ngSubmit)="sendToWhatsapp(cardDetails)" *ngIf="whatsForm && showWhatsForm">
+        <mat-form-field class="text-start" appearance="outline">
+            <mat-label>{{ 'STORE.PHONENUMBERTOWHATSAPP' | translate }}</mat-label>
+            <input type="text" autocomplete="off" formControlName="whatsappMobile"  matInput placeholder="966xxxxxxxxx" />
+          </mat-form-field>
+          <div class="d-flex justify-content-center align-items-center  m-1">
+          <button class="strock font-16 py-1 edit mx-2" type="submit" style="padding: 0.25rem;" [disabled]="whatsForm.invalid" mat-button>
+            {{ 'ACTIONS.SEND' | translate }}
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</ng-template>

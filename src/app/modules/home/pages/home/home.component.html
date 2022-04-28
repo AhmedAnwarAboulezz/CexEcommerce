@@ -1,0 +1,731 @@
+<section class="page-wrapper d-flex flex-column h-100">
+  <h1>{{ 'HOME.HI' | translate }}, {{cardDetails.customerNickName ? cardDetails?.customerNickName :
+    cardDetails?.customerName }}. <span class="text-middle">{{ isMorning ? ('HOME.GOOD' | translate) : ('HOME.NIGHT' |
+      translate) }}</span></h1>
+  <div class="grid-container-main show-mobile-screen">
+    <div class="card-wrapper d-flex flex-column justify-content-between">
+      <div class="card-info">
+        <div>
+          <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.BALANCE' | translate }}</p>
+          <p class="font-weight-bold font-20">{{ cardDetails?.balance }} SR</p>
+        </div>
+
+        <div>
+          <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.CARDTYPE' | translate }}</p>
+          <p class="font-weight-bold font-18">{{ lang === 'en' ? cardDetails?.cardType.nameEn :
+            cardDetails?.cardType.nameAr }}</p>
+        </div>
+
+        <img src="assets/images/empty/card_toplogohome.png" alt="card_toplogo" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <div class="barcode d-flex justify-content-center bg-white">
+          <svg id="barcode1"></svg>
+        </div>
+      </div>
+
+      <div class="cardfooter">
+        <h6 class="m-0 font-18 regular">{{ cardDetails?.customerName }}</h6>
+      </div>
+    </div>
+  </div>
+    
+  <div class="grid-container">
+    <div class="card-wrapper d-flex flex-column justify-content-between show-large-screen">
+      <div class="card-info">
+        <div>
+          <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.BALANCE' | translate }}</p>
+          <p class="font-weight-bold font-20">{{ cardDetails?.balance }} SR</p>
+        </div>
+
+        <div>
+          <p class="mb-2 font-16" style="color: #acacad;">{{ 'HOME.CARDTYPE' | translate }}</p>
+          <p class="font-weight-bold font-18">{{ lang === 'en' ? cardDetails?.cardType.nameEn :
+            cardDetails?.cardType.nameAr }}</p>
+        </div>
+
+        <img src="assets/images/empty/card_toplogohome.png" alt="card_toplogo" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <div class="barcode d-flex justify-content-center bg-white">
+          <svg id="barcode1"></svg>
+        </div>
+      </div>
+
+      <div class="cardfooter">
+        <h6 class="m-0 font-18 regular">{{ cardDetails?.customerName }}</h6>
+      </div>
+    </div>
+
+
+    <a [routerLink]="['/store']" >
+      <div class="items-details d-flex flex-column justify-content-between bg-secondary text-white " >
+        <h3 class="regular">{{ 'HOME.GBOX' | translate }}</h3>
+
+        <div class="offers-details-info d-flex align-items-center justify-content-between">
+          
+            <span class="font-12">{{ 'HOME.DETAILS' | translate }}</span>
+
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" class="rotate" viewBox="0 0 20 20" fill="currentColor" >
+              <path fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd" />
+            </svg> -->
+        
+
+          <img src="/assets/images/empty/giftbox_icon.png" alt="offers" />
+        </div>
+      </div>
+    </a>
+    <div class="items-details d-flex flex-column justify-content-between bg-bluelight text-white">
+      <h3 class="regular">{{ 'HOME.MYINFO' | translate }}</h3>
+
+      <div class="offers-details-info d-flex justify-content-between align-items-center">
+        <a (click)="openDialog(informationModal, 'userInformation')"
+          class="text-dark font-weight-bold m-0 d-flex align-items-center align-self-end">
+          <span class="font-12">{{ 'HOME.DETAILS' | translate }}</span>
+
+          <svg xmlns="http://www.w3.org/2000/svg" class="rotate" width="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd" />
+          </svg>
+        </a>
+
+        <img src="assets/images/empty/myinformation_icon.png" alt="offers" />
+      </div>
+    </div>
+
+    <!-- recommended products -->
+    <div class="items-details recomended d-flex flex-column justify-content-between text-white">
+      <h3 class="regular mb-2 text-black"><b>{{ 'HOME.RECPRODUCTS' | translate }}</b></h3>
+      <mat-divider></mat-divider>
+
+      <div class="h-100" setRtl *ngIf="recommendedProducts.length">
+        <ngb-carousel class="h-100">
+          <ng-template ngbSlide *ngFor="let recommendedProduct of recommendedProducts">
+            <a href="javascript:">
+              <div class="picsum-img-wrapper d-flex align-items-center">
+                <img [src]="recommendedProduct.photo" alt="First Slide Image">
+
+                <div class="text-black product-info" setRtl>
+                  <h3 class="mb-0  font-14"
+                    title="{{ lang === 'en' ? recommendedProduct.titleEn : recommendedProduct.titleAr }}">
+                    {{ lang === 'en' ? recommendedProduct.titleEn : recommendedProduct.titleAr }}
+                  </h3>
+                  <del class="regular font-14">SAR {{ recommendedProduct.priceBefore }}</del>
+                  <p class="regular font-18 text-success">SAR {{ recommendedProduct.priceAfter }}</p>
+                </div>
+              </div>
+            </a>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center h-100" *ngIf="!recommendedProducts.length">
+        <p class="m-0 font-22">{{ "There's no data right now.." }}</p>
+      </div>
+    </div>
+
+    <div class="items-details d-flex flex-column justify-content-between bg-success text-white">
+      <h3 class="regular">{{ 'HOME.STOREDETAILS' | translate }}</h3>
+      <div class="offers-details-info d-flex align-items-center justify-content-between">
+        <a routerLink="/home/stores" routerLinkActive="active"
+          class="text-dark font-weight-bold m-0 d-flex align-items-center align-self-end">
+          <span class="font-12">{{ 'HOME.DETAILS' | translate }}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" class="rotate" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd" />
+          </svg>
+        </a>
+
+        <img src="/assets/images/empty/stores_icon.png" alt="offers" />
+      </div>
+    </div>
+
+    <div class="items-details d-flex flex-column justify-content-between ry text-white" style="background-color: #009688;">
+      <h3 class="regular">{{ 'HOME.OFFERS' | translate }}</h3>
+
+      <div class="offers-details-info d-flex justify-content-between align-items-center">
+        <a href="http://www.al-sadhan.com/flier/mobile/index.html" target="_blank"
+          class="text-dark font-weight-bold m-0 d-flex align-items-center align-self-end">
+          <span class="font-12">{{ 'HOME.DETAILS' | translate }}</span>
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" class="rotate" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd" />
+          </svg>
+        </a>
+
+        <img src="assets/images/empty/offers_icon.png" alt="offers" />
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper h-100">
+    <div class="wrapper-transaction bg-white d-flex flex-column">
+      <div class="transaction pb-0">
+        <div class="transaction-data">
+          <h1>{{ 'HOME.MYINVOICES' | translate }}</h1>
+          <p class="m-0">{{ 'HOME.LAST10' | translate }}</p>
+        </div>
+
+        <div class="transaction-link">
+          <a routerLink="/invoices" routerLinkActive="active">
+            <button type="button" class="btn btn-primary text-white d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+
+              <span class="pr-2 pl-2">{{ 'HOME.VIEWALL' | translate }}</span>
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <app-table *ngIf="rows.length" [columns]="columns" [rows]="rows" [withCheckbox]="false" [withIndex]="true"
+        (action)="doAction($event)"></app-table>
+
+      <div class="d-flex justify-content-center align-items-center h-100" *ngIf="!rows.length">
+        <p class="m-0 font-16">{{ 'HOME.NODATA' | translate }}</p>
+      </div>
+    </div>
+
+    <div class="wrapper-transaction bg-white d-flex flex-column">
+      <img src="/assets/images/empty/FLIGHT-BKK.jpg" alt="family" />
+      <div class="d-flex justify-content-between align-items-center p-3 position-relative">
+        <p class="text-dark font-weight-bold font-16 p-0 m-0 addfamily">{{ 'HOME.SAVEMORE' | translate }}</p>
+
+        <button (click)="openDialog(familyModal, 'family')" type="button"
+          class="btn btn-primary btn-circle btn-lg p-0 d-flex align-items-center justify-content-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="position-relative">
+        <div class="d-flex justify-content-between align-items-center p-3">
+          <p class="text-dark font-weight-bold font-14 p-0 m-0">{{ 'HOME.FAMILY.NAME' | translate }}</p>
+          <p class="text-dark font-weight-bold font-14 p-0 m-0">{{ 'HOME.FAMILY.RELATION' | translate }}</p>
+          <p class="text-dark font-weight-bold font-14 p-0 m-0"> {{ 'HOME.FAMILY.ID' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="position-relative" *ngFor="let customer of customerRelations">
+        <div class="d-flex justify-content-between align-items-center p-3">
+          <p class="text-middle font-16 p-0 m-0 text-overflow" matTooltip="{{ customer.name }}"
+            matTooltipClass="custom-tooltip">{{ customer.name }}</p>
+          <p class="text-middle font-16 p-0 m-0 text-overflow"
+            matTooltip="{{ lang ==='en' ? customer.relationNameEn: customer.relationNameAr }}"
+            matTooltipClass="custom-tooltip">{{ lang ==='en' ? customer.relationNameEn: customer.relationNameAr }}</p>
+          <p class="text-middle font-weight-bold font-14 p-0 m-0 text-overflow" matTooltip="{{ customer.id }}"
+            matTooltipClass="custom-tooltip">{{ customer.id }}</p>
+        </div>
+
+        <mat-divider></mat-divider>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center h-100" *ngIf="!customerRelations.length">
+        <p class="m-0 font-16">{{ 'HOME.NODATA' | translate }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- --------------------------------------------------------------------------- -->
+<!-- CONFIRM MODAL -->
+<ng-template #completeModal>
+  <!-- -----------register form----------- -->
+  <form method="post" class="d-block mt-4 animate" [formGroup]="mainForm" (ngSubmit)="register()">
+    <mat-form-field class="w-100 text-start" appearance="outline">
+      <mat-label>{{ 'HOME.FIELDS.NICK' | translate }}</mat-label>
+      <input type="text" formControlName="nickName" matInput>
+    </mat-form-field>
+
+    <mat-form-field class="w-100 text-start" appearance="outline">
+      <mat-label>{{ 'HOME.FIELDS.EMAIL' | translate }}</mat-label>
+      <input type="email" formControlName="email" matInput>
+    </mat-form-field>
+
+    <mat-form-field class="w-100 text-start" appearance="outline">
+      <mat-label>{{ 'HOME.FIELDS.NATIONALID' | translate }}</mat-label>
+      <input type="number" formControlName="nationalId" matInput>
+    </mat-form-field>
+
+    <app-dropdown [items]="maritalStatus" [formGroup]="mainForm" controlName="maritalStatus"
+      label="{{ 'HOME.FIELDS.MSTATUS' | translate }}">
+    </app-dropdown>
+
+    <app-dropdown [items]="preferredLanguages" [formGroup]="mainForm" controlName="languageId"
+      label="{{ 'HOME.FIELDS.LANG' | translate }}"></app-dropdown>
+
+    <app-dropdown [items]="nationalities" [formGroup]="mainForm" controlName="nationality"
+      label="{{ 'HOME.FIELDS.NAT' | translate }}">
+    </app-dropdown>
+
+    <app-dropdown [items]="cities" [formGroup]="mainForm" controlName="cityId"
+      label="{{ 'HOME.FIELDS.CITY' | translate }}"></app-dropdown>
+
+    <app-dropdown [items]="districts" [formGroup]="mainForm" controlName="districtId"
+      label="{{ 'HOME.FIELDS.DISTRICT' | translate }}"></app-dropdown>
+
+    <button class="w-100 main-btn strock font-16 py-1" type="submit" [disabled]="mainForm.invalid" mat-button>{{
+      'ACTIONS.SAVE' | translate }}</button>
+     
+
+  </form> <button class="w-100 main-btn secondary font-16 mt-2"  mat-button (click)="close()">{{
+        'HOME.FIELDS.SKIP' | translate }}</button>
+</ng-template>
+
+<!-- Information MODAL -->
+<ng-template #informationModal>
+  <h1>{{ 'HOME.FIELDS.UPDATEINFO' | translate }}</h1>
+  <form method="post" class="d-block mt-4" [formGroup]="mainForm" *ngIf="mainForm">
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.FULLNAME' | translate }}</mat-label>
+          <input type="text" formControlName="name" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-6">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.NICK' | translate }}</mat-label>
+          <input type="text" formControlName="nickName" matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.EMAIL' | translate }}</mat-label>
+          <input type="email" formControlName="email" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-6">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.NATIONALID' | translate }}</mat-label>
+          <input type="number" formControlName="nationalId" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-6">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.MOBILE' | translate }}</mat-label>
+          <input type="number" formControlName="phone" matInput placeholder="11*******">
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-6">
+        <app-datepicker [formGroup]="mainForm" controlName="dateOfBirth" label="{{ 'HOME.FIELDS.DOB' | translate }}"
+          [maxDate]="today">
+        </app-datepicker>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between columnGap">
+      <mat-radio-group class="w-100 text-start" aria-label="Gender" (change)="getGenderValue($event, 'main')">
+        <mat-radio-button [value]="1" [checked]="mainForm.get('gender')?.value === 1">{{ 'HOME.FIELDS.MALE' | translate
+          }}</mat-radio-button>
+        <mat-radio-button [value]="2" [checked]="mainForm.get('gender')?.value === 2">{{ 'HOME.FIELDS.FEMALE' |
+          translate }}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <app-dropdown [items]="maritalStatus" [formGroup]="mainForm" controlName="maritalStatus" [searchable]="searchable"
+      label="{{ 'HOME.FIELDS.MSTATUS' | translate }}">
+    </app-dropdown>
+
+    <app-dropdown [items]="preferredLanguages" [formGroup]="mainForm" controlName="languageId" [searchable]="searchable"
+      label="{{ 'HOME.FIELDS.LANG' | translate }}"></app-dropdown>
+
+    <app-dropdown [items]="nationalities" [formGroup]="mainForm" controlName="countryId" [searchable]="searchable"
+      label="{{ 'HOME.FIELDS.NAT' | translate }}"></app-dropdown>
+
+    <app-dropdown [items]="cities" [formGroup]="mainForm" controlName="cityId" [searchable]="searchable"
+      label="{{ 'HOME.FIELDS.CITY' | translate }}"></app-dropdown>
+
+    <app-dropdown [items]="districts" [formGroup]="mainForm" controlName="districtId" [searchable]="searchable"
+      label="{{ 'HOME.FIELDS.DISTRICT' | translate }}"></app-dropdown>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <button class="w-100 main-btn strock font-16 py-1" type="submit" mat-button (click)="updateUserInformation()">{{
+          'HOME.FIELDS.UPDATE' | translate }}</button>
+      </div>
+
+      <div class="col-sm-6">
+        <button class="w-100 main-btn secondary font-16 py-1"  mat-button (click)="close()">{{
+          'HOME.FIELDS.CANCEL' | translate }}</button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<!--Add new family-->
+<ng-template #familyModal>
+  <h1>{{ 'HOME.FAMILY.INFO' | translate }}</h1>
+  <form method="post" class="d-block mt-4 animate" [formGroup]="addForm" (ngSubmit)="addFamily()">
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.FULLNAME' | translate }}</mat-label>
+          <input type="text" formControlName="name" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-6">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.MOBILE' | translate }}</mat-label>
+          <input type="number" formControlName="phone" matInput placeholder="05xxxxxxx">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.PASSWORD' | translate }}</mat-label>
+          <img class="img-fluid" src="assets/images/icons/{{ showPassword ? 'eye' : 'eye-off'}}.svg"
+            (click)="showPassword = !showPassword" alt="Key Icon" matSuffix>
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput
+            placeholder="**********">
+
+          <mat-error *ngIf="addForm.get('password')?.errors && addForm.get('password')?.touched">
+            <span class="font-12">{{ addForm.get('password')?.errors | validationHandler }}</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12">
+        <mat-form-field class="w-100 text-start" appearance="outline">
+          <mat-label>{{ 'HOME.FIELDS.PASSWORDCONFIRM' | translate }}</mat-label>
+          <img class="img-fluid" src="assets/images/icons/{{ showPassword ? 'eye' : 'eye-off'}}.svg"
+            (click)="showPassword = !showPassword" alt="Key Icon" matSuffix>
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword" matInput
+            placeholder="**********">
+
+          <mat-error *ngIf="addForm.get('confirmPassword')?.errors && addForm.get('confirmPassword')?.touched">
+            <span class="font-12">{{ addForm.get('confirmPassword')?.errors | validationHandler }}</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12">
+        <app-datepicker [formGroup]="addForm" controlName="dateOfBirth" label="{{ 'HOME.FIELDS.DOB' | translate }}"
+          [maxDate]="maxDate"></app-datepicker>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between columnGap">
+      <mat-radio-group class="w-100 text-start" aria-label="Gender" (change)="getGenderValue($event)">
+        <mat-radio-button [value]="1">{{ 'HOME.FIELDS.MALE' | translate }}</mat-radio-button>
+        <mat-radio-button [value]="2">{{ 'HOME.FIELDS.FEMALE' | translate }}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <app-dropdown [items]="maritalStatus" [formGroup]="addForm" controlName="maritalStatus"
+      label="{{ 'HOME.FIELDS.MSTATUS' | translate }}"></app-dropdown>
+
+    <app-dropdown [items]="relationShipTypes" [formGroup]="addForm" controlName="relationShipId"
+      label="{{ 'HOME.FAMILY.RELATION' | translate }}"></app-dropdown>
+
+    <div class="d-flex justify-content-end columnGap">
+      <button class="w-100 main-btn strock  font-16 py-1" type="submit" [disabled]="addForm.invalid" mat-button>{{
+        'ACTIONS.ADD' | translate }}</button>
+      <button class="w-100 main-btn secondary font-16 py-1" type="button" mat-button (click)="close()">{{
+        'ACTIONS.CANCEL' | translate }}</button>
+    </div>
+  </form>
+</ng-template>
+
+<!-- Offer-->
+<ng-template #offerModal>
+  <h1>{{ 'HOME.OUROFFER' | translate }}</h1>
+  <div class="mapouter">
+    <div class="gmap_canvas"><iframe width="100%" height="500" id="gmap_canvas"
+        src="http://www.al-sadhan.com/flier/mobile/index.html#p=1" frameborder="0" scrolling="no" marginheight="0"
+        marginwidth="0"></iframe>
+      <style>
+        .mapouter {
+          position: relative;
+          text-align: right;
+          height: 500px;
+          width: 800px;
+        }
+      </style>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-3">
+    <button class="w-100 main-btn secondary font-16 py-1" type="submit" mat-button (click)="close()">{{
+      'HOME.FIELDS.CANCEL' | translate }}</button>
+  </div>
+</ng-template>
+
+<!-- survey modal -->
+<ng-template #surveyModal>
+  <div class="survey" *ngIf="survey">
+    <h1 class="m-0 mb-4 font-22 regular">{{ lang === 'en' ? survey.nameEn : survey.nameAr }}</h1>
+    <form method="post" class="d-block mt-4" [formGroup]="mainForm" (ngSubmit)="rate()" *ngIf="mainForm">
+      <div class="form-array row flex-column align-items-center" formArrayName="answers">
+        <div class="form-group mb-2 col-sm-10" [formGroup]="mainForm.get('answers')?.get(questionIndex.toString())"
+          *ngFor="let question of survey.questions; let questionIndex = index">
+          <div class="form-control d-flex flex-column border-0 h-100">
+            <label [for]="'question-' + question.id" class="font-16">{{ lang === 'en' ? question.bodyEn :
+              question.bodyAr }}</label>
+
+            <!-- rating type -->
+            <div [id]="'question-' + question.id" setRtl
+              class="emotions mt-2 w-100 d-flex align-items-center justify-content-between"
+              *ngIf="question.questionTypeId === QuestionTypes.rating">
+
+              <!-- happy -->
+              <svg class="happy" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0"
+                viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.happy}"
+                (click)="setRate(questionIndex, 5)">
+                <path
+                  d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z" />
+                <path
+                  d="M393.385 299.115c-5.781-1.385-11.49 2.177-12.844 7.906-13.75 57.885-64.958 98.313-124.542 98.313-59.656 0-110.885-40.49-124.573-98.448-1.365-5.75-7.146-9.24-12.833-7.938-5.74 1.354-9.292 7.104-7.938 12.833 15.979 67.646 75.75 114.885 145.344 114.885 69.51 0 129.26-47.167 145.292-114.708 1.365-5.739-2.176-11.489-7.906-12.843z" />
+                <circle cx="170.667" cy="192" r="21.333" />
+                <circle cx="341.333" cy="192" r="21.333" />
+              </svg>
+
+              <!-- good -->
+              <svg class="good" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0"
+                viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.good}"
+                (click)="setRate(questionIndex, 4)">
+                <path
+                  d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z" />
+                <path
+                  d="M393.385 299.115c-5.781-1.385-11.49 2.177-12.844 7.906-13.75 57.885-64.958 98.313-124.542 98.313-59.656 0-110.885-40.49-124.573-98.448-1.365-5.75-7.146-9.24-12.833-7.938-5.74 1.354-9.292 7.104-7.938 12.833 15.979 67.646 75.75 114.885 145.344 114.885 69.51 0 129.26-47.167 145.292-114.708 1.365-5.739-2.176-11.489-7.906-12.843z" />
+                <circle cx="170.667" cy="192" r="21.333" />
+                <circle cx="341.333" cy="192" r="21.333" />
+              </svg>
+
+              <!-- okay -->
+              <svg class="okay" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0"
+                viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.okay}"
+                (click)="setRate(questionIndex, 3)">
+                <path
+                  d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z" />
+                <circle cx="170.667" cy="192" r="21.333" />
+                <circle cx="341.333" cy="192" r="21.333" />
+                <path
+                  d="M373.333 341.333H138.667c-5.896 0-10.667 4.771-10.667 10.667s4.771 10.667 10.667 10.667h234.667c5.896 0 10.667-4.771 10.667-10.667-.001-5.896-4.772-10.667-10.668-10.667z" />
+              </svg>
+
+              <!-- bad -->
+              <svg class="bad" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0"
+                viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.bad}"
+                (click)="setRate(questionIndex, 2)">
+                <path
+                  d="M256 0C114.844 0 0 114.844 0 256s114.844 256 256 256 256-114.844 256-256S397.156 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z" />
+                <circle cx="170.667" cy="192" r="21.333" />
+                <circle cx="341.333" cy="192" r="21.333" />
+                <path
+                  d="M256 320h-.031c-89.615 0-124.396 45.021-125.833 46.938-3.521 4.688-2.573 11.302 2.094 14.854 4.667 3.542 11.354 2.635 14.927-2 1.208-1.573 30.604-38.458 108.813-38.458h.03c78.229.01 107.635 36.896 108.802 38.406 2.094 2.792 5.292 4.26 8.542 4.26 2.229 0 4.469-.698 6.396-2.135 4.708-3.531 5.667-10.219 2.125-14.938C380.427 365.021 345.635 320.01 256 320z" />
+              </svg>
+
+              <!-- terrible -->
+              <svg class="terrible" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0"
+                viewBox="0 0 512 512"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Rating.terrible}"
+                (click)="setRate(questionIndex, 1)">
+                <path
+                  d="M256 0C114.833 0 0 114.844 0 256s114.833 256 256 256 256-114.844 256-256S397.167 0 256 0zm0 490.667C126.604 490.667 21.333 385.396 21.333 256S126.604 21.333 256 21.333 490.667 126.604 490.667 256 385.396 490.667 256 490.667z" />
+                <path
+                  d="M255.958 298.635c-60.479 0-114.604 36.073-137.896 91.906-2.25 5.438.313 11.677 5.75 13.948 5.354 2.281 11.688-.302 13.958-5.74 19.938-47.854 66.333-78.781 118.188-78.781 51.854 0 98.271 30.927 118.208 78.802 1.708 4.094 5.688 6.563 9.854 6.563 1.375 0 2.771-.26 4.104-.823 5.438-2.26 8-8.51 5.75-13.948-23.291-55.843-77.416-91.927-137.916-91.927z" />
+                <circle cx="170.667" cy="192" r="21.333" />
+                <circle cx="341.333" cy="192" r="21.333" />
+              </svg>
+            </div>
+
+            <!-- boolean type -->
+            <div [id]="'question' + question.id"
+              class="emotions mt-2 w-100 d-flex align-items-center justify-content-end"
+              *ngIf="question.questionTypeId === QuestionTypes.boolean">
+
+              <!-- like -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0" viewBox="0 0 512 512"
+                class="m-inline-end-2 like"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Boolean.like}"
+                (click)="setRate(questionIndex, 1)">
+                <path
+                  d="M469.51 317c7.14-7.97 11.49-18.49 11.49-30 0-24.81-20.19-45-45-45h-87.34c8.65-26.25 12.34-61.08 12.34-76.01V151c0-33.08-26.92-60-60-60h-15c-6.88 0-12.88 4.68-14.55 11.36l-8.17 32.69c-11.45 45.78-47.8 96.29-85.42 105.47C171.27 223.84 155 212 136 212H46c-8.28 0-15 6.72-15 15v270c0 8.28 6.72 15 15 15h90c17.89 0 33.37-10.49 40.62-25.65l51.54 17.18c16.85 5.62 34.41 8.47 52.18 8.47H406c24.81 0 45-20.19 45-45 0-5.85-1.12-11.45-3.16-16.58C466.92 445.21 481 427.72 481 407c0-11.51-4.35-22.03-11.49-30 7.14-7.97 11.49-18.49 11.49-30s-4.35-22.03-11.49-30zM151 467c0 8.27-6.73 15-15 15H61V242h75c8.27 0 15 6.73 15 15v210zm255-135h30c8.27 0 15 6.73 15 15s-6.73 15-15 15h-30c-8.28 0-15 6.72-15 15 0 8.28 6.72 15 15 15h30c8.27 0 15 6.73 15 15s-6.73 15-15 15h-30c-8.28 0-15 6.72-15 15 0 8.28 6.72 15 15 15 8.27 0 15 6.73 15 15s-6.73 15-15 15H280.34c-14.54 0-28.91-2.33-42.7-6.93L181 456.19V270.58c23.53-4.47 46.56-19.37 67.35-43.76 20.3-23.82 36.76-55.4 44.03-84.49l5.33-21.33H301c16.54 0 30 13.46 30 30v14.99c0 20.14-6.3 58.77-14.36 76.01H286c-8.28 0-15 6.72-15 15 0 8.28 6.72 15 15 15h150c8.27 0 15 6.73 15 15s-6.73 15-15 15h-30c-8.28 0-15 6.72-15 15 0 8.28 6.72 15 15 15z" />
+                <circle cx="106" cy="437" r="15" />
+                <path
+                  d="M316 0c-8.284 0-15 6.716-15 15v31c0 8.284 6.716 15 15 15s15-6.716 15-15V15c0-8.284-6.716-15-15-15zM252.36 66.148l-21.213-21.213c-5.857-5.858-15.355-5.858-21.213 0-5.858 5.858-5.858 15.355 0 21.213l21.213 21.213c5.857 5.857 15.356 5.858 21.213 0 5.858-5.858 5.858-15.355 0-21.213zM422.066 44.935c-5.857-5.858-15.355-5.858-21.213 0L379.64 66.147c-5.858 5.858-5.858 15.355 0 21.213 5.857 5.858 15.355 5.859 21.213.001l21.213-21.213c5.858-5.858 5.858-15.355 0-21.213z" />
+              </svg>
+
+              <!-- dislike -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#c6ccd0" viewBox="0 0 512 512"
+                class="m-inline-start-3 terrible"
+                [ngClass]="{'active': mainForm.get('answers')?.get(questionIndex.toString())?.value.answerId === Boolean.dislike}"
+                (click)="setRate(questionIndex, 2)">
+                <path d="M46.32 273.32h29.673v29.673H46.32z" />
+                <path
+                  d="M488.639 242.484c7.225-9.158 11.553-20.702 11.553-33.245 0-18.371-9.264-34.613-23.36-44.319 7.225-9.158 11.553-20.702 11.553-33.245 0-18.364-9.254-34.609-23.342-44.317 7.222-9.156 11.534-20.706 11.534-33.246C476.577 24.457 452.45.33 422.795.33H289.309c-28.379 0-56.24 5.053-82.811 15.017l-55.83 20.937V12.088H0v353.639h150.668v-56.803c51.144 54.842 99.367 108.775 107.744 122.182v59c0 11.891 9.674 21.564 21.564 21.564 49.039 0 88.936-39.896 88.936-88.935v-26.613l-16.079-55.542 105.385.005c29.655 0 53.782-24.127 53.782-53.782 0-18.371-9.264-34.613-23.361-44.319zm-367.971 93.243H30V42.088h90.668v293.639zm337.551-25.142l-145.304-.007 25.997 89.799v22.358c0 29.633-21.985 54.228-50.5 58.334v-53.003c0-7.265 0-13.003-73.773-93.979-26.079-28.626-52.408-56.716-63.971-69.002V68.321l66.363-24.886c23.19-8.697 47.509-13.106 72.277-13.106h133.487c13.113 0 23.782 10.669 23.782 23.782s-10.669 23.782-23.782 23.782H384.43v30h50.173c13.113 0 23.782 10.668 23.782 23.781s-10.669 23.782-23.782 23.782H398.14v30h48.27c13.113 0 23.782 10.669 23.782 23.782s-10.669 23.782-23.782 23.782h-36.428v30h48.235c13.113 0 23.782 10.668 23.782 23.781.001 13.115-10.668 23.784-23.78 23.784z" />
+              </svg>
+            </div>
+
+
+            <!-- question type -->
+            <div [id]="'question' + question.id"
+              class="emotions mt-2 w-100 d-flex align-items-center justify-content-end"
+              *ngIf="question.questionTypeId === QuestionTypes.question">
+              <mat-form-field class="w-100 text-start" appearance="outline">
+                <mat-label>Your Notes</mat-label>
+                <textarea name="answer" id="answer" cols="30" rows="2" formControlName="answerText" matInput></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row flex-column align-items-center">
+        <div class="form-group mb-2 col-sm-10">
+          <div class="form-control d-flex flex-column border-0 h-100">
+            <!-- <mat-form-field class="w-100 text-start" appearance="outline">
+              <mat-label>Your Notes</mat-label>
+              <textarea name="notes" id="notes" cols="30" rows="2" formControlName="notes" matInput></textarea>
+            </mat-form-field> -->
+          </div>
+        </div>
+
+        <button class="w-75 main-btn strock font-16 py-1" type="submit" [disabled]="mainForm.invalid" mat-button>{{
+          'ACTIONS.SEND' | translate }}</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<!---View-->
+<!-- Information MODAL -->
+<ng-template #viewModal>
+  <div class="text-center m-auto">
+    <img src="../assets/images/logo/logo.png" alt="logo" />
+    <h5 class="m-0 text-medium font-18 mt-2">{{ lang === 'en' ?  "AlSadhan - " +  selectedUser.storeNameEn : "السدحان - " + selectedUser.storeNameAr }}
+    </h5>
+  </div>
+  <section class="directionModal">
+    <div class="directionRTL">
+      <div class="d-flex justify-content-start">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">{{ 'HOME.PROFILE.CARDNUMBER' | translate }}</p>
+        <p class="text-middle font-16 d-block mt-2 mr-2 ml-2">{{selectedUser.cardNumber}}</p>
+      </div>
+      <div class="d-flex justify-content-start">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">{{ 'HOME.Complain.CUSTOMERNAME' | translate }}</p>
+        <p class="text-middle font-16 d-block mt-2 mr-2 ml-2">{{selectedUser.customerName}}</p>
+      </div>
+      <div class="d-flex justify-content-between">
+        <!-- <div class="d-flex justify-content-start">
+          <p class="text-medium font-16 d-block font-weight-bold mt-2">{{ 'HOME.POINTS' | translate }}</p>
+          <p class="text-middle font-16 d-block mt-2 mr-2 ml-2"></p>
+        </div> -->
+        <div class="d-flex justify-content-start">
+          <p class="text-medium font-16 d-block font-weight-bold mt-2">{{ 'HOME.PROFILE.DATE' | translate }}</p>
+          <p class="text-middle font-16 d-block mt-2 mr-2 ml-2">{{selectedUser.transactionDate}} </p>
+        </div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div *ngFor="let details of selectedUser.details">
+      <div class="d-flex justify-content-start">
+        <p class="text-medium font-14 d-block  mt-2">{{details?.descriptionEn}}</p>
+        <p class="text-medium font-14 d-block  mt-2 mr-2 ml-2">{{details?.descriptionAr}}</p>
+
+      </div>
+      <div class="d-flex justify-content-start">
+        <p class="text-medium font-14 d-block  mt-2 mr-2 ml-2" *ngIf="details.qty>0">QTY: {{details?.qty}}  </p>
+        <p class="text-medium font-14 d-block  mt-2 mr-2 ml-2" *ngIf="details.weight>0"> Weight : {{details?.weight}} KG </p>
+      </div>
+        <div class="d-flex justify-content-end">
+        <p class="text-middle font-16 d-block  mt-2 mr-3 ml-3">{{details.price}}</p>
+      </div>
+      <hr>
+    </div>
+    <!-- <mat-divider></mat-divider> -->
+    <div class="d-flex justify-content-end flex-column mt-2">
+      <div class="d-flex justify-content-end">
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">Total الأجمالي</p>
+        <p class="text-medium font-weight-bold font-16 d-block mt-2 mr-3 ml-3">{{selectedUser.total}}</p>
+      </div>
+      <div class="d-flex justify-content-end">
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">VAT</p>
+        <p class="text-medium font-weight-bold font-16 d-block mt-2 mr-3 ml-3">{{selectedUser.vat}}</p>
+      </div>
+    </div>
+    <!-- <span class="mt-2 ml-3 mr-3 text-medium font-16 font-weight-bold">(15%)</span> -->
+    <mat-divider></mat-divider>
+    <div class="d-flex justify-content-between mt-2">
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">Date and Time</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{selectedUser.transactionDate}}</p>
+      </div>
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">Branch</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{selectedUser.storeId}}</p>
+      </div>
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">POS</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{selectedUser.terminalNumber}}</p>
+      </div>
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">EMPID</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{selectedUser.cashirId}}</p>
+      </div>
+      <div class="d-flex justify-content-start flex-column">
+        <p class="text-medium font-16 d-block font-weight-bold mt-2">TransID</p>
+        <p class="text-middle font-16 d-block font-weight-bold mt-2">{{rowID}}</p>
+      </div>
+    </div>
+    <hr>
+
+    <div class="text-right mt-2">
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">سياسة الإسترجاع والإستبدال </p>
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">يجب احضار الفاتورة الأصلية</p>
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">يجب ان يكون المنتج بحالة جيده وبنفس حالتة عند الشراء</p>
+
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">تطبق الشروط والأحكام</p>
+    </div>
+    <div class=" mt-2">
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">RETURN & REFUND POLICY</p>
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">You Must bring the original invoice</p>
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">The Product must be in good condition & in the same condition when parchasing</p>
+
+      <p class="text-medium font-14 d-block font-weight-bold mt-2">Terms and condition apply</p>
+    </div>
+    <!-- <div class="text-center mt-4">
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">VAT# 30054265678547854</p>
+    </div> -->
+    <div class="text-center mt-5">
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">VAT# 300041212900003</p>
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">شركة السدحان التجارية: 9200000546</p>
+      <p class="text-medium font-16 d-block font-weight-bold mt-2">الادارة العامة - الرياض حي الورود  </p>
+    </div>
+   <div class="m-auto text-center">
+    <ngx-qrcode
+    [elementType]="elementType"
+    [value] = "value"
+    cssClass = "aclass"
+    [errorCorrectionLevel]="correctionLevel"
+    >
+</ngx-qrcode>
+   </div>
+  </section>
+</ng-template>

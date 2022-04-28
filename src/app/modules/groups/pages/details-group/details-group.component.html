@@ -1,0 +1,51 @@
+<section class="page-wrapper">
+  <div class="detailsUser mb-5">
+    <div class="d-flex justify-content-between align-items-baseline">
+      <h1>تفاصيل العملاء</h1>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="each d-flex flex-column px-3 py-2">
+        <label for="phone" class="text-main-light font-14 mb-1">{{
+          "HOME.SEARCH.NAME" | translate
+        }}</label>
+        <span
+          id="phone"
+          class="text-medium font-16 d-block font-weight-bold"
+          >{{ informationUser.name }}</span
+        >
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="each d-flex flex-column px-3 py-2">
+        <label for="nationalId" class="text-main-light font-14 mb-1">{{
+          "HOME.SEARCH.DESCRIPTION" | translate
+        }}</label>
+        <span
+          id="nationalId"
+          class="text-medium font-16 d-block font-weight-bold"
+          >{{informationUser.description  }}</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<button mat-flat-button class="m-btn strock-bg border mx-2 mb-3" type="button" *ngIf="selectedRows.length > 0"
+  (click)="deleteSelected()">
+  <span>{{ "HOME.SEARCH.DELETE" | translate }}</span>
+</button>
+
+<app-table [columns]="columns" [rows]="rows" [withIndex]="true" (selectedRows)="getSelectedRows($event)"
+(action)="doAction($event)" *ngIf="rows.length">
+</app-table>
+<div class="mt-5" *ngIf="rows.length">
+  <app-paginator [totalCount]="totalCount" [pageSize]="pageSize"  (pageSelected)="pageNumber = $event; getGroup()"></app-paginator>
+</div>
+
+<div class="d-flex flex-column align-items-center justify-content-center h-100" *ngIf="!rows.length">
+  <!-- <img src="../../../../../assets/images/nodata-found.png" alt="{{ 'HOME.NODATA' | translate }}"> -->
+ <p class="m-0 mt-5  font-14">{{ 'HOME.NODATA' | translate }}</p>
+</div>
+</section>
+

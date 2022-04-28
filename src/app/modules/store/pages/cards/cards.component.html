@@ -1,0 +1,54 @@
+<app-store-toolbar [cartCount]="cartCount"></app-store-toolbar>
+<section class="page-wrapper">
+  <div class="d-flex justify-content-between align-items-start">
+    <!-- <h1>{{ 'STORE.PRODUCTS' | translate }} </h1> -->
+    <mat-form-field class="w-100 text-start" appearance="outline">
+      <mat-label>{{ 'STORE.SEARCH' | translate }}</mat-label>
+      <input type="Search" #search (keyup)="filterProducts(search.value)" matInput>
+    </mat-form-field>
+  </div>
+  <div class="storesList">
+      <div class="row col-sm-12 m-0 mt-2">
+        <div class="col-sm-3" *ngFor="let item of products">
+          <div class="storesListContainer">
+            <div class="d-flex justify-content-center align-items-center item-image">
+              <img [src]="item.photo" alt="card_toplogo" />
+            </div>
+            <div class="d-flex justify-content-between align-items-start">
+              <p class="p-0 m-0">
+                <span class="pr-1 pl-1 text-middle font-weight-bold">{{ lang === 'en' ? item.titleEn : item.titleAr }}</span>
+              </p>
+            </div>
+            <div class="d-flex justify-content-start flex-column align-items-start mt-2">
+              <p class="pr-1 pl-1 font-weight-bold text-price">
+               {{ item.price?.amount }} {{'STORE.ACCURECY' | translate}}
+              </p>
+            </div>
+            <div class="d-flex justify-content-center align-items-start" *ngIf="!isInCart(item)" >
+              <button  mat-button class="main-btn btn-body font-18"  (click)="addToCart(item,0)">
+                <div class="d-flex align-items-center">
+                   
+                    <span >{{'STORE.ADDTOCART' | translate}}</span>
+                </div>
+              </button>
+            </div>
+            <div class="d-flex justify-content-center align-items-start" *ngIf="isInCart(item)" >
+              <button  mat-button class="main-btn btn-body font-18"  (click)="addToCart(item, 1)">
+                <div class="d-flex align-items-center">
+                    <span class="material-icons">add</span>
+                </div>
+              </button>
+              <span style="padding: 7px 12px;"> {{item.quantity}} </span>
+              <button  mat-button class="main-btn btn-body font-18"  (click)="addToCart(item, -1)">
+                <div class="d-flex align-items-center">
+                    <span class="material-icons">remove</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+</section>

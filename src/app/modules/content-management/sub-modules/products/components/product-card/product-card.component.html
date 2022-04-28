@@ -1,0 +1,21 @@
+<mat-card class="product-card">
+    <a class="d-block position-relative product-photo-wrapper" [routerLink]="[ 'product/' + product.id ]">
+        <img mat-card-image loading="lazy" class="product-photo cursor-pointer" [src]="product.photo" onerror="this.src = 'assets/images/empty/card_bg.png'"
+             alt="Product Photo">
+
+        <div class="status d-flex flex-column align-items-center position-absolute bg-light px-2 py-1" setRtl>
+            <div class="d-flex align-items-center">
+                <del class="font-12 m-inline-end-1 text-middle">{{ product.priceBefore }}</del>
+                <span class="font-12 text-middle">SAR</span>
+            </div>
+            <div class="d-flex align-items-center">
+                <p class="m-0 m-inline-end-1 font-16 font-weight-bold text-dark">{{ product.priceAfter }}</p>
+                <span class="font-16 text-dark font-weight-bold">SAR</span>
+            </div>
+        </div>
+    </a>
+
+    <mat-card-content>
+        <app-product [product]="product"></app-product>
+    </mat-card-content>
+</mat-card>

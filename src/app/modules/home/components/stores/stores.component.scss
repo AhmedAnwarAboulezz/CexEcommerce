@@ -1,0 +1,31 @@
+@import 'style';
+
+.nav-pills {
+  border: 1px solid #007BFF;
+  padding: 0;
+}
+
+.stores {
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 7px;
+}
+.storesList {
+  padding-top: 30px;
+  column-gap: 10px;
+}
+.storesListContainer {
+  background-color: $white;
+  padding: 10px 16px 10px 16px;
+  border: 1px solid $light;
+  border-radius: 7px;
+  width: 100%;
+  box-shadow: 0 8px 10px 0 rgb(183 192 206 / 50%);
+  border-radius: 15px;
+  margin-bottom: 10px;
+  @include medium-screen {
+    margin-bottom: 0px;
+   }
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0 !important;
+}
